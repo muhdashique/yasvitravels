@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* banner */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-family: Arial, sans-serif;
+            font-size: 120px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 30px;
+            font-weight: lighter;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .attribution {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-30px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 60px;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+            }
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .destinations {
+            margin-bottom: 40px;
+        }
+
+        .destinations h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .destination-card h3 {
+            padding: 15px;
+            color: #333;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #0396FF, #ABDCFF);
+            border-radius: 20px;
+            padding: 60px 40px;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cta-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .tech-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .tech-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .tech-section p {
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .hero-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .destination-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        /* about section */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .card-stack {
+            position: relative;
+            height: 600px;
+        }
+
+        .background-card {
+            position: absolute;
+            width: 80%;
+            height: 500px;
+            background-color: #B8D8D8;
+            border-radius: 25px;
+            top: 40px;
+            right: 0;
+            z-index: 1;
+        }
+
+        .image-card {
+            position: absolute;
+            width: 70%;
+            height: 450px;
+            background-color: #0066cc;
+            border-radius: 25px;
+            top: 20px;
+            left: 0;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .text-card {
+            position: absolute;
+            width: 40%;
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            bottom: 40px;
+            right: 40px;
+            z-index: 3;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-card h2 {
+            color: #E67E22;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .text-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .text-card .attribution {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .text-card .attribution a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4BB1CF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #3A8FA9;
+        }
+
+        @media (max-width: 768px) {
+            .card-stack {
+                height: auto;
+                padding-bottom: 400px;
+            }
+
+            .background-card {
+                width: 100%;
+                height: 100%;
+                top: 20px;
+            }
+
+            .image-card {
+                width: 90%;
+                height: 300px;
+                position: relative;
+                margin: 0 auto;
+            }
+
+            .text-card {
+                width: 90%;
+                position: relative;
+                margin: -60px auto 0;
+                right: auto;
+                bottom: auto;
+            }
+        }
+        /* nave bar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            padding: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+        }
+
+        .nav-item.active {
+            color: #007bff;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+            margin-top: 5px;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .nav-text {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .nav-text-small {
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                overflow-x: auto;
+                padding: 15px 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-item {
+                flex: 0 0 auto;
+                margin: 0 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <div class="banner">
+            
+            <div class="banner-content">
+                <h1 class="title">HIKING<br>TOURS</h1>
+                <p class="subtitle">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                <p class="attribution"></p>
+            </div>
+            <nav class="nav-container relative z-[999]">
+                <ul class="nav-menu">
+                    <li>
+                        <a href="{% url 'index' %}" class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
+                            <span class="nav-text">Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'about' %}" class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v2h-2zm0 4h2v6h-2z"/>
+                            </svg>
+                            <span class="nav-text">About</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'property' %}" class="nav-item {% if request.resolver_match.url_name == 'rooms' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 3l9 7-1.5 1.5-7.5-5.5v12h-2V6.5L4.5 11.5 3 10l9-7zm0 6v10h6V9h-6z"/>
+                            </svg>
+                            <span class="nav-text">Rooms</span>
+                            <span class="nav-text-small">& Villas</span>
+                        </a>
+                    </li>
+            
+                    <li>
+                        <a href="{% url 'travelandtour' %}" class="nav-item {% if request.resolver_match.url_name == 'travel' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 5h-3V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v1H4c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1zM9 4h6v1H9V4zm7 3h3v11H5V7h3v4h8V7z"/>
+                            </svg>
+                            <span class="nav-text">Travel</span>
+                            <span class="nav-text-small">&Tourism</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'service' %}" class="nav-item {% if request.resolver_match.url_name == 'service' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h2l2-2h4l2 2h2v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-4-4-8-4zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm3.5-7H6V6h5v4zm5.5 7c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-7h-5V6h5v4z"/>
+                            </svg>
+                            <span class="nav-text">Services</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'gallery' %}" class="nav-item {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.7 2 6 3.4 6 5.8v12.4C6 19.6 8.7 21 12 21s6-1.4 6-3.8V5.8C18 3.4 15.3 2 12 2zm4 15.2c0 1.1-1.4 1.8-2.7 1.8s-2.7-.7-2.7-1.8v-5.4c0-1.1 1.4-1.8 2.7-1.8s2.7.7 2.7 1.8v5.4zM12 7.2c0 1.1-1.4 1.8-2.7 1.8s-2.7-.7-2.7-1.8V5.8c0-1.1 1.4-1.8 2.7-1.8s2.7.7 2.7 1.8v1.4z"/>
+                            </svg>
+                            <span class="nav-text">Gallery</span>
+                        </a>
+                    </li>
+            
+                    <li>
+                        <a href="{% url 'contact' %}" class="nav-item {% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 1H3c-1.1 0-1.99.9-1.99 2L1 21c0 1.1.89 2 1.99 2h16c1.1 0 1.99-.9 1.99-2V3c0-1.1-.89-2-1.99-2zm-6 16h-4v-2h4v2zm-1-4H9V7h5v6z"/>
+                            </svg>
+                            <span class="nav-text">Contact Us</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+            </nav>
+             </div>
+             <div class="scroll-indicator">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
+                </svg>
+            </div>
+    </section>
+    
+    <div class="container">
+        <section>
+            <div class="container">
+                <div class="card-stack">
+                    <div class="background-card"></div>
+                    <div class="image-card">
+                        <img src="https://images.pexels.com/photos/1479860/pexels-photo-1479860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tropical beach with water villas">
+                    </div>
+                    <div class="text-card">
+                        <h2>Don't Worry, Be Happy</h2>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <a href="#" class="button">LEARN MORE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="destinations">
+            <h2>Popular Travel Destinations & Types</h2>
+            <div class="destination-grid">
+                <div class="destination-card">
+                    <img src="https://vajiram-prod.s3.ap-south-1.amazonaws.com/Key_Facts_about_Maldives_ac38a6f4f7.webp" alt="Beach destination">
+                    <h3>Maldives</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/7a/c4/5e/photo1jpg.jpg?w=600&h=400&s=1" alt="Costa Rica">
+                    <h3>Costa Rica</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://www.travelandleisure.com/thmb/alGRUejkJtx_5GWmV9aQ6w9h2Uw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/costa-rica-arenal-volcano-COSTARICATG0621-171c9a2c18b448339d591ec2a4b41f6d.jpg" alt="Adventure">
+                    <h3>Adventure</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSaaDW8M62vaNLzMg9RcnIBszI_PUeVPYsZg&s" alt="Indonesia">
+                    <h3>Indonesia</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkh3uyC2BX48uIwJigPRuMs5W1zTCRqONIw&s" alt="Cultural">
+                    <h3>Cultural</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://static.toiimg.com/photo/55244089.cms" alt="Europe">
+                    <h3>Europe</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://www.fodors.com/wp-content/uploads/2019/03/crhero.jpg" alt="Nepal">
+                    <h3>Nepal</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQISdcCnsPZI6FAsSU3-CEa95kp_-rGO0s_mQ&s" alt="Hiking">
+                    <h3>Hiking</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Don't Worry, Be Happy</h2>
+            <p>Let us handle all your travel arrangements while you focus on making memories.</p>
+            <a href="#" class="button">Contact Us</a>
+        </section>
+
+        <section class="tech-section">
+            <h2>Next-level travel powered by tech and the human touch</h2>
+            <p>We combine cutting-edge technology with personalized service to create unforgettable travel experiences. Our expert team uses advanced tools to craft perfect itineraries while maintaining the personal touch that makes each journey special.</p>
+            <a href="#" class="button">Learn More</a>
+        </section>
+    </div>
+</body>
+</html>

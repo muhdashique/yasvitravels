@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel & Tourism Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #FFC107;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: var(--light-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 20px;
+        }
+
+        .service-content h3 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .service-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1976D2;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        /* banner */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('https://images.pexels.com/photos/672451/pexels-photo-672451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-family: Arial, sans-serif;
+            font-size: 120px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 30px;
+            font-weight: lighter;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .attribution {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-30px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 60px;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+            }
+        }
+        /* navebar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            padding: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+        }
+
+        .nav-item.active {
+            color: #007bff;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+            margin-top: 5px;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .nav-text {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .nav-text-small {
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                overflow-x: auto;
+                padding: 15px 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-item {
+                flex: 0 0 auto;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+  <section>
+    <div class="banner">
+        
+        <div class="banner-content">
+            <h1 class="title">HIKING<br>TOURS</h1>
+            <p class="subtitle">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+            <p class="attribution"></p>
+        </div>
+        <nav class="nav-container relative z-[999]">
+            <ul class="nav-menu">
+                <li>
+                    <a href="{% url 'index' %}" class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'about' %}" class="nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v2h-2zm0 4h2v6h-2z"/>
+                        </svg>
+                        <span class="nav-text">About</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'property' %}" class="nav-item  {% if request.resolver_match.url_name == 'property' %}active{% endif %}" >
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3l9 7-1.5 1.5-7.5-5.5v12h-2V6.5L4.5 11.5 3 10l9-7zm0 6v10h6V9h-6z"/>
+                        </svg>
+                        <span class="nav-text">Rooms</span>
+                        <span class="nav-text">& Villas</span>
+                    </a>
+                </li>
+        
+                <li>
+                    <a href="{% url 'travelandtour' %}" class="nav-item {% if request.resolver_match.url_name == 'travelandtour' %}active{% endif %}">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 5h-3V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v1H4c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1zM9 4h6v1H9V4zm7 3h3v11H5V7h3v4h8V7z"/>
+                        </svg>
+                        <span class="nav-text">Travel</span>
+                        <span class="nav-text">&Tourism</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'service' %}" class="nav-item {% if request.resolver_match.url_name == 'service' %}active{% endif %}">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h2l2-2h4l2 2h2v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-4-4-8-4zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm3.5-7H6V6h5v4zm5.5 7c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-7h-5V6h5v4z"/>
+                        </svg>
+                        <span class="nav-text">Services</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'gallery' %}" class="nav-item {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C8.7 2 6 3.4 6 5.8v12.4C6 19.6 8.7 21 12 21s6-1.4 6-3.8V5.8C18 3.4 15.3 2 12 2zm4 15.2c0 1.1-1.4 1.8-2.7 1.8s-2.7-.7-2.7-1.8v-5.4c0-1.1 1.4-1.8 2.7-1.8s2.7.7 2.7 1.8v5.4zM12 7.2c0 1.1-1.4 1.8-2.7 1.8s-2.7-.7-2.7-1.8V5.8c0-1.1 1.4-1.8 2.7-1.8s2.7.7 2.7 1.8v1.4z"/>
+                        </svg>
+                        <span class="nav-text">Gallery</span>
+                    </a>
+                </li>
+        
+                <li>
+                    <a href="{% url 'contact' %}" class="nav-item {% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 1H3c-1.1 0-1.99.9-1.99 2L1 21c0 1.1.89 2 1.99 2h16c1.1 0 1.99-.9 1.99-2V3c0-1.1-.89-2-1.99-2zm-6 16h-4v-2h4v2zm-1-4H9V7h5v6z"/>
+                        </svg>
+                        <span class="nav-text">Contact Us</span>
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </nav>
+         </div>
+         <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
+            </svg>
+        </div>
+</section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Choose from our wide range of travel services</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/api/placeholder/600/400" alt="Tour Package">
+                    </div>
+                    <div class="service-content">
+                        <h3>Tour Packages</h3>
+                        <p>Customized tour packages for all your travel needs. Includes accommodation, transportation, and guided tours.</p>
+                        <p class="price">From $499</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/api/placeholder/600/400" alt="Taxi Service">
+                    </div>
+                    <div class="service-content">
+                        <h3>Taxi Service</h3>
+                        <p>Reliable and comfortable taxi services for local transportation with experienced drivers.</p>
+                        <p class="price">From $25/hour</p>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/api/placeholder/600/400" alt="Ticket Booking">
+                    </div>
+                    <div class="service-content">
+                        <h3>Ticket Booking</h3>
+                        <p>Easy and secure booking for flights, trains, and local attractions at the best prices.</p>
+                        <p class="price">Service fee from $10</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/api/placeholder/600/400" alt="Private Drivers">
+                    </div>
+                    <div class="service-content">
+                        <h3>Private Drivers</h3>
+                        <p>Professional chauffeur services for personalized travel experience with local expertise.</p>
+                        <p class="price">From $50/hour</p>
+                        <a href="#" class="btn">Hire Driver</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/api/placeholder/600/400" alt="Camping">
+                    </div>
+                    <div class="service-content">
+                        <h3>Camping Adventures</h3>
+                        <p>Guided camping experiences with all necessary equipment and experienced instructors.</p>
+                        <p class="price">From $199/night</p>
+                        <a href="#" class="btn">Plan Trip</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="/api/placeholder/600/400" alt="Photography">
+                    </div>
+                    <div class="service-content">
+                        <h3>Photography & Videography</h3>
+                        <p>Professional photo and video services to capture your travel memories.</p>
+                        <p class="price">From $299/day</p>
+                        <a href="#" class="btn">Book Session</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i>✓</i>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock assistance for all your travel needs</p>
+                </div>
+                <div class="feature-item">
+                    <i>💰</i>
+                    <h3>Best Prices</h3>
+                    <p>Competitive rates and regular special offers</p>
+                </div>
+                <div class="feature-item">
+                    <i>🎯</i>
+                    <h3>Expert Guides</h3>
+                    <p>Professional and experienced local guides</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div>
+                <h3>About Us</h3>
+                <p>Your trusted partner for all travel services, making your journey memorable and hassle-free.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Tour Packages</a></li>
+                    <li><a href="#">Transport Services</a></li>
+                    <li><a href="#">Booking</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li>Email: info@travelservice.com</li>
+                    <li>Phone: +1 234 567 890</li>
+                    <li>Address: 123 Travel Street, City</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
