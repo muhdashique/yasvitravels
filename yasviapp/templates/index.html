@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Agency</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
     <style>
         /* banner */
         * {
@@ -283,7 +291,7 @@
             position: absolute;
             width: 80%;
             height: 500px;
-            background-color: #B8D8D8;
+            background-color: #2389B5;
             border-radius: 25px;
             top: 40px;
             right: 0;
@@ -345,7 +353,7 @@
         .button {
             display: inline-block;
             padding: 12px 24px;
-            background-color: #4BB1CF;
+            background-color: #2389B5;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -464,13 +472,552 @@
                 margin: 0 10px;
             }
         }
+        /* testimonial */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .testimonials-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .testimonials-subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .testimonial-card {
+            background: #f8f8f8;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-name {
+            font-weight: bold;
+            color: #333;
+            background: #f0e6e6;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-right: 15px;
+        }
+
+        .testimonial-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .credits {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .credits a {
+            color: #666;
+            text-decoration: none;
+        }
+        /* destination */
+        .destinations-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .destinations-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .destinations-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .destination-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 1.5rem;
+        }
+
+        .destination-name {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .destinations-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .destinations-title {
+                font-size: 2rem;
+            }
+        }
+        /* package section */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .packages-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .packages-subtitle {
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .packages-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .package-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .package-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .package-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            text-align: left;
+        }
+
+        .package-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .package-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .credits {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 1024px) {
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .packages-title {
+                font-size: 2rem;
+            }
+        }
+        /* Camping Tours Section */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: serif;
+        }
+
+        .camping-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: #f5f5f5;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .content-section {
+            padding-right: 20px;
+        }
+
+        .camping-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .camping-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #a08f75;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-family: sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            background-color: #8a7a62;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+        }
+
+        .credits {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        .credits a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        @media (max-width: 900px) {
+            .camping-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .content-section {
+                padding-right: 0;
+            }
+
+            .camping-title {
+                font-size: 2.5rem;
+            }
+
+            .image-gallery {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        /* gallery section */
+        .travel-section {
+    background-color: #2389B5;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.phone-number {
+    color: #e63946;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.destination-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 16/9;
+}
+
+.destination-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.destination-card.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.destination-title {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.attribution {
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #6c757d;
+}
+
+.attribution a {
+    color: #6c757d;
+    text-decoration: underline;
+}
+/* room category  */
+.tours-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-transform: capitalize;
+        }
+
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .tour-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .tour-info {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tour-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .tour-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .tour-description {
+            padding: 1rem 1.5rem;
+            color: #666;
+            margin: 0;
+            min-height: 80px;
+        }
+
+        .book-button {
+            display: block;
+            width: calc(100% - 3rem);
+            margin: 1rem 1.5rem;
+            padding: 0.75rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-button:hover {
+            background: #1d4ed8;
+        }
+
+        .attribution {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+        }
+
+        .attribution a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .tours-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
 
     </style>
 </head>
 <body>
     <section>
         <div class="banner">
-            
             <div class="banner-content">
                 <h1 class="title">HIKING<br>TOURS</h1>
                 <p class="subtitle">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
@@ -542,84 +1089,303 @@
                             <span class="nav-text">Contact Us</span>
                         </a>
                     </li>
-                    
-                    
-                </ul>
+                    <li>
+                        <a href="{% url 'login' %}" class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z"/>
+                            </svg>
+                            <span class="nav-text">Login</span>
+                        </a>
+                    </li>
+                 </ul>
             </nav>
              </div>
              <div class="scroll-indicator">
                 <svg viewBox="0 0 24 24">
                     <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
                 </svg>
-            </div>
+        </div>
     </section>
     
-    <div class="container">
+
+    <section>
+        <div class="container">
+            <div class="card-stack">
+                <div class="background-card"></div>
+                <div class="image-card">
+                    <img src="https://images.pexels.com/photos/1479860/pexels-photo-1479860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tropical beach with water villas">
+                </div>
+                <div class="text-card">
+                    <h2>Don't Worry, Be Happy</h2>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <a href="#" class="button">LEARN MORE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="destinations-section">
+        <div class="destinations-container">
+            <h1 class="destinations-title">Popular Travel Destinations<br>& Types</h1>
+            <p class="destinations-subtitle">Browse the topics below to find travel agents who are experts on that destination or travel style.</p>
+            
+            <div class="destinations-grid">
+                {% for destination in destinations %}
+                <div class="destination-card">
+                    <a href="{% url 'propertyview' destination.id %}">
+                        {% if destination.destination_image %}
+                            <img src="{{ destination.destination_image.url }}" alt="{{ destination.name }}">
+                        {% else %}
+                            <img src="https://www.shutterstock.com/image-photo/happy-traveler-woman-on-boat-260nw-2337247887.jpg" alt="{{ destination.name }}">
+                        {% endif %}
+                        <div class="destination-overlay">
+                            <div class="destination-name">{{ destination.name }}</div>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <p>No destinations available.</p>
+                {% endfor %}
+            </div>
+            
+            
+            
+        </div>
+    </section>
+
+    <section class="tours-section">
+        <h1 class="section-title text-center">{{ section_title|default:"Room Categories" }}</h1>
+        
+        <div class="tours-grid">
+            {% for category in categories %}
+            <div class="tour-card">
+                <div class="tour-image-wrapper">
+                    <a href="{% url 'propertyview' category.id %}">
+                        {% if category.category_image %}
+                            <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
+                        {% else %}
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfrsgni2CRG5CcMq7t8Xk0c0JdtsIGL-CBJA&s" alt="{{ category.name }}" class="tour-image">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="tour-info">
+                    <span class="tour-title">
+                        <a href="{% url 'propertyview' category.id %}">{{ category.name }}</a>
+                    </span>
+                    {% if category.price %}
+                    <span class="tour-price">${{ category.price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-categories text-center">
+                <p>No room categories available.</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if show_attribution %}
+        <div class="attribution text-center">
+            Images from <a href="https://freepik.com">Freepik</a>
+        </div>
+        {% endif %}
+    </section>
+    
+
+
         <section>
-            <div class="container">
-                <div class="card-stack">
-                    <div class="background-card"></div>
-                    <div class="image-card">
-                        <img src="https://images.pexels.com/photos/1479860/pexels-photo-1479860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tropical beach with water villas">
+            <div class="packages-container">
+                <div class="packages-subtitle">UNIQUE TRAVEL</div>
+                <h2 class="packages-title">tour package</h2>
+        
+                <div class="packages-grid">
+                    <div class="package-card">
+                        <img src="/api/placeholder/400/400" alt="Luxury Hotels">
+                        <div class="package-overlay">
+                            <div class="package-name">Luxury Hotels</div>
+                            <div class="package-description">Ut enim ad minim veniam</div>
+                        </div>
                     </div>
-                    <div class="text-card">
-                        <h2>Don't Worry, Be Happy</h2>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <a href="#" class="button">LEARN MORE</a>
+        
+                    <div class="package-card">
+                        <img src="/api/placeholder/400/400" alt="VIP Transfers">
+                        <div class="package-overlay">
+                            <div class="package-name">VIP Transfers</div>
+                            <div class="package-description">Ut enim ad minim veniam</div>
+                        </div>
+                    </div>
+        
+                    <div class="package-card">
+                        <img src="/api/placeholder/400/400" alt="Luxury Villas">
+                        <div class="package-overlay">
+                            <div class="package-name">Luxury Villas</div>
+                            <div class="package-description">Ut enim ad minim veniam</div>
+                        </div>
+                    </div>
+        
+                    <div class="package-card">
+                        <img src="/api/placeholder/400/400" alt="Yachting">
+                        <div class="package-overlay">
+                            <div class="package-name">Yachting</div>
+                            <div class="package-description">Ut enim ad minim veniam</div>
+                        </div>
+                    </div>
+        
+                    <div class="package-card">
+                        <img src="/api/placeholder/400/400" alt="Safari Parks">
+                        <div class="package-overlay">
+                            <div class="package-name">Safari Parks</div>
+                            <div class="package-description">Ut enim ad minim veniam</div>
+                        </div>
+                    </div>
+        
+                    <div class="package-card">
+                        <img src="/api/placeholder/400/400" alt="Trekking">
+                        <div class="package-overlay">
+                            <div class="package-name">Trekking</div>
+                            <div class="package-description">Ut enim ad minim veniam</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="destinations">
-            <h2>Popular Travel Destinations & Types</h2>
-            <div class="destination-grid">
-                <div class="destination-card">
-                    <img src="https://vajiram-prod.s3.ap-south-1.amazonaws.com/Key_Facts_about_Maldives_ac38a6f4f7.webp" alt="Beach destination">
-                    <h3>Maldives</h3>
+    <section>
+    <div class="camping-container">
+        <div class="content-section">
+            <h1 class="camping-title">10 Amazing<br>Camping Tours</h1>
+            <p class="camping-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <a href="#" class="learn-more-btn">Learn More</a>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/200/200" alt="Camping Scene 1">
                 </div>
-                <div class="destination-card">
-                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/7a/c4/5e/photo1jpg.jpg?w=600&h=400&s=1" alt="Costa Rica">
-                    <h3>Costa Rica</h3>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/200/200" alt="Camping Scene 2">
                 </div>
-                <div class="destination-card">
-                    <img src="https://www.travelandleisure.com/thmb/alGRUejkJtx_5GWmV9aQ6w9h2Uw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/costa-rica-arenal-volcano-COSTARICATG0621-171c9a2c18b448339d591ec2a4b41f6d.jpg" alt="Adventure">
-                    <h3>Adventure</h3>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/200/200" alt="Camping Scene 3">
                 </div>
-                <div class="destination-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSaaDW8M62vaNLzMg9RcnIBszI_PUeVPYsZg&s" alt="Indonesia">
-                    <h3>Indonesia</h3>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/200/200" alt="Camping Scene 4">
                 </div>
-                <div class="destination-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkh3uyC2BX48uIwJigPRuMs5W1zTCRqONIw&s" alt="Cultural">
-                    <h3>Cultural</h3>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/200/200" alt="Camping Scene 5">
                 </div>
-                <div class="destination-card">
-                    <img src="https://static.toiimg.com/photo/55244089.cms" alt="Europe">
-                    <h3>Europe</h3>
-                </div>
-                <div class="destination-card">
-                    <img src="https://www.fodors.com/wp-content/uploads/2019/03/crhero.jpg" alt="Nepal">
-                    <h3>Nepal</h3>
-                </div>
-                <div class="destination-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQISdcCnsPZI6FAsSU3-CEa95kp_-rGO0s_mQ&s" alt="Hiking">
-                    <h3>Hiking</h3>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/200/200" alt="Camping Scene 6">
                 </div>
             </div>
-        </section>
-
-        <section class="cta-section">
-            <h2>Don't Worry, Be Happy</h2>
-            <p>Let us handle all your travel arrangements while you focus on making memories.</p>
-            <a href="#" class="button">Contact Us</a>
-        </section>
-
-        <section class="tech-section">
-            <h2>Next-level travel powered by tech and the human touch</h2>
-            <p>We combine cutting-edge technology with personalized service to create unforgettable travel experiences. Our expert team uses advanced tools to craft perfect itineraries while maintaining the personal touch that makes each journey special.</p>
-            <a href="#" class="button">Learn More</a>
-        </section>
+        </div>
+        
+        <div class="image-section">
+            <img src="/api/placeholder/600/750" alt="Main Camping Scene" class="main-image">
+        </div>
     </div>
+    </section>
+        <section>
+            <div class="testimonials-container">
+                <h1 class="testimonials-title">Testimonials</h1>
+                <p class="testimonials-subtitle">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <span class="testimonial-name">Celia Almeda</span>
+                            <img src="/api/placeholder/50/50" alt="Celia Almeda" class="testimonial-image">
+                        </div>
+                        <p class="testimonial-text">Proin sed libero enim sed faucibus turpis. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Ut sem nulla pharetra diam sit amet nisl.</p>
+                    </div>
+        
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <span class="testimonial-name">Frank Kinney</span>
+                            <img src="/api/placeholder/50/50" alt="Frank Kinney" class="testimonial-image">
+                        </div>
+                        <p class="testimonial-text">Proin sed libero enim sed faucibus turpis. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Ut sem nulla pharetra diam sit amet nisl.</p>
+                    </div>
+        
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <span class="testimonial-name">Nick Jhonson</span>
+                            <img src="/api/placeholder/50/50" alt="Nick Jhonson" class="testimonial-image">
+                        </div>
+                        <p class="testimonial-text">Proin sed libero enim sed faucibus turpis. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Ut sem nulla pharetra diam sit amet nisl.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+        <section class="travel-section">
+            <div class="header">
+              <h1>Gallery </h1>
+                
+            </div>
+            
+            <div class="destinations-grid">
+                <div class="destination-card large">
+                    <img src="dolomites.jpg" alt="Dolomite Alps">
+                    <div class="destination-title">Dolomite Alps</div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="iceland.jpg" alt="Iceland">
+                    <div class="destination-title">Iceland</div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="ethiopia.jpg" alt="Ethiopia">
+                    <div class="destination-title">Ethiopia</div>
+                </div>
+                <div class="destination-card">
+                    <img src="iceland.jpg" alt="Iceland">
+                    <div class="destination-title">Iceland</div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="ethiopia.jpg" alt="Ethiopia">
+                    <div class="destination-title">Ethiopia</div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="nepal.jpg" alt="Nepal">
+                    <div class="destination-title">Nepal</div>
+                </div>
+                
+                <div class="destination-card">
+                    <img src="kenya.jpg" alt="Kenya">
+                    <div class="destination-title">Kenia</div>
+                </div>
+                
+                <div class="destination-card large">
+                    <img src="newzealand.jpg" alt="New Zealand">
+                    <div class="destination-title">New Zealand</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h1>Home Page</h1>
+<h2>Destinations</h2>
+<ul>
+    {% for destination in destinations %}
+    <li>{{ destination.name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Categories</h2>
+<ul>
+    {% for category in categories %}
+    <li>{{ category.name }}</li>
+    {% endfor %}
+</ul>
+
+        </section>
+
+            
+            
+   
 </body>
 </html>
+{% endblock %}

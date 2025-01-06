@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +54,7 @@
 
         /* Products Section */
         .products {
-            background-color: #FF5722;
+            background-color: #2389B5;
             padding: 60px 0;
             color: white;
         }
@@ -69,7 +73,7 @@
 
         .product-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 0px;
             overflow: hidden;
         }
 
@@ -361,6 +365,209 @@
                 margin: 0 10px;
             }
         }
+
+        /* destination */
+        .destinations-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .destinations-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .destinations-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .destination-card {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 1.5rem;
+        }
+
+        .destination-name {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .destinations-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .destinations-title {
+                font-size: 2rem;
+            }
+        }
+        /* category */
+        /* Destinations Section Styles */
+.products {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.destinations-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.destination-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.destination-card:hover {
+    transform: translateY(-5px);
+}
+
+.destination-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.destination-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.destination-card:hover img {
+    transform: scale(1.05);
+}
+
+.destination-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    padding: 20px;
+}
+
+.destination-name {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.button {
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+    padding: 15px 40px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .destinations-title {
+        font-size: 2rem;
+    }
+
+    .destinations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .destination-card img {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .destinations-title {
+        font-size: 1.75rem;
+    }
+    
+    .button {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -438,6 +645,14 @@
                             <span class="nav-text">Contact Us</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{% url 'login' %}" class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z"/>
+                            </svg>
+                            <span class="nav-text">Login</span>
+                        </a>
+                    </li>
                     
                     
                 </ul>
@@ -459,30 +674,35 @@
 
     <section class="products">
         <div class="container">
-            <h2>Build Great Products</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="/api/placeholder/400/300" alt="Living room design">
+            <h1 class="destinations-title">Popular Travel Destinations<br>& Types</h1>
+            <div class="destinations-grid">
+                {% for destination in destinations %}
+                <div class="destination-card">
+                    <a href="{% url 'propertyview' destination.id %}">
+                        {% if destination.destination_image %}
+                            <img src="{{ destination.destination_image.url }}" alt="{{ destination.name }}">
+                        {% else %}
+                            <img src="https://www.shutterstock.com/image-photo/happy-traveler-woman-on-boat-260nw-2337247887.jpg" alt="{{ destination.name }}">
+                        {% endif %}
+                        <div class="destination-overlay">
+                            <div class="destination-name">{{ destination.name }}</div>
+                        </div>
+                    </a>
                 </div>
-                <div class="product-card">
-                    <img src="/api/placeholder/400/300" alt="Bedroom design">
-                </div>
-                <div class="product-card">
-                    <img src="/api/placeholder/400/300" alt="Kitchen design">
-                </div>
-                <div class="product-card">
-                    <img src="/api/placeholder/400/300" alt="Office design">
-                </div>
-                <div class="product-card">
-                    <img src="/api/placeholder/400/300" alt="Bathroom design">
-                </div>
-                <div class="product-card">
-                    <img src="/api/placeholder/400/300" alt="Dining room design">
-                </div>
+                {% empty %}
+                <p>No destinations available.</p>
+                {% endfor %}
             </div>
+            
+            
             <a href="#" class="button">VIEW MORE</a>
         </div>
     </section>
+
+
+    
+    
+    
 
     <section class="services container">
         <h2>Complete Interior Design Service</h2>
@@ -523,20 +743,7 @@
         <a href="#" class="button">LEARN MORE</a>
     </section>
 
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="contact">
-                <h3>Contacts</h3>
-                <p>Get in touch to discuss your interior design needs. We're here to help bring your vision to life.</p>
-            </div>
-            <div class="newsletter">
-                <h3>Sign up for the newsletter</h3>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email">
-                    <button type="submit" class="button">Submit</button>
-                </form>
-            </div>
-        </div>
-    </footer>
+    
 </body>
 </html>
+{% endblock %}

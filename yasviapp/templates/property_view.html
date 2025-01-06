@@ -1,165 +1,13 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            line-height: 1.6;
-            background-color: #fff;
-            color: #333;
-        }
-
-        .hero {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .offices {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .office {
-            padding: 20px;
-        }
-
-        .office h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-
-        .office p {
-            margin-bottom: 10px;
-            color: #666;
-        }
-
-        .cards-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .card p {
-            color: #666;
-        }
-
-        .contact-section {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .contact-form {
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-
-        .submit-btn {
-            background-color: #ffd700;
-            color: #333;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            background-color: #ffed4a;
-        }
-
-        .contact-info {
-            padding: 20px;
-        }
-
-        .contact-info h3 {
-            margin-bottom: 15px;
-        }
-
-        .social-links {
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            margin-right: 10px;
-            color: #333;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .contact-section {
-                grid-template-columns: 1fr;
-            }
-        }
-        /* banner */
-        
-        * {
+         /* banner */
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -169,7 +17,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background-image: url('https://images.pexels.com/photos/210243/pexels-photo-210243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-image: url('https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -254,8 +102,165 @@
                 font-size: 20px;
             }
         }
-        /* navebar */
         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .destinations {
+            margin-bottom: 40px;
+        }
+
+        .destinations h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .destination-card h3 {
+            padding: 15px;
+            color: #333;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #0396FF, #ABDCFF);
+            border-radius: 20px;
+            padding: 60px 40px;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cta-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .tech-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .tech-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .tech-section p {
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .hero-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .destination-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+         /* nave bar */
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -333,12 +338,151 @@
                 margin: 0 10px;
             }
         }
+        /* category */
+/* Tours Section Styles */
+.tours-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #3498db;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tour-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tour-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.tour-image-wrapper {
+    position: relative;
+    padding-top: 66.67%; /* 3:2 aspect ratio */
+    overflow: hidden;
+}
+
+.tour-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.tour-card:hover .tour-image {
+    transform: scale(1.1);
+}
+
+.tour-info {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+}
+
+.tour-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.tour-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #3498db;
+}
+
+.no-categories {
+    grid-column: 1 / -1;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.no-categories p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tours-section {
+        padding: 60px 15px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    .tours-grid {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .tour-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .tour-title {
+        font-size: 1.1rem;
+    }
+
+    .tour-price {
+        font-size: 1.15rem;
+    }
+}
     </style>
 </head>
 <body>
+
     <section>
         <div class="banner">
-            
             <div class="banner-content">
                 <h1 class="title">HIKING<br>TOURS</h1>
                 <p class="subtitle">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
@@ -365,22 +509,22 @@
                     </li>
                     
                     <li>
-                        <a href="{% url 'property' %}" class="nav-item  {% if request.resolver_match.url_name == 'property' %}active{% endif %}" >
+                        <a href="{% url 'property' %}" class="nav-item {% if request.resolver_match.url_name == 'rooms' %}active{% endif %}">
                             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 3l9 7-1.5 1.5-7.5-5.5v12h-2V6.5L4.5 11.5 3 10l9-7zm0 6v10h6V9h-6z"/>
                             </svg>
                             <span class="nav-text">Rooms</span>
-                            <span class="nav-text">& Villas</span>
+                            <span class="nav-text-small">& Villas</span>
                         </a>
                     </li>
             
                     <li>
-                        <a href="{% url 'travelandtour' %}" class="nav-item {% if request.resolver_match.url_name == 'travelandtour' %}active{% endif %}">
+                        <a href="{% url 'travelandtour' %}" class="nav-item {% if request.resolver_match.url_name == 'travel' %}active{% endif %}">
                             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20 5h-3V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v1H4c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1zM9 4h6v1H9V4zm7 3h3v11H5V7h3v4h8V7z"/>
                             </svg>
                             <span class="nav-text">Travel</span>
-                            <span class="nav-text">&Tourism</span>
+                            <span class="nav-text-small">&Tourism</span>
                         </a>
                     </li>
                     
@@ -403,7 +547,7 @@
                     </li>
             
                     <li>
-                        <a href="{% url 'contact' %}" class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                        <a href="{% url 'contact' %}" class="nav-item {% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">
                             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M21 1H3c-1.1 0-1.99.9-1.99 2L1 21c0 1.1.89 2 1.99 2h16c1.1 0 1.99-.9 1.99-2V3c0-1.1-.89-2-1.99-2zm-6 16h-4v-2h4v2zm-1-4H9V7h5v6z"/>
                             </svg>
@@ -418,97 +562,47 @@
                             <span class="nav-text">Login</span>
                         </a>
                     </li>
-                    
-                    
-                </ul>
+                 </ul>
             </nav>
              </div>
              <div class="scroll-indicator">
                 <svg viewBox="0 0 24 24">
                     <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
                 </svg>
+        </div>
+    </section>
+
+
+    <section class="propertyview-section">
+        <h1 class="section-title text-center">{{ destination.name }}</h1>
+        <p class="destination-description text-center">
+            Explore categories available in {{ destination.name }}.
+        </p>
+    
+        <div class="tours-grid">
+            {% for category in categories %}
+            <div class="tour-card">
+                <div class="tour-image-wrapper">
+                    {% if category.category_image %}
+                        <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
+                    {% else %}
+                        <img src="/api/placeholder/300/200" alt="{{ category.name }}" class="tour-image">
+                    {% endif %}
+                </div>
+                <div class="tour-info">
+                    <span class="tour-title">{{ category.name }}</span>
+                    {% if category.price %}
+                    <span class="tour-price">${{ category.price }}</span>
+                    {% endif %}
+                </div>
             </div>
-    </section>
-
-    <section class="offices">
-        <div class="office">
-            <h3>La Crosse</h3>
-            <p>123 Main Street North Suite 101</p>
-            <p>La Crosse, WI 54601</p>
-            <p>Tel: (123) 456-7890</p>
-            <p>Fax: (123) 456-7891</p>
-        </div>
-
-        <div class="office">
-            <h3>Los Angeles</h3>
-            <p>456 Ocean Avenue Suite 202</p>
-            <p>Los Angeles, CA 90001</p>
-            <p>Tel: (123) 456-7892</p>
-            <p>Fax: (123) 456-7893</p>
-        </div>
-
-        <div class="office">
-            <h3>Dallas</h3>
-            <p>789 Star Road Suite 303</p>
-            <p>Dallas, TX 75001</p>
-            <p>Tel: (123) 456-7894</p>
-            <p>Fax: (123) 456-7895</p>
-        </div>
-    </section>
-
-    <section class="cards-container">
-        <div class="card">
-            <h3>How to help?</h3>
-            <p>Let us know how we can help you. Our team is ready to provide solutions.</p>
-        </div>
-
-        <div class="card">
-            <h3>Our mission</h3>
-            <p>We strive to provide exceptional service and innovative solutions to our clients.</p>
-        </div>
-
-        <div class="card">
-            <h3>Contact Us</h3>
-            <p>Get in touch with our team for any inquiries or assistance.</p>
-            <p>+1 (234) 567-8910</p>
-        </div>
-    </section>
-
-    <section class="contact-section">
-        <div class="contact-form">
-            <h2>Contact Us</h2>
-            <form>
-                <div class="form-group">
-                    <input type="text" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <textarea placeholder="Message" rows="5"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">SUBMIT</button>
-            </form>
-        </div>
-
-        <div class="contact-info">
-            <h3>Call us</h3>
-            <p>Phone: (123) 456-7890</p>
-            <p>Toll Free: (800) 123-4567</p>
-            
-            <h3 style="margin-top: 20px;">Location</h3>
-            <p>123 Business Street</p>
-            <p>Suite 100</p>
-            <p>City, State 12345</p>
-
-            <h3 style="margin-top: 20px;">Social</h3>
-            <div class="social-links">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
+            {% empty %}
+            <div class="no-categories text-center">
+                <p>No categories available for this destination.</p>
             </div>
+            {% endfor %}
         </div>
     </section>
+    
 </body>
 </html>
-{% endblock %}
