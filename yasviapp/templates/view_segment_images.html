@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- view_segment_images.html -->
+<section class="imageview-section">
+    <h1 class="section-title text-center">{{ segment.name }}</h1>
+    <p class="segment-description text-center">
+        Explore images available for {{ segment.name }}.
+    </p>
+
+    <div class="images-grid">
+        {% for image in images %}
+        <div class="image-card">
+            <div class="image-wrapper">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}" class="segment-image">
+            </div>
+            <div class="image-info">
+                <span class="image-title">{{ image.title }}</span>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-images text-center">
+            <p>No images available for this segment.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+</body>
+</html>

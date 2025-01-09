@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Gallery Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            margin-bottom: 1.5rem;
+            animation: slideUp 0.5s ease;
+        }
+
+        form p {
+            margin-bottom: 1.5rem;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        form input,
+        form textarea,
+        form select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        form input:focus,
+        form textarea:focus,
+        form select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .current-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .current-image img {
+            max-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            form {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Custom file input styling */
+        .file-input-wrapper {
+            position: relative;
+            margin-top: 0.5rem;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #e9ecef;
+            border: 2px dashed #ced4da;
+            border-radius: 5px;
+            color: #495057;
+            text-align: center;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-wrapper:hover .file-input-button {
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Gallery Image</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{% url 'add_gallery_image' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhance file input styling
+            const fileInput = document.querySelector('input[type="file"]');
+            if (fileInput) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'file-input-wrapper';
+                const button = document.createElement('div');
+                button.className = 'file-input-button';
+                button.textContent = 'Choose Image';
+
+                fileInput.parentNode.insertBefore(wrapper, fileInput);
+                wrapper.appendChild(button);
+                wrapper.appendChild(fileInput);
+
+                fileInput.addEventListener('change', function() {
+                    if (this.files.length > 0) {
+                        button.textContent = this.files[0].name;
+                    } else {
+                        button.textContent = 'Choose Image';
+                    }
+                });
+            }
+
+            // Form validation
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                const requiredInputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+                let isValid = true;
+
+                requiredInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.style.borderColor = '#dc3545';
+                    } else {
+                        input.style.borderColor = '#e0e0e0';
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Please fill in all required fields');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

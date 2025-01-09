@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- view_segments.html -->
+    <section>
+        <div class="container mx-auto p-8 max-w-6xl">
+            <h1 class="text-4xl mb-2 text-center">Unique travel experiences</h1>
+            <p class="text-gray-600 mb-8 text-center">From renovations and room additions to masonry and other handyman services</p>
+            
+            <div class="segments-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {% for segment in segments %}
+              <div class="segment-card bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="segment-image-wrapper h-48 overflow-hidden">
+                  <a href="{% url 'view_segment_images' segment.id %}">
+                    {% if segment.segment_image %}
+                      <img src="{{ segment.segment_image.url }}" alt="{{ segment.name }}" class="w-full h-full object-cover segment-image"/>
+                    {% else %}
+                      <img src="/api/placeholder/400/320" alt="{{ segment.name }}" class="w-full h-full object-cover segment-image"/>
+                    {% endif %}
+                  </a>
+                </div>
+                <div class="segment-info p-6">
+                  <a href="{% url 'view_segment_images' segment.id %}">
+                    <span class="segment-title text-xl font-semibold mb-2 block">{{ segment.name|upper }}</span>
+                  </a>
+                  <p class="segment-description text-gray-600 mb-4">{{ segment.description }}</p>
+                  <a href="{% url 'view_segment_images' segment.id %}" class="inline-block text-orange-600 hover:text-orange-700 font-medium">MORE</a>
+                </div>
+              </div>
+              {% empty %}
+              <div class="no-segments text-center col-span-full text-gray-500 py-12">
+                <p>No segments available for this category.</p>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+    </section>  
+    <!-- <section>
+        <h1>{{ category.name }} - Segments</h1>
+
+<div class="segments-list">
+    {% for segment in segments %}
+    <div class="segment-card">
+        <a href="#">
+            <h3>{{ segment.name }}</h3>
+            <p>{{ segment.description }}</p>
+        </a>
+    </div>
+    {% empty %}
+    <p>No segments available for this category.</p>
+    {% endfor %}
+</div>
+
+    </section> -->
+    
+
+</body>
+</html>

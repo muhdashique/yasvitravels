@@ -3,251 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Styled Buttons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #4e73df;
-            --secondary-color: #858796;
-        }
-
-        body {
-            background-color: #f8f9fc;
-        }
-
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,.08);
-        }
-
-        .admin-title {
-            color: var(--primary-color);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #e3e6f0;
-        }
-
-        .card {
+        /* General Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 1rem;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
             border: none;
-            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
-            margin-bottom: 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .card-header {
-            background-color: white;
-            border-bottom: 1px solid #e3e6f0;
-            padding: 1rem 1.25rem;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .card-header h2 {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin: 0;
+        /* Button Variants */
+        .btn-info {
+            background-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background-color: #007bff;
         }
 
         .btn-primary:hover {
-            background-color: #2e59d9;
-            border-color: #2e59d9;
+            background-color: #0056b3;
         }
 
-        .table {
-            background-color: white;
-            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        /* Card and Layout Styles */
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 500px;
+            overflow: hidden;
         }
 
-        .table thead th {
-            background-color: #f8f9fc;
-            border-top: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            color: var(--secondary-color);
+        .card-header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
         }
 
-        .btn-action {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
+        .card-body {
+            padding: 20px;
         }
 
-        .alert {
-            border-radius: 0.35rem;
-            border: none;
+        .mt-3 {
+            margin-top: 1rem;
         }
 
-        form label {
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
+        .mt-4 {
+            margin-top: 1.5rem;
         }
 
-        form input, form textarea, form select {
-            border-radius: 0.35rem !important;
-            border: 1px solid #d1d3e2 !important;
-            padding: 0.5rem 1rem !important;
+        .text-center {
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-user-shield me-2"></i>Admin Panel
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">
-                            <i class="fas fa-sign-out-alt me-1"></i>Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- View Destinations -->
+   <div>
+    <a href="{% url 'add_testimonial' %}" class="btn btn-primary">Add Testimonial</a>
+   </div><br>
+<br>
+    <div>
+        <a href="{% url 'add_gallery_image' %}" class="btn btn-primary">Add New Gallery Image</a>
 
-    <div class="container py-4">
-        <h1 class="admin-title">Dashboard</h1>
-
-        {% if messages %}
-        <div class="messages mb-4">
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-
-        <div class="row">
-            <!-- Destination Form -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="h5"><i class="fas fa-map-marker-alt me-2"></i>Add Destination</h2>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" action="{% url 'add_destination' %}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ destination_form.as_p }}
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-plus me-1"></i>Add Destination
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-
-            <!-- Category Form -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="h5"><i class="fas fa-folder me-2"></i>Add Category</h2>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" action="{% url 'add_category' %}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ category_form.as_p }}
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-plus me-1"></i>Add Category
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-
-            <!-- Segment Form -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="h5"><i class="fas fa-puzzle-piece me-2"></i>Add Segment</h2>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" action="{% url 'add_segment' %}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ segment_form.as_p }}
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-plus me-1"></i>Add Segment
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            
-
-            <!-- Image Form -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="h5"><i class="fas fa-image me-2"></i>Add Image</h2>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" action="{% url 'add_image' %}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ image_form.as_p }}
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-plus me-1"></i>Add Image
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Display Existing Data -->
-        <div class="card mt-4">
-            <div class="card-header">
-                <h2 class="h5"><i class="fas fa-list me-2"></i>Existing Destinations</h2>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for destination in destinations %}
-                            <tr>
-                                <td>{{ destination.name }}</td>
-                                <td>{{ destination.description }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-action">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-action">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
     </div>
+    <br>
+    <br>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <br>
+
+    <div>
+        <a href="{% url 'package_add' %}" class="btn btn-primary">Add New Package</a>
+
+    </div>
+    <br>
+    <br>
+
+    <br>
+<div>
+    <a href="{% url 'add_campingimage' %}" class="btn btn-primary">Add camping Image</a>
+
+
+</div>
+
+    <section>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="h5"><i class="fas fa-eye me-2"></i>Destinations</h2>
+                </div>
+                <div class="card-body text-center">
+                    <a href="{% url 'view_destinations' %}" class="btn btn-info">
+                         Destinations
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Manage Categories -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="h5"><i class="fas fa-list me-2"></i> Categories</h2>
+                </div>
+                <div class="card-body text-center">
+                    <a href="{% url 'manage_categories' %}" class="btn btn-secondary mt-3">
+                        <i class="fas fa-arrow-left me-1"></i>  Categories
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segment List -->
+    <section>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="h5"><i class="fas fa-arrow-left me-2"></i>Segments</h2>
+                </div>
+                <div class="card-body text-center">
+                    <a href="{% url 'segment_list' %}" class="btn btn-primary mt-4">
+                        <i class="fas fa-arrow-left me-1"></i>  Segments
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Manage Images -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="h5"><i class="fas fa-images me-2"></i> Images</h2>
+                </div>
+                <div class="card-body text-center">
+                    <a href="{% url 'manage_images' %}" class="btn btn-primary">
+                        <i class="fas fa-images me-1"></i>  Images
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+<section>
+ 
+</section>
 </body>
 </html>

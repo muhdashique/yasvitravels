@@ -33,23 +33,26 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 60px 0;
+            padding: 60px ;
         }
 
         .hero-content {
             max-width: 500px;
+            align-items: center;
         }
 
         .hero-content h1 {
             font-size: 48px;
             margin-bottom: 20px;
             color: #333;
+            align-items: center;
         }
 
         .hero-content p {
             color: #666;
             margin-bottom: 30px;
             line-height: 1.6;
+            align-items: center;
         }
 
         /* Products Section */
@@ -567,6 +570,135 @@
     }
 }
 
+/* new scroll */
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.destinations-grid {
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth; /* For smooth scrolling */
+    gap: 16px;
+    width: 100%;
+}
+
+.destination-card {
+    flex: 0 0 200px; /* Adjust the card width */
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    width: 70vh;
+    height: 30vh;
+}
+
+.destination-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.destination-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.scroll-button.left {
+    left: -20px;
+}
+
+.scroll-button.right {
+    right: -20px;
+}
+
+.scroll-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* scroll button */
+.scroll-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.scroll-buttons button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.scroll-buttons button:hover {
+    background-color: #444;
+}
+/* new style */
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    color: #fff; /* White arrow */
+    border: none;
+    padding: 12px 18px; /* Adjust button size */
+    cursor: pointer;
+    border-radius: 70%; /* Circular shape */
+    z-index: 1; /* Ensure it appears above content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+}
+
+.scroll-button:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Darker background on hover */
+    transform: translateY(-50%) scale(1.1); /* Slightly enlarge on hover */
+}
+
+.scroll-button:active {
+    transform: translateY(-50%) scale(0.95); /* Pressed effect */
+}
+
+.scroll-button.right {
+    right: 10px; /* Position on the right */
+}
+
+.scroll-button.left {
+    left: 10px; /* Position on the left */
+}
+
+/* Optional Media Query for Small Screens */
+@media (max-width: 768px) {
+    .scroll-button {
+        padding: 8px 12px; /* Smaller buttons on smaller screens */
+    }
+}
+
+
 
     </style>
 </head>
@@ -664,40 +796,37 @@
                 </svg>
             </div>
     </section>
-    <section class="hero container">
-        <div class="hero-content">
-            <h1>Design Your Home, Your Way</h1>
-            <p>Transform your space into something extraordinary with our expert interior design services. Together we'll create the perfect look for your home.</p>
-            <a href="#" class="button">LEARN MORE</a>
-        </div>
-    </section>
+    
 
     <section class="products">
         <div class="container">
             <h1 class="destinations-title">Popular Travel Destinations<br>& Types</h1>
-            <div class="destinations-grid">
-                {% for destination in destinations %}
-                <div class="destination-card">
-                    <a href="{% url 'propertyview' destination.id %}">
-                        {% if destination.destination_image %}
-                            <img src="{{ destination.destination_image.url }}" alt="{{ destination.name }}">
-                        {% else %}
-                            <img src="https://www.shutterstock.com/image-photo/happy-traveler-woman-on-boat-260nw-2337247887.jpg" alt="{{ destination.name }}">
-                        {% endif %}
-                        <div class="destination-overlay">
-                            <div class="destination-name">{{ destination.name }}</div>
-                        </div>
-                    </a>
+            <div class="scroll-container">
+                <button class="scroll-button left" aria-label="Scroll Left">‹</button>
+                <div class="destinations-grid">
+                    {% for destination in destinations %}
+                    <div class="destination-card">
+                        <a href="{% url 'propertyview' destination.id %}">
+                            {% if destination.destination_image %}
+                                <img src="{{ destination.destination_image.url }}" alt="{{ destination.name }}">
+                            {% else %}
+                                <img src="https://www.shutterstock.com/image-photo/happy-traveler-woman-on-boat-260nw-2337247887.jpg" alt="{{ destination.name }}">
+                            {% endif %}
+                            <div class="destination-overlay">
+                                <div class="destination-name">{{ destination.name }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% empty %}
+                    <p>No destinations available.</p>
+                    {% endfor %}
                 </div>
-                {% empty %}
-                <p>No destinations available.</p>
-                {% endfor %}
+                <button class="scroll-button right " aria-label="Scroll Right">›</button>
             </div>
-            
-            
-            <a href="#" class="button">VIEW MORE</a>
         </div>
     </section>
+    
+    
 
 
     
@@ -742,7 +871,28 @@
         </div>
         <a href="#" class="button">LEARN MORE</a>
     </section>
-
+    <div class="scroll-buttons">
+        <button class="scroll-left">‹</button>
+        <button class="scroll-right">›</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollContainer = document.querySelector('.destinations-grid');
+            const scrollLeftButton = document.querySelector('.scroll-button.left');
+            const scrollRightButton = document.querySelector('.scroll-button.right');
+    
+            scrollLeftButton.addEventListener('click', () => {
+                scrollContainer.scrollBy({ left: -200, behavior: 'smooth' });
+            });
+    
+            scrollRightButton.addEventListener('click', () => {
+                scrollContainer.scrollBy({ left: 200, behavior: 'smooth' });
+            });
+        });
+    </script>
+    
+    
     
 </body>
 </html>

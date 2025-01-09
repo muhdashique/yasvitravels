@@ -573,36 +573,36 @@
     </section>
 
 
-    <section class="propertyview-section">
-        <h1 class="section-title text-center">{{ destination.name }}</h1>
-        <p class="destination-description text-center">
-            Explore categories available in {{ destination.name }}.
-        </p>
-    
-        <div class="tours-grid">
-            {% for category in categories %}
-            <div class="tour-card">
-                <div class="tour-image-wrapper">
-                    {% if category.category_image %}
+    <div class="tours-grid">
+        {% for category in categories %}
+        <div class="tour-card">
+            <div class="tour-image-wrapper">
+                {% if category.category_image %}
+                    <a href="{% url 'view_segments' category.id %}">
                         <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
-                    {% else %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'view_segments' category.id %}">
                         <img src="/api/placeholder/300/200" alt="{{ category.name }}" class="tour-image">
-                    {% endif %}
-                </div>
-                <div class="tour-info">
+                    </a>
+                {% endif %}
+            </div>
+            <div class="tour-info">
+                <a href="{% url 'view_segments' category.id %}">
                     <span class="tour-title">{{ category.name }}</span>
-                    {% if category.price %}
-                    <span class="tour-price">${{ category.price }}</span>
-                    {% endif %}
-                </div>
+                </a>
+                {% if category.price %}
+                <span class="tour-price">${{ category.price }}</span>
+                {% endif %}
             </div>
-            {% empty %}
-            <div class="no-categories text-center">
-                <p>No categories available for this destination.</p>
-            </div>
-            {% endfor %}
         </div>
-    </section>
+        {% empty %}
+        <div class="no-categories text-center">
+            <p>No categories available for this destination.</p>
+        </div>
+        {% endfor %}
+    </div>
+    
     
 </body>
 </html>

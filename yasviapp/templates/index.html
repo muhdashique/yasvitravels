@@ -552,6 +552,150 @@
             color: #666;
             text-decoration: none;
         }
+        .testimonials-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        position: relative;
+    }
+
+    .testimonials-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .testimonials-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .testimonials-wrapper {
+        position: relative;
+        overflow: hidden;
+        padding: 0 50px;
+    }
+
+    .testimonials-grid {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        gap: 30px;
+    }
+
+    .testimonial-card {
+        flex: 0 0 calc(33.333% - 20px);
+        min-width: calc(33.333% - 20px);
+        background: #2389B5;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        gap: 15px;
+    }
+
+    .testimonial-name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    .testimonial-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .testimonial-text {
+        color: #ffffff;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .scroll-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #fff;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .scroll-button:hover {
+        background: #f0f0f0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .scroll-button.left {
+        left: 0;
+    }
+
+    .scroll-button.right {
+        right: 0;
+    }
+
+    .scroll-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .scroll-button::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-style: solid;
+        border-width: 2px 2px 0 0;
+        display: inline-block;
+    }
+
+    .scroll-button.left::before {
+        transform: rotate(-135deg);
+        margin-left: 5px;
+    }
+
+    .scroll-button.right::before {
+        transform: rotate(45deg);
+        margin-right: 5px;
+    }
+
+    /* Auto-scroll control button */
+    .auto-scroll-control {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 15px;
+        background: #333;
+        color: white;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.3s ease;
+    }
+
+    .auto-scroll-control:hover {
+        background: #555;
+    }
         /* destination */
         .destinations-container {
             max-width: 1200px;
@@ -731,182 +875,232 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        .camping-section {
+            background-color: #2389B5;
+            padding: 4rem 2rem;
+            color: white;
+        }
         .camping-container {
             max-width: 1200px;
-            margin: 60px auto;
-            padding: 40px;
-            background-color: #f5f5f5;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
+            margin: 0 auto;
         }
-
         .content-section {
-            padding-right: 20px;
+            text-align: center;
         }
-
         .camping-title {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            font-weight: normal;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
         }
-
         .camping-description {
-            color: #666;
+            font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 30px;
+            color: #cccccc;
+            margin: 0 auto 2rem;
+            max-width: 700px;
         }
-
         .learn-more-btn {
             display: inline-block;
-            padding: 12px 30px;
-            background-color: #a08f75;
+            padding: 0.8rem 1.5rem;
+            background-color: #4CAF50;
             color: white;
             text-decoration: none;
-            border-radius: 3px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            font-family: sans-serif;
+            border-radius: 4px;
+            margin-bottom: 2rem;
             transition: background-color 0.3s ease;
         }
-
         .learn-more-btn:hover {
-            background-color: #8a7a62;
+            background-color: #45a049;
         }
-
         .image-gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
-
-        .gallery-item {
-            aspect-ratio: 1;
+        .package-card {
+            position: relative;
+            height: 300px;
             overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
         }
-
-        .gallery-item img {
+        .package-card:hover {
+            transform: translateY(-5px);
+        }
+        .package-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
         }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        .package-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            text-align: left;
         }
-
-        .main-image {
-            width: 100%;
-            aspect-ratio: 4/5;
-            object-fit: cover;
+        .package-overlay p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #e0e0e0;
         }
-
-        .credits {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 15px;
+        .package-overlay p strong {
+            color: #ffffff;
         }
-
-        .credits a {
-            color: #666;
-            text-decoration: none;
-        }
-
-        @media (max-width: 900px) {
-            .camping-container {
-                grid-template-columns: 1fr;
-                padding: 20px;
+        @media (max-width: 768px) {
+            .camping-section {
+                padding: 3rem 1rem;
             }
-
-            .content-section {
-                padding-right: 0;
-            }
-
             .camping-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
-
-            .image-gallery {
-                margin-top: 20px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .image-gallery {
-                grid-template-columns: repeat(2, 1fr);
+            .package-card {
+                height: 250px;
             }
         }
         /* gallery section */
-        .travel-section {
-    background-color: #2389B5;
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+.travel-section {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 40px 20px;
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
+    position: relative;
+    background-color: #2389B5;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Decorative background elements */
+.travel-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(135deg, #f8e1e8 0%, #fff1f4 100%);
+    z-index: -1;
 }
 
 .header {
-    margin-bottom: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
 }
 
-.phone-number {
-    color: #e63946;
-    text-decoration: none;
-    font-size: 2em;
+.header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #e8b4bc;
+    margin: 15px auto 0;
 }
 
-.destinations-grid {
+.header h1 {
+    font-family: "Playfair Display", serif;
+    color: #333;
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 20px 0;
+    position: relative;
+}
+
+.gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.destination-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    aspect-ratio: 16/9;
-}
-
-.destination-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.destination-card.large {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-
-.destination-title {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-    font-size: 1.5em;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.attribution {
+    gap: 30px;
     margin-top: 20px;
-    font-size: 0.8em;
-    color: #6c757d;
+    position: relative;
+    z-index: 1;
 }
 
-.attribution a {
-    color: #6c757d;
-    text-decoration: underline;
+.gallery-card {
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding-bottom: 15px;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 15px;
+}
+
+.gallery-title {
+    font-family: "Playfair Display", serif;
+    color: #333;
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0 15px;
+}
+
+.gallery-card p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 20px 20px;
+}
+
+/* Subtle pattern overlay */
+.travel-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(#f8e1e8 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .travel-section::before {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+        color: #ffffff;
+    }
+    
+    .travel-section::before {
+        height: 100px;
+    }
 }
 /* room category  */
 .tours-section {
@@ -1152,6 +1346,8 @@
         </div>
     </section>
 
+    
+
     <section class="tours-section">
         <h1 class="section-title text-center">{{ section_title|default:"Room Categories" }}</h1>
         
@@ -1159,7 +1355,7 @@
             {% for category in categories %}
             <div class="tour-card">
                 <div class="tour-image-wrapper">
-                    <a href="{% url 'propertyview' category.id %}">
+                    <a href="{% url 'view_segments' category.id %}">
                         {% if category.category_image %}
                             <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
                         {% else %}
@@ -1169,7 +1365,7 @@
                 </div>
                 <div class="tour-info">
                     <span class="tour-title">
-                        <a href="{% url 'propertyview' category.id %}">{{ category.name }}</a>
+                        <a href="{% url 'view_segments' category.id %}">{{ category.name }}</a>
                     </span>
                     {% if category.price %}
                     <span class="tour-price">${{ category.price }}</span>
@@ -1189,203 +1385,188 @@
         </div>
         {% endif %}
     </section>
+     
     
 
 
-        <section>
-            <div class="packages-container">
-                <div class="packages-subtitle">UNIQUE TRAVEL</div>
-                <h2 class="packages-title">tour package</h2>
-        
-                <div class="packages-grid">
-                    <div class="package-card">
-                        <img src="/api/placeholder/400/400" alt="Luxury Hotels">
-                        <div class="package-overlay">
-                            <div class="package-name">Luxury Hotels</div>
-                            <div class="package-description">Ut enim ad minim veniam</div>
-                        </div>
-                    </div>
-        
-                    <div class="package-card">
-                        <img src="/api/placeholder/400/400" alt="VIP Transfers">
-                        <div class="package-overlay">
-                            <div class="package-name">VIP Transfers</div>
-                            <div class="package-description">Ut enim ad minim veniam</div>
-                        </div>
-                    </div>
-        
-                    <div class="package-card">
-                        <img src="/api/placeholder/400/400" alt="Luxury Villas">
-                        <div class="package-overlay">
-                            <div class="package-name">Luxury Villas</div>
-                            <div class="package-description">Ut enim ad minim veniam</div>
-                        </div>
-                    </div>
-        
-                    <div class="package-card">
-                        <img src="/api/placeholder/400/400" alt="Yachting">
-                        <div class="package-overlay">
-                            <div class="package-name">Yachting</div>
-                            <div class="package-description">Ut enim ad minim veniam</div>
-                        </div>
-                    </div>
-        
-                    <div class="package-card">
-                        <img src="/api/placeholder/400/400" alt="Safari Parks">
-                        <div class="package-overlay">
-                            <div class="package-name">Safari Parks</div>
-                            <div class="package-description">Ut enim ad minim veniam</div>
-                        </div>
-                    </div>
-        
-                    <div class="package-card">
-                        <img src="/api/placeholder/400/400" alt="Trekking">
-                        <div class="package-overlay">
-                            <div class="package-name">Trekking</div>
-                            <div class="package-description">Ut enim ad minim veniam</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+       
 
     <section>
-    <div class="camping-container">
-        <div class="content-section">
-            <h1 class="camping-title">10 Amazing<br>Camping Tours</h1>
-            <p class="camping-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <a href="#" class="learn-more-btn">Learn More</a>
-            
-            <div class="image-gallery">
-                <div class="gallery-item">
-                    <img src="/api/placeholder/200/200" alt="Camping Scene 1">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/200/200" alt="Camping Scene 2">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/200/200" alt="Camping Scene 3">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/200/200" alt="Camping Scene 4">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/200/200" alt="Camping Scene 5">
-                </div>
-                <div class="gallery-item">
-                    <img src="/api/placeholder/200/200" alt="Camping Scene 6">
-                </div>
+        <div class="packages-container">
+            <div class="packages-subtitle">UNIQUE TRAVEL</div>
+            <h2 class="packages-title">Tour Packages</h2>
+    
+            <div class="packages-grid">
+                {% for package in packages %}
+                    <div class="package-card">
+                        <img src="{{ package.image.url }}" alt="{{ package.name }}">
+                        <div class="package-overlay">
+                            <div class="package-name">{{ package.name }}</div>
+                            <div class="package-description">{{ package.details }}</div>
+                            <div class="package-amount">Price: ₹{{ package.amount }}</div>
+                            <div class="package-status">
+                                Status: {{ package.get_status_display }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        
-        <div class="image-section">
-            <img src="/api/placeholder/600/750" alt="Main Camping Scene" class="main-image">
-        </div>
-    </div>
     </section>
-        <section>
-            <div class="testimonials-container">
-                <h1 class="testimonials-title">Testimonials</h1>
-                <p class="testimonials-subtitle">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <span class="testimonial-name">Celia Almeda</span>
-                            <img src="/api/placeholder/50/50" alt="Celia Almeda" class="testimonial-image">
-                        </div>
-                        <p class="testimonial-text">Proin sed libero enim sed faucibus turpis. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Ut sem nulla pharetra diam sit amet nisl.</p>
-                    </div>
-        
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <span class="testimonial-name">Frank Kinney</span>
-                            <img src="/api/placeholder/50/50" alt="Frank Kinney" class="testimonial-image">
-                        </div>
-                        <p class="testimonial-text">Proin sed libero enim sed faucibus turpis. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Ut sem nulla pharetra diam sit amet nisl.</p>
-                    </div>
-        
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <span class="testimonial-name">Nick Jhonson</span>
-                            <img src="/api/placeholder/50/50" alt="Nick Jhonson" class="testimonial-image">
-                        </div>
-                        <p class="testimonial-text">Proin sed libero enim sed faucibus turpis. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Ut sem nulla pharetra diam sit amet nisl.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    
+    
         
 
-        <section class="travel-section">
-            <div class="header">
-              <h1>Gallery </h1>
+
+
+
+    <section class="camping-section">
+        <div class="camping-container">
+            <div class="content-section">
+                <h1 class="camping-title">10 Amazing<br>Camping Tours</h1>
+                <p class="camping-description">Duis aute irure dolor in reprehenderit...</p>
+                <a href="{% url 'login' %}" class="learn-more-btn">Add New Image</a>
                 
-            </div>
-            
-            <div class="destinations-grid">
-                <div class="destination-card large">
-                    <img src="dolomites.jpg" alt="Dolomite Alps">
-                    <div class="destination-title">Dolomite Alps</div>
-                </div>
-                
-                <div class="destination-card">
-                    <img src="iceland.jpg" alt="Iceland">
-                    <div class="destination-title">Iceland</div>
-                </div>
-                
-                <div class="destination-card">
-                    <img src="ethiopia.jpg" alt="Ethiopia">
-                    <div class="destination-title">Ethiopia</div>
-                </div>
-                <div class="destination-card">
-                    <img src="iceland.jpg" alt="Iceland">
-                    <div class="destination-title">Iceland</div>
-                </div>
-                
-                <div class="destination-card">
-                    <img src="ethiopia.jpg" alt="Ethiopia">
-                    <div class="destination-title">Ethiopia</div>
-                </div>
-                
-                <div class="destination-card">
-                    <img src="nepal.jpg" alt="Nepal">
-                    <div class="destination-title">Nepal</div>
-                </div>
-                
-                <div class="destination-card">
-                    <img src="kenya.jpg" alt="Kenya">
-                    <div class="destination-title">Kenia</div>
-                </div>
-                
-                <div class="destination-card large">
-                    <img src="newzealand.jpg" alt="New Zealand">
-                    <div class="destination-title">New Zealand</div>
+                <div class="image-gallery">
+                    {% for image in images %}
+                    <div class="package-card">
+                        <img src="{{ image.image.url }}" alt="Camping Scene">
+                        <div class="package-overlay">
+                            <p><strong>Description:</strong> {{ image.description }}</p>
+                            <p><strong>Name:</strong> {{ image.name }}</p>
+                            <p><strong>Details:</strong> {{ image.details }}</p>
+                            <p><strong>Price:</strong> {{ image.amount }}</p>
+                            <p><strong>Status:</strong> {{ image.status|yesno:"Available,Not Available" }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>No camping images available.</p>
+                    {% endfor %}
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    
 
-        <section>
-            <h1>Home Page</h1>
-<h2>Destinations</h2>
-<ul>
-    {% for destination in destinations %}
-    <li>{{ destination.name }}</li>
-    {% endfor %}
-</ul>
 
-<h2>Categories</h2>
-<ul>
-    {% for category in categories %}
-    <li>{{ category.name }}</li>
-    {% endfor %}
-</ul>
 
-        </section>
 
-            
-            
-   
+
+    <!-- TESTIMONIAL SECTION -->
+    <section>
+        <div class="testimonials-container">
+            <h1 class="testimonials-title">Testimonials</h1>
+            <p class="testimonials-subtitle">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    
+            <div class="testimonials-wrapper">
+                <button class="scroll-button left" onclick="scrollTestimonials('left')" id="scrollLeft"></button>
+                <div class="testimonials-grid" id="testimonialsGrid">
+                    {% for testimonial in testimonials %}
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <span class="testimonial-name">{{ testimonial.name }}</span>
+                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" class="testimonial-image">
+                        </div>
+                        <p class="testimonial-text">{{ testimonial.review }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="scroll-button right" onclick="scrollTestimonials('right')" id="scrollRight"></button>
+                <button class="auto-scroll-control" id="autoScrollControl">Pause</button>
+            </div>
+        </div>
+    </section>
+        
+
+    
+<section class="travel-section">
+    <div class="header">
+        <h1>Gallery</h1>
+    </div>
+    
+    <div class="gallery-grid">
+        {% for image in gallery_images %}
+            <div class="gallery-card">
+                <img src="{{ image.image.url }}" alt="{{ image.category }}">
+                <div class="gallery-title">{{ image.category }}</div>
+                <p>{{ image.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+    
+
+        <script>
+            let currentPosition = 0;
+            const grid = document.getElementById('testimonialsGrid');
+            const cards = grid.getElementsByClassName('testimonial-card');
+            const cardWidth = cards[0].offsetWidth + 30; // Include gap
+            const visibleCards = 3;
+            const maxPosition = (cards.length - visibleCards) * cardWidth;
+            let autoScrollInterval;
+            let isAutoScrolling = true;
+    
+            function scrollTestimonials(direction) {
+                if (direction === 'right' && currentPosition > -maxPosition) {
+                    currentPosition -= cardWidth;
+                } else if (direction === 'left' && currentPosition < 0) {
+                    currentPosition += cardWidth;
+                } else if (direction === 'right' && currentPosition <= -maxPosition) {
+                    // Reset to beginning when reaching the end
+                    currentPosition = 0;
+                }
+    
+                grid.style.transform = `translateX(${currentPosition}px)`;
+                updateButtonStates();
+            }
+    
+            function updateButtonStates() {
+                document.getElementById('scrollLeft').disabled = currentPosition >= 0;
+                document.getElementById('scrollRight').disabled = currentPosition <= -maxPosition;
+            }
+    
+            function startAutoScroll() {
+                autoScrollInterval = setInterval(() => {
+                    scrollTestimonials('right');
+                }, 3000); // Scroll every 3 seconds
+            }
+    
+            function toggleAutoScroll() {
+                const button = document.getElementById('autoScrollControl');
+                if (isAutoScrolling) {
+                    clearInterval(autoScrollInterval);
+                    button.textContent = 'Resume';
+                } else {
+                    startAutoScroll();
+                    button.textContent = 'Pause';
+                }
+                isAutoScrolling = !isAutoScrolling;
+            }
+    
+            // Start auto-scrolling
+            startAutoScroll();
+    
+            // Pause on hover
+            grid.addEventListener('mouseenter', () => {
+                if (isAutoScrolling) {
+                    clearInterval(autoScrollInterval);
+                }
+            });
+    
+            grid.addEventListener('mouseleave', () => {
+                if (isAutoScrolling) {
+                    startAutoScroll();
+                }
+            });
+    
+            // Add click handler for auto-scroll control
+            document.getElementById('autoScrollControl')
+                .addEventListener('click', toggleAutoScroll);
+    
+            // Initial button states
+            updateButtonStates();
+        </script>
+
 </body>
 </html>
 {% endblock %}

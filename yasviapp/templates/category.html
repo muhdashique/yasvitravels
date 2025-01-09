@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Manage Categories</title>
+        <style>
+           body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.card {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.card-header .h5 {
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.table {
+    width: 100%;
+    margin: 20px 0;
+    color: #495057;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+form input[type="file"] {
+    margin-top: 5px;
+}
+.tours-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.tour-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    overflow: hidden;
+}
+
+.tour-image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.tour-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.tour-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.tour-price {
+    font-size: 1rem;
+    color: #28a745;
+    margin-top: 5px;
+}
+
+.category-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.no-categories p {
+    color: #666;
+    font-size: 1rem;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+        </style>
+    </head>
+    
+<body>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="h5"><i class="fas fa-folder me-2"></i>Manage Categories</h2>
+            </div>
+            <div class="card-body">
+                <!-- Add/Edit Category Form -->
+                <form method="post" action="{% url 'add_category' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ category_form.as_p }}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus me-1"></i>Save Category
+                    </button>
+                </form>
+    
+                <!-- List of Categories -->
+                <hr>
+                <h3 class="h6">Existing Categories</h3>
+                <div class="tours-grid">
+                    {% for category in categories %}
+                    <div class="tour-card">
+                        <div class="tour-image-wrapper">
+                            {% if category.category_image %}
+                                <a href="{% url 'view_segments' category.id %}">
+                                    <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
+                                </a>
+                            {% else %}
+                                <a href="{% url 'view_segments' category.id %}">
+                                    <img src="/api/placeholder/300/200" alt="{{ category.name }}" class="tour-image">
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="tour-info">
+                            <a href="{% url 'view_segments' category.id %}">
+                                <span class="tour-title">{{ category.name }}</span>
+                            </a>
+                            {% if category.price %}
+                            <span class="tour-price">${{ category.price }}</span>
+                            {% endif %}
+                            <div class="category-actions">
+                                <a href="{% url 'edit_category' category.id %}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form method="post" action="{% url 'delete_category' category.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="no-categories text-center">
+                        <p>No categories available for this destination.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

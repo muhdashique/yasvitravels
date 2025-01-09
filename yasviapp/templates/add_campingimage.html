@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Camping Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 2rem;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h1::after, h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #3498db;
+            margin: 10px auto;
+        }
+
+        /* Form Styling */
+        form {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            background: #f8f9fa;
+            border: 2px dashed #cbd5e0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Gallery Styling */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-item p {
+            padding: 1rem;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        .gallery-item .edit-btn,
+        .gallery-item .delete-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem 1rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .edit-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #27ae60;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Empty state styling */
+        .image-gallery > p {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            color: #7f8c8d;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            form {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Add a New Camping Image</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image">
+        <textarea name="description" placeholder="Description"></textarea>
+        <select name="status">
+            <option value="True" selected>Available</option>
+            <option value="False">Not Available</option>
+        </select>
+        <button type="submit">Save</button>
+    </form>
+    {% for image in images %}
+    <div class="package-card">
+        <img src="{{ image.image.url }}" alt="Camping Scene">
+        <div class="package-overlay">
+            <p>{{ image.description }}</p>
+            <p>{{ image.name }}</p>
+            <p>{{ image.details }}</p>
+            <p>{{ image.amount }}</p>
+            <p>{{ image.status|yesno:"Available,Not Available" }}</p>
+            <a href="{% url 'edit_campingimage' image.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'delete_campingimage' image.id %}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this image?');">Delete</a>
+        </div>
+    </div>
+{% empty %}
+    <p>No camping images available.</p>
+{% endfor %}
+
+
+
+
+
+    <script>
+        // Add drag and drop functionality for image upload
+        const fileInput = document.querySelector('input[type="file"]');
+        const uploadArea = fileInput.parentElement;
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            uploadArea.classList.add('highlight');
+        }
+
+        function unhighlight(e) {
+            uploadArea.classList.remove('highlight');
+        }
+
+        uploadArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            fileInput.files = files;
+        }
+    </script>
+</body>
+</html>

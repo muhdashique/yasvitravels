@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Camping Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #3498db;
+            margin: 10px auto;
+        }
+
+        form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: #f8f9fa;
+            border: 2px dashed #cbd5e0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        input[type="file"]:hover {
+            border-color: #3498db;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 120px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        button[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* Optional: Add preview of current image */
+        .current-image {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .current-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            form {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            button[type="submit"] {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* File input custom styling */
+        input[type="file"]::-webkit-file-upload-button {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        input[type="file"]::-webkit-file-upload-button:hover {
+            background: #2980b9;
+        }
+
+        /* Optional: Add a back button */
+        .back-button {
+            color: #2c3e50;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: #3498db;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Edit Camping Image</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        {% if image.image %}
+        <div class="current-image">
+            <img src="{{ image.image.url }}" alt="Current camping image">
+        </div>
+        {% endif %}
+    
+        <label for="image">Update Image (optional):</label>
+        <input type="file" name="image">
+    
+        <label for="description">Description:</label>
+        <textarea name="description" rows="4">{{ image.description }}</textarea>
+    
+        <label for="status">Status:</label>
+        <select name="status">
+            <option value="True" {% if image.status %}selected{% endif %}>Available</option>
+            <option value="False" {% if not image.status %}selected{% endif %}>Not Available</option>
+        </select>
+    
+        <button type="submit">Save Changes</button>
+    </form>
+    
+
+    <script>
+        // Add form submission feedback
+        const form = document.querySelector('form');
+        const submitButton = document.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', () => {
+            submitButton.textContent = 'Saving...';
+            submitButton.disabled = true;
+        });
+
+        // Add file input preview
+        const fileInput = document.querySelector('input[type="file"]');
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const currentImage = document.querySelector('.current-image img');
+                    if (currentImage) {
+                        currentImage.src = event.target.result;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
