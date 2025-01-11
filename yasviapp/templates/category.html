@@ -1,214 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Manage Categories</title>
-        <style>
-           body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+        }
 
-.card {
-    margin: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
 
-.card-header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    border-radius: 8px 8px 0 0;
-    font-size: 1.25rem;
-    display: flex;
-    align-items: center;
-}
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
 
-.card-header .h5 {
-    margin: 0;
-}
+        .sidebar a:hover {
+            background-color: #495057;
+        }
 
-.card-body {
-    padding: 20px;
-}
+        .sidebar a.active {
+            background-color: #007bff;
+        }
 
-.btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.875rem;
-    transition: background-color 0.3s ease;
-}
+        .sidebar .logout {
+            margin-top: auto;
+            background-color: #6c757d;
+            text-align: center;
+        }
 
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-}
+        .sidebar .logout:hover {
+            background-color: #5a6268;
+        }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-}
+        /* Main Content */
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+        }
 
-.btn-warning {
-    background-color: #ffc107;
-    color: #333;
-    border: none;
-}
+        .card {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+        }
 
-.btn-warning:hover {
-    background-color: #e0a800;
-}
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            font-size: 1.25rem;
+        }
 
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-}
+        .tours-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-.btn-danger:hover {
-    background-color: #c82333;
-}
+        .tour-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+        }
 
-.table {
-    width: 100%;
-    margin: 20px 0;
-    color: #495057;
-    border-collapse: collapse;
-}
+        .tour-image-wrapper img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
 
-.table th, .table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #dee2e6;
-}
+        .tour-info {
+            padding: 15px;
+            text-align: center;
+        }
 
-.table th {
-    background-color: #f8f9fa;
-}
+        .tour-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
 
-.table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+        .tour-price {
+            font-size: 1rem;
+            color: #28a745;
+            margin-top: 5px;
+        }
 
-.table tbody tr:hover {
-    background-color: #e9ecef;
-}
+        .category-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+        .btn {
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #3302f7;
+            transition: background-color 0.3s;
+        }
 
-form button {
-    margin-top: 10px;
-}
+        .btn-warning {
+            background-color: #ffc107;
+        }
 
-form input[type="file"] {
-    margin-top: 5px;
-}
-.tours-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
+        .btn-danger {
+            background-color: #dc3545;
+        }
 
-.tour-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    overflow: hidden;
-}
+        .btn:hover {
+            opacity: 0.9;
+        }
 
-.tour-image-wrapper img {
-    width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ddd;
-}
+        .no-categories p {
+            color: #666;
+            font-size: 1rem;
+            padding: 20px;
+            text-align: center;
+        }
 
-.tour-info {
-    padding: 15px;
-    text-align: center;
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
 
-.tour-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-}
+            .content {
+                margin-left: 0;
+                padding: 10px;
+            }
 
-.tour-price {
-    font-size: 1rem;
-    color: #28a745;
-    margin-top: 5px;
-}
+            .tours-grid {
+                flex-direction: column;
+                align-items: center;
+            }
 
-.category-actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.btn {
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    color: #fff;
-    transition: background-color 0.3s;
-}
-
-.btn-warning {
-    background-color: #ffc107;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-}
-
-.btn:hover {
-    opacity: 0.9;
-}
-
-.no-categories p {
-    color: #666;
-    font-size: 1rem;
-    padding: 20px;
-    text-align: center;
-}
-
-
-
-        </style>
-    </head>
-    
+            .tour-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
-    <div class="col-md-12">
+    <div class="sidebar">
+        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
+        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
+        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
+        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
+        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
+        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
+        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
+        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+       
+    </div>
+
+    <div class="content">
         <div class="card">
             <div class="card-header">
                 <h2 class="h5"><i class="fas fa-folder me-2"></i>Manage Categories</h2>
             </div>
             <div class="card-body">
-                <!-- Add/Edit Category Form -->
                 <form method="post" action="{% url 'add_category' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ category_form.as_p }}
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-plus me-1"></i>Save Category
+                        <i class="fas fa-plus me-1" style="color: #007bff;"></i>Save Category
                     </button>
                 </form>
-    
-                <!-- List of Categories -->
                 <hr>
                 <h3 class="h6">Existing Categories</h3>
                 <div class="tours-grid">
@@ -217,11 +209,11 @@ form input[type="file"] {
                         <div class="tour-image-wrapper">
                             {% if category.category_image %}
                                 <a href="{% url 'view_segments' category.id %}">
-                                    <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
+                                    <img src="{{ category.category_image.url }}" alt="{{ category.name }}">
                                 </a>
                             {% else %}
                                 <a href="{% url 'view_segments' category.id %}">
-                                    <img src="/api/placeholder/300/200" alt="{{ category.name }}" class="tour-image">
+                                    <img src="/api/placeholder/300/200" alt="{{ category.name }}">
                                 </a>
                             {% endif %}
                         </div>
@@ -233,12 +225,12 @@ form input[type="file"] {
                             <span class="tour-price">${{ category.price }}</span>
                             {% endif %}
                             <div class="category-actions">
-                                <a href="{% url 'edit_category' category.id %}" class="btn btn-warning btn-sm">
+                                <a href="{% url 'edit_category' category.id %}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                                 <form method="post" action="{% url 'delete_category' category.id %}" style="display:inline;">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm">
+                                    <button type="submit" class="btn btn-danger">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
@@ -246,16 +238,13 @@ form input[type="file"] {
                         </div>
                     </div>
                     {% empty %}
-                    <div class="no-categories text-center">
+                    <div class="no-categories">
                         <p>No categories available for this destination.</p>
                     </div>
                     {% endfor %}
                 </div>
-                
-                
             </div>
         </div>
     </div>
-    
 </body>
 </html>

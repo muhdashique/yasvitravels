@@ -3,177 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Styled Buttons</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* General Button Styles */
-        .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            font-size: 1rem;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --hover-color: #2980b9;
+            --text-color: #ecf0f1;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f5f6fa;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--primary-color);
+            color: var(--text-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .sidebar a {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
         }
 
-        /* Button Variants */
-        .btn-info {
-            background-color: #17a2b8;
+        .sidebar a i {
+            width: 24px;
+            margin-right: 12px;
+            font-size: 1.1em;
         }
 
-        .btn-info:hover {
-            background-color: #138496;
+        .sidebar a:hover {
+            background-color: var(--secondary-color);
+            border-left-color: var(--accent-color);
+            padding-left: 28px;
         }
 
-        .btn-secondary {
-            background-color: #6c757d;
+        .sidebar a.active {
+            background-color: var(--secondary-color);
+            border-left-color: var(--accent-color);
+            position: relative;
         }
 
-        .btn-secondary:hover {
-            background-color: #5a6268;
+        .sidebar a.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent #f5f6fa transparent transparent;
         }
 
-        .btn-primary {
-            background-color: #007bff;
+        .sidebar .logout {
+            margin-top: auto;
+            background-color: #c0392b;
+            border-left: none !important;
+            transition: all 0.3s ease;
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .sidebar .logout:hover {
+            background-color: #e74c3c;
+            padding-left: 24px;
         }
 
-        /* Card and Layout Styles */
-        .card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            max-width: 500px;
-            overflow: hidden;
+        /* Main Content Styles */
+        .content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            flex-grow: 1;
+            min-height: 100vh;
+            background-color: #f5f6fa;
         }
 
-        .card-header {
-            background-color: #343a40;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
+        .content h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            font-weight: 600;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
         }
 
-        .card-body {
-            padding: 20px;
+        .content p {
+            color: #2c3e50;
+            line-height: 1.6;
+            font-size: 1.1em;
         }
 
-        .mt-3 {
-            margin-top: 1rem;
-        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
 
-        .mt-4 {
-            margin-top: 1.5rem;
-        }
+            .sidebar a span {
+                display: none;
+            }
 
-        .text-center {
-            text-align: center;
+            .sidebar a {
+                padding: 20px;
+                justify-content: center;
+            }
+
+            .sidebar a i {
+                margin: 0;
+                font-size: 1.4em;
+            }
+
+            .content {
+                margin-left: 70px;
+            }
+
+            .sidebar a:hover {
+                padding-left: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- View Destinations -->
-   <div>
-    <a href="{% url 'add_testimonial' %}" class="btn btn-primary">Add Testimonial</a>
-   </div><br>
-<br>
-    <div>
-        <a href="{% url 'add_gallery_image' %}" class="btn btn-primary">Add New Gallery Image</a>
-
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="{% url 'adminpannel' %}" class="active">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Admin Panel</span>
+        </a>
+        <a href="{% url 'view_destinations' %}">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Destinations</span>
+        </a>
+        <a href="{% url 'manage_categories' %}">
+            <i class="fas fa-list"></i>
+            <span>Categories</span>
+        </a>
+        <a href="{% url 'segment_list' %}">
+            <i class="fas fa-th-large"></i>
+            <span>Segments</span>
+        </a>
+        <a href="{% url 'manage_images' %}">
+            <i class="fas fa-images"></i>
+            <span>Images</span>
+        </a>
+        <a href="{% url 'add_testimonial' %}">
+            <i class="fas fa-comment-alt"></i>
+            <span>Add Testimonial</span>
+        </a>
+        <a href="{% url 'add_gallery_image' %}">
+            <i class="fas fa-camera"></i>
+            <span>Gallery Image</span>
+        </a>
+        <a href="{% url 'package_add' %}">
+            <i class="fas fa-box"></i>
+            <span>Package</span>
+        </a>
+        <a href="{% url 'add_campingimage' %}">
+            <i class="fas fa-campground"></i>
+            <span>Camping Image</span>
+        </a>
+        <a href="{% url 'logout' %}" class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
     </div>
-    <br>
-    <br>
 
-    <br>
-
-    <div>
-        <a href="{% url 'package_add' %}" class="btn btn-primary">Add New Package</a>
-
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to the Admin Panel</h1>
+        <p>Use the sidebar to navigate through the available options.</p>
     </div>
-    <br>
-    <br>
-
-    <br>
-<div>
-    <a href="{% url 'add_campingimage' %}" class="btn btn-primary">Add camping Image</a>
-
-
-</div>
-
-    <section>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="h5"><i class="fas fa-eye me-2"></i>Destinations</h2>
-                </div>
-                <div class="card-body text-center">
-                    <a href="{% url 'view_destinations' %}" class="btn btn-info">
-                         Destinations
-                    </a>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Manage Categories -->
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="h5"><i class="fas fa-list me-2"></i> Categories</h2>
-                </div>
-                <div class="card-body text-center">
-                    <a href="{% url 'manage_categories' %}" class="btn btn-secondary mt-3">
-                        <i class="fas fa-arrow-left me-1"></i>  Categories
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Segment List -->
-    <section>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="h5"><i class="fas fa-arrow-left me-2"></i>Segments</h2>
-                </div>
-                <div class="card-body text-center">
-                    <a href="{% url 'segment_list' %}" class="btn btn-primary mt-4">
-                        <i class="fas fa-arrow-left me-1"></i>  Segments
-                    </a>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Manage Images -->
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="h5"><i class="fas fa-images me-2"></i> Images</h2>
-                </div>
-                <div class="card-body text-center">
-                    <a href="{% url 'manage_images' %}" class="btn btn-primary">
-                        <i class="fas fa-images me-1"></i>  Images
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-<section>
- 
-</section>
 </body>
 </html>

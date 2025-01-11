@@ -13,90 +13,178 @@
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #1a1c23;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .sidebar a.active {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .sidebar .logout {
+            margin-top: auto;
+            background-color: #dc3545;
+        }
+
+        .sidebar .logout:hover {
+            background-color: #c82333;
+        }
+
+        /* Main Content */
+        .content {
+            margin-left: 250px;
             padding: 2rem;
         }
 
         /* Form Styling */
-        form {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto 3rem;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+
+        .form-title {
+            color: #424345;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
         }
 
         form p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        form input, form textarea {
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        form input, form textarea, form select {
             width: 100%;
-            padding: 0.5rem;
-            margin-top: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        form input:focus, form textarea:focus, form select:focus {
+            border-color: #2196F3;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+            outline: none;
         }
 
         button[type="submit"] {
             background-color: #2196F3;
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         button[type="submit"]:hover {
             background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
         }
 
         /* Packages Section */
         .packages-container {
-            max-width: 1200px;
-            margin: 4rem auto;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .packages-header {
             text-align: center;
+            margin-bottom: 3rem;
         }
 
         .packages-subtitle {
             color: #2196F3;
-            font-weight: bold;
+            font-weight: 600;
             letter-spacing: 2px;
+            text-transform: uppercase;
             margin-bottom: 1rem;
         }
 
         .packages-title {
             font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 3rem;
+            color: #1a1c23;
+            margin-bottom: 1rem;
         }
 
         .packages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
-            padding: 1rem;
         }
 
         .package-card {
             position: relative;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            height: 300px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            height: 350px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .package-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
         .package-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .package-card:hover img {
+            transform: scale(1.1);
         }
 
         .package-overlay {
@@ -104,11 +192,11 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: white;
-            padding: 1.5rem;
-            transform: translateY(100px);
-            transition: transform 0.3s;
+            padding: 2rem;
+            transform: translateY(70%);
+            transition: transform 0.5s ease;
         }
 
         .package-card:hover .package-overlay {
@@ -116,80 +204,136 @@
         }
 
         .package-name {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .package-description {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 1rem;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease;
         }
 
         .package-card:hover .package-description {
             opacity: 1;
         }
 
+        .package-amount {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2196F3;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-status {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+
         .package-actions {
             display: flex;
             gap: 1rem;
-            justify-content: center;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s ease;
         }
 
         .package-card:hover .package-actions {
             opacity: 1;
         }
 
-        .package-actions a, 
+        .package-actions a,
         .package-actions button {
             background-color: #2196F3;
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
             border: none;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+        }
+
+        .package-actions button {
+            background-color: #dc3545;
         }
 
         .package-actions a:hover,
         .package-actions button:hover {
-            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .packages-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
         }
 
         @media (max-width: 768px) {
-            body {
+            .content {
+                margin-left: 0;
                 padding: 1rem;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .package-card {
+                height: 300px;
             }
 
             .packages-title {
                 font-size: 2rem;
             }
 
-            .package-card {
-                height: 250px;
+            .form-container {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    
-    
-    <section>
-        <div class="packages-container">
-            <div class="packages-subtitle">UNIQUE TRAVEL</div>
-            <h2 class="packages-title">Tour Packages</h2>
-    
+    <div class="sidebar">
+        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
+        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
+        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
+        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
+        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
+        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
+        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
+        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+       
+    </div>
+
+    <div class="content">
+        <div class="form-container">
+            <h2 class="form-title">Add New Package</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save Package</button>
+            </form>
+        </div>
+
+        <section class="packages-container">
+            <div class="packages-header">
+                <div class="packages-subtitle">UNIQUE TRAVEL</div>
+                <h2 class="packages-title">Tour Packages</h2>
+            </div>
+
             <div class="packages-grid">
                 {% for package in packages %}
                     <div class="package-card">
@@ -197,13 +341,11 @@
                         <div class="package-overlay">
                             <div class="package-name">{{ package.name }}</div>
                             <div class="package-description">{{ package.details }}</div>
-                            <div class="package-amount">Price: ₹{{ package.amount }}</div>
-                            <div class="package-status">
-                                Status: {{ package.get_status_display }}
-                            </div>
+                            <div class="package-amount">₹{{ package.amount }}</div>
+                            <div class="package-status">{{ package.get_status_display }}</div>
                             <div class="package-actions">
                                 <a href="{% url 'edit_package' package.id %}">Edit</a>
-                                <form method="POST" action="{% url 'delete_package' package.id %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this package?')">
+                                <form method="POST" action="{% url 'delete_package' package.id %}" style="display: inline;">
                                     {% csrf_token %}
                                     <button type="submit">Delete</button>
                                 </form>
@@ -212,41 +354,39 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
-    </section>
-    
-    
+        </section>
+    </div>
 
     <script>
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            // Apply animation to package cards
+            document.querySelectorAll('.package-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.5s ease-out';
+                observer.observe(card);
+            });
+
+            // Delete confirmation
+            document.querySelectorAll('form[action*="delete_package"]').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    if (!confirm('Are you sure you want to delete this package?')) {
+                        e.preventDefault();
+                    }
                 });
             });
-        });
-
-        // Add animation when cards come into view
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.package-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(50px)';
-            card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
-            observer.observe(card);
         });
     </script>
 </body>

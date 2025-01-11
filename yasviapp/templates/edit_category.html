@@ -12,6 +12,8 @@
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: row;
         }
 
         .container {
@@ -110,28 +112,95 @@
         .btn-container {
             text-align: center;
         }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .sidebar a.active {
+            background-color: #007bff;
+        }
+
+        .sidebar .logout {
+            margin-top: auto;
+            background-color: #6c757d;
+            text-align: center;
+        }
+
+        .sidebar .logout:hover {
+            background-color: #5a6268;
+        }
+
+        /* Main Content Styles */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h2><i class="fas fa-folder"></i>Edit Category</h2>
+    <div class="sidebar">
+        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
+        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
+        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
+        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
+        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
+        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
+        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
+        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+       
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-folder"></i>Edit Category</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'edit_category' category.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ category_form.as_p }}
+                        <button type="submit">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="card-body">
-                <form method="post" action="{% url 'edit_category' category.id %}" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ category_form.as_p }}
-                    <button type="submit">
-                        <i class="fas fa-save"></i> Save Changes
-                    </button>
-                </form>
+            <div class="btn-container">
+                <a href="{% url 'manage_categories' %}" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Manage Categories
+                </a>
             </div>
-        </div>
-        <div class="btn-container">
-            <a href="{% url 'manage_categories' %}" class="btn-secondary">
-                <i class="fas fa-arrow-left"></i> Back to Manage Categories
-            </a>
         </div>
     </div>
 </body>

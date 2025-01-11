@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 
 # Public Views
 def index(request):
-    destinations = Destination.objects.all()[:6]
+    destinations = Destination.objects.all()[:8]
     categories = Category.objects.all()[:6]
     testimonials = Testimonial.objects.all()
     gallery_images = GalleryImage.objects.all()
@@ -216,7 +216,7 @@ def edit_destination(request, destination_id):
         form = DestinationForm(request.POST, request.FILES, instance=destination)
         if form.is_valid():
             form.save()
-            return redirect('view_destinations')  # Redirect to the destinations list after editing
+            return redirect('add_destination')  # Redirect to the destinations list after editing
     else:
         form = DestinationForm(instance=destination)
     return render(request, 'edit_destination.html', {'destination_form': form, 'destination': destination})
@@ -478,16 +478,27 @@ def delete_package(request, id):
     return redirect('package_add')
 
 
-
-
 def add_campingimage(request):
     if request.method == 'POST':
         image = request.FILES.get('image')  # Handle the uploaded file
         description = request.POST.get('description', '')
+        name = request.POST.get('name', '')  # Ensure 'name' is properly captured
+        details = request.POST.get('details', '')  # Ensure 'details' is properly captured
+        amount = request.POST.get('amount', 0)  # Ensure 'amount' is properly captured
         status = request.POST.get('status', True)  # Default to True (Available)
 
+        # Convert status to a boolean value
+        status = True if status.lower() == 'true' else False
+
         # Create a new CampingImage instance
-        CampingImage.objects.create(image=image, description=description, status=status)
+        CampingImage.objects.create(
+            image=image,
+            description=description,
+            name=name,
+            details=details,
+            amount=amount,
+            status=status
+        )
 
         return redirect('add_campingimage')
 
@@ -496,6 +507,7 @@ def add_campingimage(request):
 
     return render(request, 'add_campingimage.html', {'images': images})
 
+
 def edit_campingimage(request, image_id):
     image = get_object_or_404(CampingImage, id=image_id)
 
@@ -503,10 +515,19 @@ def edit_campingimage(request, image_id):
         if 'image' in request.FILES:
             image.image = request.FILES.get('image')
         image.description = request.POST.get('description', '')
+        image.name = request.POST.get('name', '')
+        image.details = request.POST.get('details', '')
+        image.amount = request.POST.get('amount', 0)  # Ensure 'amount' is properly captured
+        image.status = request.POST.get('status', True)  # Default to True (Available)
+
+        # Convert status to a boolean value
+        image.status = True if image.status.lower() == 'true' else False
+
         image.save()
         return redirect('add_campingimage')
 
     return render(request, 'edit_campingimage.html', {'image': image})
+
 
 
 def delete_campingimage(request, image_id):

@@ -11,12 +11,53 @@
         }
 
         body {
+            display: flex;
             background-color: #f5f5f5;
-            padding: 2rem;
             min-height: 100vh;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
             display: flex;
             flex-direction: column;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #007bff;
+        }
+
+        .sidebar .logout {
+            margin-top: auto;
+            text-align: center;
+            background-color: #6c757d;
+        }
+
+        .content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
             align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         h1 {
@@ -39,7 +80,7 @@
             background: white;
             padding: 2.5rem;
             border-radius: 10px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
             animation: slideIn 0.5s ease-out;
@@ -52,44 +93,30 @@
             font-weight: 500;
         }
 
-        input[type="file"] {
-            width: 100%;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            background: #f8f9fa;
-            border: 2px dashed #cbd5e0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-
-        input[type="file"]:hover {
-            border-color: #3498db;
-        }
-
-        textarea {
+        input[type="file"],
+        textarea,
+        select {
             width: 100%;
             padding: 1rem;
             margin-bottom: 1.5rem;
             border: 1px solid #cbd5e0;
             border-radius: 5px;
-            resize: vertical;
-            min-height: 120px;
             font-size: 1rem;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        textarea:focus {
-            outline: none;
+        input[type="file"]:hover,
+        textarea:focus,
+        select:focus {
             border-color: #3498db;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
 
-        button[type="submit"] {
+        button {
             background-color: #3498db;
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1rem;
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
@@ -98,27 +125,46 @@
             transition: all 0.3s ease;
         }
 
-        button[type="submit"]:hover {
+        button:hover {
             background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        button[type="submit"]:active {
-            transform: translateY(0);
-        }
-
-        /* Optional: Add preview of current image */
         .current-image {
-            margin-bottom: 1.5rem;
             text-align: center;
+            margin-bottom: 1.5rem;
         }
 
         .current-image img {
             max-width: 100%;
-            height: auto;
             border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .content {
+                margin-left: 200px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 10px;
+            }
         }
 
         @keyframes slideIn {
@@ -131,109 +177,50 @@
                 transform: translateY(0);
             }
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            form {
-                padding: 1.5rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            button[type="submit"] {
-                padding: 0.8rem 1.5rem;
-            }
-        }
-
-        /* File input custom styling */
-        input[type="file"]::-webkit-file-upload-button {
-            background: #3498db;
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 1rem;
-            transition: background-color 0.3s;
-        }
-
-        input[type="file"]::-webkit-file-upload-button:hover {
-            background: #2980b9;
-        }
-
-        /* Optional: Add a back button */
-        .back-button {
-            color: #2c3e50;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 1rem;
-            transition: color 0.3s;
-        }
-
-        .back-button:hover {
-            color: #3498db;
-        }
-
     </style>
 </head>
 <body>
-    <h1>Edit Camping Image</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="sidebar">
+        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
+        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
+        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
+        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
+        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
+        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
+        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
+        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+       
+    </div>
+    <div class="content">
+        <h1>Edit Camping Image</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image">
+        
+            <label for="description">Description:</label>
+            <textarea name="description" id="description">{{ image.description }}</textarea>
+        
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="{{ image.name }}" required>
+        
+            <label for="details">Details:</label>
+            <textarea name="details" id="details">{{ image.details }}</textarea>
+        
+            <label for="amount">Amount:</label>
+            <input type="number" name="amount" id="amount" value="{{ image.amount }}" required step="0.01">
+        
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="true" {% if image.status %}selected{% endif %}>Available</option>
+                <option value="false" {% if not image.status %}selected{% endif %}>Not Available</option>
+            </select>
+        
+            <button type="submit">Update Camping Image</button>
+        </form>
+        
+    </div>
     
-        {% if image.image %}
-        <div class="current-image">
-            <img src="{{ image.image.url }}" alt="Current camping image">
-        </div>
-        {% endif %}
-    
-        <label for="image">Update Image (optional):</label>
-        <input type="file" name="image">
-    
-        <label for="description">Description:</label>
-        <textarea name="description" rows="4">{{ image.description }}</textarea>
-    
-        <label for="status">Status:</label>
-        <select name="status">
-            <option value="True" {% if image.status %}selected{% endif %}>Available</option>
-            <option value="False" {% if not image.status %}selected{% endif %}>Not Available</option>
-        </select>
-    
-        <button type="submit">Save Changes</button>
-    </form>
-    
-
-    <script>
-        // Add form submission feedback
-        const form = document.querySelector('form');
-        const submitButton = document.querySelector('button[type="submit"]');
-
-        form.addEventListener('submit', () => {
-            submitButton.textContent = 'Saving...';
-            submitButton.disabled = true;
-        });
-
-        // Add file input preview
-        const fileInput = document.querySelector('input[type="file"]');
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const currentImage = document.querySelector('.current-image img');
-                    if (currentImage) {
-                        currentImage.src = event.target.result;
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
 </body>
 </html>
