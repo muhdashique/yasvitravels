@@ -153,7 +153,169 @@
             padding: 2rem;
             grid-column: 1 / -1;
         }
+        /* image view section */
+        /* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header styles */
+.text-4xl {
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Grid layout */
+.segments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+/* Segment card styles */
+.segment-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Image wrapper styles */
+.segment-image-wrapper {
+    position: relative;
+    padding-top: 66.67%; /* 3:2 aspect ratio */
+    overflow: hidden;
+}
+
+.segment-image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Segment info styles */
+.segment-info {
+    padding: 1.25rem;
+}
+
+.segment-title {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.segment-description {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+/* Action buttons styles */
+.segment-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Empty state styles */
+.no-segments {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+    color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .segments-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+    
+    .segment-info {
+        padding: 1rem;
+    }
+}
+        
+/* check filter */
+.form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        
     </style>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -166,32 +328,81 @@
         <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
         <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
         <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-        <a href="{% url 'logout' %}" class="logout">Logout</a>
     </div>
 
     <div class="content">
         <section>
             <div class="card">
                 <div class="card-header">
-                    <h2 class="h5"><i class="fas fa-puzzle-piece"></i> Add Segment</h2>
+                    <h2 class="h5">Add Segment</h2>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{% url 'add_segment' %}" enctype="multipart/form-data">
+                    <form method="post" action="{% url 'add_segment' %}" enctype="multipart/form-data" id="segmentForm">
                         {% csrf_token %}
-                        {{ segment_form.as_p }}
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Add Segment
-                        </button>
+                    
+                        {% if segment_form.destination %}
+                        <div class="form-group">
+                            <label for="id_destination">Destination:</label>
+                            {{ segment_form.destination }}
+                            {% if segment_form.destination.errors %}
+                                <div class="error-message">{{ segment_form.destination.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    
+                        {% if segment_form.category %}
+                        <div class="form-group">
+                            <label for="id_category">Category:</label>
+                            {{ segment_form.category }}
+                            {% if segment_form.category.errors %}
+                                <div class="error-message">{{ segment_form.category.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    
+                        {% if segment_form.name %}
+                        <div class="form-group">
+                            <label for="id_name">Name:</label>
+                            {{ segment_form.name }}
+                            {% if segment_form.name.errors %}
+                                <div class="error-message">{{ segment_form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    
+                        {% if segment_form.description %}
+                        <div class="form-group">
+                            <label for="id_description">Description:</label>
+                            {{ segment_form.description }}
+                            {% if segment_form.description.errors %}
+                                <div class="error-message">{{ segment_form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    
+                        {% if segment_form.segment_image %}
+                        <div class="form-group">
+                            <label for="id_segment_image">Image:</label>
+                            {{ segment_form.segment_image }}
+                            {% if segment_form.segment_image.errors %}
+                                <div class="error-message">{{ segment_form.segment_image.errors }}</div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    
+                        <button type="submit" class="btn-submit">Add Segment</button>
                     </form>
+                    
                 </div>
             </div>
         </section>
+        
 
         <section>
             <div class="container">
                 <h1 class="text-4xl text-center">Unique travel experiences</h1>
                 <p class="text-center">From renovations and room additions to masonry and other handyman services</p>
-
+        
                 <div class="segments-grid">
                     {% for segment in segments %}
                     <div class="segment-card">
@@ -205,6 +416,13 @@
                         <div class="segment-info">
                             <span class="segment-title">{{ segment.name|upper }}</span>
                             <p class="segment-description">{{ segment.description }}</p>
+                            
+                            <!-- Display Destination and Category -->
+                            <p class="segment-meta">
+                                <strong>Destination:</strong> {{ segment.destination.name }}<br />
+                                <strong>Category:</strong> {{ segment.category.name }}
+                            </p>
+        
                             <div class="segment-actions">
                                 <a href="{% url 'edit_segment' segment.id %}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit
@@ -226,6 +444,57 @@
                 </div>
             </div>
         </section>
+        
     </div>
+    <script>
+        $(document).ready(function() {
+            var categorySelect = $('#id_category');
+            var destinationSelect = $('#id_destination');
+            
+            // Initially disable category select
+            categorySelect.prop('disabled', true);
+            
+            destinationSelect.change(function() {
+                var destinationId = $(this).val();
+                categorySelect.empty();
+                
+                if (destinationId) {
+                    categorySelect.prop('disabled', false);
+                    
+                    $.ajax({
+                        url: '/get_categories/',
+                        data: {
+                            'destination_id': destinationId
+                        },
+                        success: function(data) {
+                            categorySelect.append('<option value="">---------</option>');
+                            data.forEach(function(category) {
+                                categorySelect.append(
+                                    $('<option></option>')
+                                        .attr('value', category.id)
+                                        .text(category.name)
+                                );
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error fetching categories:", error);
+                            categorySelect.prop('disabled', true);
+                            categorySelect.append('<option value="">---------</option>');
+                        }
+                    });
+                } else {
+                    categorySelect.prop('disabled', true);
+                    categorySelect.append('<option value="">---------</option>');
+                }
+            });
+
+            // Enable category select before form submission
+            $('#segmentForm').submit(function() {
+                categorySelect.prop('disabled', false);
+            });
+        });
+    </script>
+
+    
 </body>
 </html>

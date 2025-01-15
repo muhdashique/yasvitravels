@@ -116,6 +116,54 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* whatsapp button */
+        .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    transition: all 0.3s;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128C7E;
+}
+
+.whatsapp-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.tooltip {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+    white-space: nowrap;
+    font-family: Arial, sans-serif;
+}
+
+.whatsapp-float:hover .tooltip {
+    display: block;
+}
         </style>
         
 </head>
@@ -124,6 +172,18 @@
     {% block content %}
     <!-- Main content goes here -->
     {% endblock %}
+    <!-- watsapp button -->
+    <div class="whatsapp-float">
+        <!-- Added your number with India's country code (91) -->
+        <a class="whatsapp-link" 
+        href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F"
+           target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 2.625.857 5.055 2.31 7.02L.816 23.85l4.83-1.494A11.943 11.943 0 0012 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm0 22c-2.475 0-4.77-.75-6.675-2.033l-.48-.288-3.045.945.96-3.045-.288-.48A9.917 9.917 0 010 12C0 6.48 5.385 2 12 2s12 4.48 12 10-5.385 10-12 10zm6.72-7.32c-.39-.195-2.31-1.14-2.67-1.275-.36-.135-.615-.195-.87.195-.255.39-.975 1.275-1.2 1.53-.225.255-.45.285-.84.09-2.28-1.14-3.78-2.04-5.28-4.62-.39-.675.39-.63.39-.63s1.005-1.035 1.26-1.425c.255-.39.255-.72.09-.99-.165-.27-1.59-3.84-2.175-5.25-.57-1.38-.57-1.14-.78-1.17s-.435-.015-.675-.015c-.24 0-.615.09-.93.42-.315.33-1.2 1.17-1.2 2.865 0 1.695 1.23 3.33 1.41 3.57.18.24 2.535 3.87 6.15 5.43 3.615 1.545 3.615 1.035 4.275.96.66-.075 2.13-.87 2.43-1.71.3-.84.3-1.56.21-1.71-.09-.15-.345-.24-.735-.435z"/>
+            </svg>
+            <span class="tooltip">Click to chat on WhatsApp</span>
+        </a>
+    </div>
     
 
     <!-- Footer Section -->
@@ -167,21 +227,19 @@
                     <li><a href="#">Podcast</a></li>
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">Customers</a></li>
-                    <li><a href="#">Legal • Privacy</a></li>
-                    <li><a href="#">Security</a></li>
                 </ul>
             </div>
 
             <div class="footer-info">
                 <div class="language-selector">
-                    <img src="us-flag.png" alt="English">
-                    <span>English</span>
+                    <img src="{% static 'images\file.png' %}" alt="Your Logo" class="login-icon" style="width: 150px; height: auto;">
+                    
                 </div>
                 <p class="footer-description">
-                    Odoo is a suite of open source business apps that cover all your company needs: CRM, eCommerce, accounting, inventory, point of sale, project management, etc.
+                    At Yasvi Travels, we bring your travel dreams to life with tailored itineraries, hassle-free bookings, and expert support. Whether you're seeking serene getaways or thrilling adventures, we’re here to make every journey smooth, memorable, and truly special
                 </p>
                 <p class="footer-description">
-                    Odoo's unique value proposition is to be at the same time very easy to use and fully integrated.
+                    
                 </p>
                 <div class="social-links">
                     <a href="https://www.facebook.com/share/186GrnxYLL/"><i class="fab fa-facebook-f"></i></a>

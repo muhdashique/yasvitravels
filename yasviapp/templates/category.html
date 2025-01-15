@@ -180,7 +180,7 @@
         <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
         <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
         <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
         <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
         <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
         <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
@@ -208,22 +208,31 @@
                     <div class="tour-card">
                         <div class="tour-image-wrapper">
                             {% if category.category_image %}
-                                <a href="{% url 'view_segments' category.id %}">
+                               
                                     <img src="{{ category.category_image.url }}" alt="{{ category.name }}">
                                 </a>
                             {% else %}
-                                <a href="{% url 'view_segments' category.id %}">
+                              
                                     <img src="/api/placeholder/300/200" alt="{{ category.name }}">
                                 </a>
                             {% endif %}
                         </div>
                         <div class="tour-info">
-                            <a href="{% url 'view_segments' category.id %}">
+                         
                                 <span class="tour-title">{{ category.name }}</span>
                             </a>
+                            
+                            <!-- Display Destination -->
+                            {% if category.destination %}
+                            <p class="tour-destination">
+                                <strong>Destination:</strong> {{ category.destination.name }}
+                            </p>
+                            {% endif %}
+                            
                             {% if category.price %}
                             <span class="tour-price">${{ category.price }}</span>
                             {% endif %}
+                            
                             <div class="category-actions">
                                 <a href="{% url 'edit_category' category.id %}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit
@@ -243,6 +252,7 @@
                     </div>
                     {% endfor %}
                 </div>
+                
             </div>
         </div>
     </div>

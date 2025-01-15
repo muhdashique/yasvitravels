@@ -1,0 +1,9 @@
+New Contact Form Submission
+
+<p>Name: {{ name }}</p>
+<p>Email: {{ email }}</p>
+<p>Phone: {{ phone }}</p>
+<p>Message: {{ message }}</p>
+
+
+This email was sent from your website's contact form.

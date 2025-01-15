@@ -445,102 +445,138 @@
                 font-size: 2rem;
             }
         }
-        /* category */
-        /* Destinations Section Styles */
-.products {
-    padding: 80px 0;
-    background-color: #f8f9fa;
-}
-
-.container {
+    /* category */
+.tours-section {
+    padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
 }
 
-.destinations-title {
-    text-align: center;
+.section-title {
     font-size: 2.5rem;
-    margin-bottom: 50px;
     color: #333;
-    line-height: 1.4;
+    margin-bottom: 40px;
+    font-weight: 600;
 }
 
-.destinations-grid {
+.tours-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-bottom: 50px;
+    padding: 20px 0;
 }
 
-.destination-card {
-    position: relative;
-    border-radius: 12px;
+.tour-card {
+    background: white;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    position: relative;
 }
 
-.destination-card:hover {
+.tour-card:hover {
     transform: translateY(-5px);
 }
 
-.destination-card a {
-    text-decoration: none;
-    color: inherit;
+.tour-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
 }
 
-.destination-card img {
+.tour-image {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
-    display: block;
     transition: transform 0.3s ease;
 }
 
-.destination-card:hover img {
+.tour-card:hover .tour-image {
     transform: scale(1.05);
 }
 
-.destination-overlay {
+.tour-info {
+    padding: 20px;
+    background: rgb(140, 138, 138);
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.8) 0%,
-        rgba(0, 0, 0, 0) 100%
-    );
-    padding: 20px;
 }
 
-.destination-name {
-    color: #fff;
-    font-size: 1.25rem;
-    font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.button {
+.tour-title {
     display: block;
-    width: max-content;
-    margin: 0 auto;
-    padding: 15px 40px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 30px;
+    font-size: 1.5rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+    color: #ffffff;
+    margin-bottom: 10px;
 }
 
-.button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+.tour-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tour-price {
+    font-size: 1.2rem;
+    color: #666;
+    display: block;
+}
+
+.tour-status {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+.no-categories {
+    grid-column: 1 / -1;
+    padding: 40px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    text-align: center;
+    color: #666;
+}
+
+.attribution {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.attribution a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tours-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .tour-image-wrapper {
+        height: 200px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Optional: Add these styles to your base template for better overall appearance */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.text-center {
+    text-align: center;
 }
 
 /* Responsive Styles */
@@ -708,7 +744,7 @@
             
             <div class="banner-content">
                 <h1 class="title">HIKING<br>TOURS</h1>
-                <p class="subtitle">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                <p class="subtitle">Explore. Discover. Experience. Your Journey Begins Here with Yasvi Travels</p>
                 <p class="attribution"></p>
             </div>
             <nav class="nav-container relative z-[999]">
@@ -833,43 +869,42 @@
     
     
 
-    <section class="services container">
-        <h2>Complete Interior Design Service</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Design consultation">
-                <h3>LIVING DESIGN</h3>
+    <section class="tours-section">
+        <h1 class="section-title text-center">{{ section_title|default:"Room Categories" }}</h1>
+        
+        <div class="tours-grid">
+            {% for category in categories %}
+            <div class="tour-card">
+                <div class="tour-image-wrapper">
+                    <a href="{% url 'view_segments' category.id %}">
+                        {% if category.category_image %}
+                            <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
+                        {% else %}
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfrsgni2CRG5CcMq7t8Xk0c0JdtsIGL-CBJA&s" alt="{{ category.name }}" class="tour-image">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="tour-info">
+                    <span class="tour-title">
+                        <a href="{% url 'view_segments' category.id %}">{{ category.name }}</a>
+                    </span>
+                    {% if category.price %}
+                    <span class="tour-price">${{ category.price }}</span>
+                    {% endif %}
+                </div>
             </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Space planning">
-                <h3>BEDROOM DESIGN</h3>
+            {% empty %}
+            <div class="no-categories text-center">
+                <p>No room categories available.</p>
             </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Color consultation">
-                <h3>KITCHEN DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Furniture selection">
-                <h3>OFFICE DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Lighting design">
-                <h3>BATHROOM DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Accessory selection">
-                <h3>DINING DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Project management">
-                <h3>OUTDOOR DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Final styling">
-                <h3>CUSTOM DESIGN</h3>
-            </div>
+            {% endfor %}
         </div>
-        <a href="#" class="button">LEARN MORE</a>
+        
+        {% if show_attribution %}
+        <div class="attribution text-center">
+            Images from <a href="https://freepik.com">Freepik</a>
+        </div>
+        {% endif %}
     </section>
     
     

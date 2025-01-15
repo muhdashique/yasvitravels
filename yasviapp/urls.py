@@ -36,7 +36,6 @@ urlpatterns = [
     path('images/delete/<int:image_id>/', views.delete_image, name='delete_image'),
     path('add-testimonial/', views.add_testimonial, name='add_testimonial'),
    path('edit-testimonial/<int:id>/', views.edit_testimonial, name='edit_testimonial'),
-    # path('testimonials_view/',views.testimonials_view,name='testimonials_view') ,
       path('delete-testimonial/<int:id>/', views.delete_testimonial, name='delete_testimonial'),
      path('add-testimonial/', views.add_testimonial, name='add_testimonial'),
       path('gallery/', views.gallery_view, name='gallery'),
@@ -53,6 +52,10 @@ urlpatterns = [
     path('edit-campingimage/<int:image_id>/', views.edit_campingimage, name='edit_campingimage'),
      path('edit_campingimage/<int:image_id>/', views.edit_campingimage, name='edit_campingimage'),
     path('delete_campingimage/<int:image_id>/', views.delete_campingimage, name='delete_campingimage'),
+      path('add_segment/', views.add_segment, name='add_segment'),
+    path('get_categories/', views.get_categories, name='get_categories'),
+     path('get_segments/', views.get_segments, name='get_segments'),
+    #  path('send-email/', views.send_email, name='send_email'),
 ]
 
     

@@ -185,7 +185,7 @@
         <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
         <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
         <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
         <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
         <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
         <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
@@ -196,29 +196,59 @@
         <h1>Edit Camping Image</h1>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="image">Image:</label>
-            <input type="file" name="image" id="image">
-        
-            <label for="description">Description:</label>
-            <textarea name="description" id="description">{{ image.description }}</textarea>
-        
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="{{ image.name }}" required>
-        
-            <label for="details">Details:</label>
-            <textarea name="details" id="details">{{ image.details }}</textarea>
-        
-            <label for="amount">Amount:</label>
-            <input type="number" name="amount" id="amount" value="{{ image.amount }}" required step="0.01">
-        
-            <label for="status">Status:</label>
-            <select name="status" id="status">
-                <option value="true" {% if image.status %}selected{% endif %}>Available</option>
-                <option value="false" {% if not image.status %}selected{% endif %}>Not Available</option>
-            </select>
-        
-            <button type="submit">Update Camping Image</button>
+            
+            {% if form.errors %}
+                <ul class="errors">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ field }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+            <fieldset style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+                <legend style="font-size: 1.2em; padding: 0 10px;">Update Camping Image</legend>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="image" style="display: block; font-weight: bold; margin-bottom: 5px;">Image:</label>
+                    <input type="file" name="image" id="image" style="width: 100%; padding: 8px;">
+                    {% if image.image %}
+                        <img src="{{ image.image.url }}" alt="Current Image" style="display: block; max-width: 100%; margin-top: 10px;">
+                    {% endif %}
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="display: block; font-weight: bold; margin-bottom: 5px;">Name:</label>
+                    <input type="text" name="name" id="name" value="{{ image.name }}" required style="width: 100%; padding: 8px;">
+                </div>
+                
+               
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="description" style="display: block; font-weight: bold; margin-bottom: 5px;">Description:</label>
+                    <textarea name="description" id="description" style="width: 100%; padding: 8px;" rows="4">{{ image.description }}</textarea>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="amount" style="display: block; font-weight: bold; margin-bottom: 5px;">Amount:</label>
+                    <input type="number" name="amount" id="amount" value="{{ image.amount }}" required min="0" step="0.01" style="width: 100%; padding: 8px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="status" style="display: block; font-weight: bold; margin-bottom: 5px;">Status:</label>
+                    <select name="status" id="status" style="width: 100%; padding: 8px;">
+                        <option value="true" {% if image.status %}selected{% endif %}>Available</option>
+                        <option value="false" {% if not image.status %}selected{% endif %}>Not Available</option>
+                    </select>
+                </div>
+                
+                <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; font-size: 1em; border: none; border-radius: 5px; cursor: pointer;">
+                    Update Camping Image
+                </button>
+            </fieldset>
         </form>
+        
         
     </div>
     

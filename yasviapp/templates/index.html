@@ -1358,9 +1358,18 @@
     <section>
         <div class="banner">
             <div class="banner-content">
-                <h1 class="title">HIKING<br>TOURS</h1>
-                <p class="subtitle">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+                <div>
+                    <a href="{% url 'index' %}">
+                        <!-- Replace 'logo.png' with your actual logo image -->
+                        <img src="logo.png" alt="Yasvi Travels Logo" class="logo-image">
+                        <!-- <span class="logo-text">Yasvi Travels</span> -->
+                    </a>
+                    <div>
+                        <h1 class="title">HIKING<br>TOURS</h1>
+                <p class="subtitle">Explore. Discover. Experience. Your Journey Begins Here with Yasvi Travels</p>
                 <p class="attribution"></p>
+                    </div>
+                </div>
             </div>
             <nav class="nav-container relative z-[999]">
                 <ul class="nav-menu">
@@ -1455,9 +1464,11 @@
                     <img src="https://images.pexels.com/photos/1479860/pexels-photo-1479860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tropical beach with water villas">
                 </div>
                 <div class="text-card">
-                    <h2>Don't Worry, Be Happy</h2>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <a href="#" class="button">LEARN MORE</a>
+                    <h2>Yasvi Travels: Your Gateway to Unforgettable Journeys</h2>
+                    <p>Welcome to Yasvi Travels, your trusted companion for unforgettable journeys!
+
+At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenate, and create memories that last a lifetime. With a passion for travel and a commitment to excellence, we specialize in crafting personalized travel experiences that cater to your dreams and preferences.</p>
+                    <a href="{% url 'about' %}" class="button">LEARN MORE</a>
                 </div>
             </div>
         </div>
@@ -1532,7 +1543,7 @@
     </section>
 
 
-    <section class="services container">
+    <!-- <section class="services container">
         <h2>Complete Interior Design Service</h2>
         <div class="services-grid">
             <div class="service-card">
@@ -1568,7 +1579,7 @@
                 <h3>CUSTOM DESIGN</h3>
             </div>
         </div>
-    </section>
+    </section> -->
      
     
 
@@ -1583,7 +1594,7 @@
             <div class="packages-grid">
                 {% for package in packages %}
                     <div class="package-card">
-                        <img src="{{ package.image.url }}" alt="{{ package.name }}">
+                       <a href="{% url 'travelandtour' %}#tour_package"> <img src="{{ package.image.url }}" alt="{{ package.name }}"></a>
                         <div class="package-overlay">
                             <div class="package-name">{{ package.name }}</div>
                             <div class="package-description">{{ package.details }}</div>
@@ -1608,14 +1619,14 @@
     <section class="camping-section">
         <div class="camping-container">
           <div class="content-section">
-            <h1 class="camping-title">10 Amazing<br>Camping Tours</h1>
+            <h1 class="camping-title"> Amazing<br>Camping Tours</h1>
             <p class="camping-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
             <a href="{% url 'login' %}" class="learn-more-btn">Add New Image</a>
             
             <div class="image-gallery">
               {% for image in images %}
                 <div class="package-card">
-                  <img src="{{ image.image.url }}" alt="{{ image.name }}">
+                 <a href="{% url 'travelandtour' %}#campain_tour"> <img src="{{ image.image.url }}" alt="{{ image.name }}"></a>
                   <div class="package-overlay">
                     <p><strong></strong> {{ image.description }}</p>
                     <p><strong></strong> {{ image.name }}</p>
@@ -1674,7 +1685,7 @@
     <div class="gallery-grid">
         {% for image in gallery_images %}
             <div class="gallery-card">
-                <img src="{{ image.image.url }}" alt="{{ image.category }}">
+               <a href="{% url 'gallery' %}#gallery_image"> <img src="{{ image.image.url }}" alt="{{ image.category }}"></a>
                 <div class="gallery-title">{{ image.category }}</div>
                 <p>{{ image.description }}</p>
             </div>

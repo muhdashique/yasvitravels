@@ -32,6 +32,7 @@ class Segment(models.Model):
 
 
 
+
 class Image(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

@@ -10,6 +10,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Segment, Image
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404, render, redirect
+from django.core.mail import send_mail
 
 
 
@@ -19,9 +20,9 @@ def index(request):
     destinations = Destination.objects.all()[:8]
     categories = Category.objects.all()[:6]
     testimonials = Testimonial.objects.all()
-    gallery_images = GalleryImage.objects.all()
-    packages = Package.objects.all()
-    images = CampingImage.objects.all()
+    gallery_images = GalleryImage.objects.all()[:6]
+    packages = Package.objects.all()[:6]
+    images = CampingImage.objects.all()[:6]
     return render(request, "index.html", {'destinations': destinations, 'categories': categories,'testimonials': testimonials,'gallery_images': gallery_images,'packages': packages,'images': images})
 
 def about(request):
@@ -38,7 +39,7 @@ def property(request):
     
     return render(request, "property.html", {
         'destinations': destinations,
-        # 'categories': categories,
+        'categories': categories,
     })
 
 
@@ -130,29 +131,72 @@ def add_category(request):
     return render(request, 'category.html', {'category_form': form})
 
 
-
 @login_required(login_url='login')
 def add_segment(request):
     if request.method == 'POST':
         form = SegmentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('segment_list')  # Redirect to a page listing all segments
+            return redirect('segment_list')
+        else:
+            print("Form errors:", form.errors)
     else:
         form = SegmentForm()
-    return render(request, 'segment.html', {'segment_form': form})
 
+    segments = Segment.objects.all()
+    context = {
+        'segment_form': form,  # Changed to match template
+        'segments': segments
+    }
+    return render(request, 'segment.html', context)
+
+
+
+def get_segments(request):
+    category_id = request.GET.get('category_id')
+    if category_id:
+        segments = Segment.objects.filter(category_id=category_id).values('id', 'name')
+        return JsonResponse(list(segments), safe=False)
+    return JsonResponse([], safe=False)
+
+
+
+
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+
+def get_categories(request):
+    destination_id = request.GET.get('destination_id')
+    if destination_id:
+        categories = Category.objects.filter(destination_id=destination_id).values('id', 'name')
+        return JsonResponse(list(categories), safe=False)
+    return JsonResponse([], safe=False)
+
+
+@login_required(login_url='login')
 
 @login_required(login_url='login')
 def add_image(request):
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Image added successfully!')
-            return redirect('view_segment_images')
-        messages.error(request, 'Please correct the errors below.')
-    return redirect('view_segment_imagesl')
+            try:
+                form.save()
+                messages.success(request, 'Image added successfully!')
+                return redirect('manage_images')
+            except Exception as e:
+                messages.error(request, f'Error saving image: {str(e)}')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+            print("Form errors:", form.errors)  # For debugging
+    else:
+        form = ImageForm()
+    
+    images = Image.objects.all()
+    return render(request, 'add_image.html', {
+        'form': form,
+        'images': images
+    })
 
 
 def propertyview(request, destination_id):
@@ -163,7 +207,7 @@ def propertyview(request, destination_id):
     categories = Category.objects.filter(destination=destination)
 
     return render(request, "property_view.html", {
-        # 'destination': destination,
+        'destination': destination,
         'categories': categories,
     })
 
@@ -534,4 +578,30 @@ def delete_campingimage(request, image_id):
     image = get_object_or_404(CampingImage, id=image_id)
     image.delete()
     return redirect('add_campingimage')
+
+
+
+
+
+def send_email(request):
+    if request.method == 'POST':
+        name = request.POST.get('fullName')  # Ensure correct field names
+        email = request.POST.get('userEmail')
+        message = request.POST.get('userMessage')
+
+        print(f"Name: {name}, Email: {email}, Message: {message}")  # Debugging line
+
+        subject = f"New Message from {name}"
+        email_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+
+        send_mail(
+            subject,
+            email_message,
+            'yasvitravels@gmail.com',
+            ['yasvitravels@gmail.com'],
+            fail_silently=False,
+        )
+        return JsonResponse({ 'Email sent successfully!'})
+
+    return render(request, 'contact.html')
 

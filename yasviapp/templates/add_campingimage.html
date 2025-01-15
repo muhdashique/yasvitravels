@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Camping Image</title>
   <style>
     * {
       margin: 0;
@@ -27,6 +30,8 @@
       left: 0;
       padding-top: 20px;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
     }
 
     .sidebar a {
@@ -99,6 +104,8 @@
 
     input[type="file"],
     textarea,
+    input[type="text"],
+    input[type="number"],
     select {
       width: 100%;
       padding: 10px;
@@ -205,220 +212,74 @@
         margin-left: 0;
         padding: 10px;
       }
-    }  /* Sidebar Styles */
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #343a40;
-            color: #fff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            color: #fff;
-            padding: 15px 20px;
-            display: block;
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar a:hover {
-            background-color: #495057;
-        }
-
-        .sidebar a.active {
-            background-color: #007bff;
-        }
-
-        .sidebar .logout {
-            margin-top: auto;
-            background-color: #6c757d;
-            text-align: center;
-        }
-
-        .sidebar .logout:hover {
-            background-color: #5a6268;
-        }
-
-        /* Main Content Styles */
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-            flex-grow: 1;
-            background-color: #f8f9fa;
-            min-height: 100vh;
-        }
-
-        .container {
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .col-md-6 {
-            flex: 1 1 calc(50% - 20px);
-        }
-
-        .card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 15px;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .card-header h2 {
-            margin: 0;
-            font-size: 1.25rem;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            font-size: 0.875rem;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-warning {
-            background-color: #ffc107;
-            color: #212529;
-            border: none;
-        }
-
-        .btn-warning:hover {
-            background-color: #e0a800;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-        }
-
-        .btn-danger:hover {
-            background-color: #bd2130;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        table th,
-        table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        table th {
-            background-color: #f1f1f1;
-        }
-
-        img {
-            border-radius: 4px;
-        }
+    }
   </style>
 </head>
 <body>
-    <div class="sidebar">
-        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i>Admin Panel</a>
-        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
-        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
-        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
-        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
-        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
-        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
-        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-       
-    </div>
+  <div class="sidebar">
+    <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
+    <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
+    <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
+    <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
+    <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
+    <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
+    <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
+    <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
+    <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+  </div>
 
-    <div class="content-wrapper">
-        <h1>Add a New Camping Image</h1>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <label for="image">Image:</label>
-            <input type="file" name="image" id="image" required>
-        
-            <label for="description">Description:</label>
-            <textarea name="description" id="description"></textarea>
-        
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
-        
-            <label for="details">Details:</label>
-            <textarea name="details" id="details"></textarea>
-        
-            <label for="amount">Amount:</label>
-            <input type="number" name="amount" id="amount" required step="0.01">
-        
-            <label for="status">Status:</label>
-            <select name="status" id="status">
-                <option value="true" {% if object.status %}selected{% endif %}>Available</option>
-                <option value="false" {% if not object.status %}selected{% endif %}>Not Available</option>
-            </select>
-        
-            <button type="submit">Add Camping Image</button>
-        </form>
-        
-    </div>
-    
+  <div class="content-wrapper">
+    <h1>Add a New Camping Image</h1>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="image">Image:</label>
+        <input type="file" name="image" id="image" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea name="description" id="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" required step="0.01">
+      </div>
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select name="status" id="status">
+          <option value="true" {% if object.status %}selected{% endif %}>Available</option>
+          <option value="false" {% if not object.status %}selected{% endif %}>Not Available</option>
+        </select>
+      </div>
+      <button type="submit">Add Camping Image</button>
+    </form>
+
     <div class="gallery-grid">
       {% for image in images %}
-        <div class="package-card">
+      <div class="package-card">
           <img src="{{ image.image.url }}" alt="{{ image.name }}">
           <div class="package-overlay">
-            <p><strong>Description:</strong> {{ image.description }}</p>
-            <p><strong>Name:</strong> {{ image.name }}</p>
-            <p><strong>Status:</strong> {{ image.status|yesno:"Available,Not Available" }}</p>
-            <div class="action-buttons">
-              <a href="{% url 'edit_campingimage' image.id %}" class="edit-btn">Edit</a>
-              <a href="{% url 'delete_campingimage' image.id %}" class="delete-btn">Delete</a>
-            </div>
+              <p><strong>Description:</strong> {{ image.description }}</p>
+              <p><strong>Name:</strong> {{ image.name }}</p>
+              <p><strong>Amount:</strong> {{ image.amount }}</p> <!-- Added amount -->
+              <p><strong>Status:</strong> {{ image.status|yesno:"Available,Not Available" }}</p>
+              <div class="action-buttons">
+                  <a href="{% url 'edit_campingimage' image.id %}" class="edit-btn">Edit</a>
+                  <a href="{% url 'delete_campingimage' image.id %}" class="delete-btn">Delete</a>
+              </div>
           </div>
-        </div>
+      </div>
       {% empty %}
-        <div class="empty-state">
+      <div class="empty-state">
           <p>No camping images available.</p>
-        </div>
+      </div>
       {% endfor %}
-    </div>
+  </div>
+  
   </div>
 </body>
 </html>

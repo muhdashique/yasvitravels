@@ -161,6 +161,148 @@
         img {
             border-radius: 4px;
         }
+        /* new  */
+        /* Card container styles */
+.card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    padding: 1.25rem;
+    border-bottom: 1px solid #eee;
+}
+
+.card-header h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.card-header i {
+    margin-right: 0.5rem;
+    color: #666;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Transform table into grid */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+}
+
+tbody {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0.5rem;
+}
+
+tr {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Hide table headers visually but keep them for accessibility */
+thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Style table cells */
+td {
+    padding: 0;
+}
+
+td:first-child {
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+td:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+td:nth-child(2) {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Action buttons container */
+td:last-child {
+    padding: 0 1rem 1rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Button styles */
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-sm {
+    padding: 0.4rem 1.2rem;
+}
+
+.btn i {
+    margin-right: 0.4rem;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    tbody {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+    
+    td:first-child {
+        height: 180px;
+    }
+}
     </style>
 </head>
 <body>
@@ -169,7 +311,7 @@
     <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
     <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
     <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-    <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
+    <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
     <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
     <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
     <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
@@ -198,42 +340,113 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="h5"><i class="fas fa-list me-2"></i>Manage Images</h2>
-                        </div>
-                        <div class="card-body">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Title</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for image in images %}
-                                    <tr>
-                                        <td><img src="{{ image.image.url }}" alt="{{ image.title }}" style="width: 50px; height: 50px;"></td>
-                                        <td>{{ image.title }}</td>
-                                        <td>
-                                            <a href="{% url 'edit_image' image.id %}" class="btn btn-warning btn-sm">
-                                                <i class="fas fa-edit"></i> Edit
-                                            </a>
-                                            <a href="{% url 'delete_image' image.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
-                                                <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                <section>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="h5"><i class="fas fa-list"></i> Manage Images</h2>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped" role="grid">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Title</th>
+                                            <th>Destination</th>
+                                            <th>Category</th>
+                                            <th>Segment</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for image in images %}
+                                        <tr>
+                                            <td>
+                                                <img src="{{ image.image.url }}" alt="{{ image.title }}" style="max-width: 100px; max-height: 100px;">
+                                            </td>
+                                            <td>Name:{{ image.title }}</td>
+                                            <td>Destination:{{ image.destination.name }}</td>
+                                            <td>Category:{{ image.category.name }}</td>
+                                            <td>Segment:{{ image.segment.name }}</td>
+                                            <td>
+                                                <a href="{% url 'edit_image' image.id %}" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <form method="post" action="{% url 'delete_image' image.id %}" style="display:inline;">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="6" class="text-center">No images available.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                
             </div>
         </div>
     </div>
+
+
+<!-- Add this script section just before the closing </body> tag in add_image.html -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const destinationSelect = document.querySelector('select[name="destination"]');
+    const categorySelect = document.querySelector('select[name="category"]');
+    const segmentSelect = document.querySelector('select[name="segment"]');
+
+    // Function to update categories
+    function updateCategories() {
+        const destinationId = destinationSelect.value;
+        categorySelect.innerHTML = '<option value="">---------</option>';
+        segmentSelect.innerHTML = '<option value="">---------</option>';
+        
+        if (destinationId) {
+            fetch(`/get_categories/?destination_id=${destinationId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(category => {
+                        const option = new Option(category.name, category.id);
+                        categorySelect.add(option);
+                    });
+                });
+        }
+    }
+
+    // Function to update segments
+    function updateSegments() {
+        const categoryId = categorySelect.value;
+        segmentSelect.innerHTML = '<option value="">---------</option>';
+        
+        if (categoryId) {
+            fetch(`/get_segments/?category_id=${categoryId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(segment => {
+                        const option = new Option(segment.name, segment.id);
+                        segmentSelect.add(option);
+                    });
+                });
+        }
+    }
+
+    // Add event listeners
+    destinationSelect.addEventListener('change', updateCategories);
+    categorySelect.addEventListener('change', updateSegments);
+});
+</script>
+
+
+
+
 </body>
 </html>
