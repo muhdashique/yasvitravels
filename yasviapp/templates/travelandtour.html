@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel & Tourism Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -783,6 +784,232 @@
         font-size: 0.9rem;
     }
 }
+/* taxy servise */
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .taxi-service {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://storage.googleapis.com/production-hostgator-v1-0-8/588/349588/h0cXJnxB/99c8c80d286944e4a6d2f8626b8dd230');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .features-section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .features-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .contact-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #333;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        /* New WhatsApp Button Styles */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+
+        .whatsapp-button svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        .whatsapp-pulse {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #25D366;
+            opacity: 0.5;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        /* ticket booking section */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .booking-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .booking-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .booking-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+
+        @media (max-width: 768px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+                margin: 20px;
+                padding: 10px;
+            }
+        }
 
     </style>
 </head>
@@ -891,7 +1118,7 @@
             <div class="card-content">
               <h2 class="card-title">Taxi Services</h2>
               <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-              <a href="#" class="card-button">More</a>
+              <a href="#taxy_service" class="card-button">More</a>
             </div>
           </div>
     
@@ -900,7 +1127,7 @@
             <div class="card-content">
               <h2 class="card-title">Ticket Booking</h2>
               <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-              <a href="#" class="card-button">More</a>
+              <a href="#ticket_booking" class="card-button">More</a>
             </div>
           </div>
     
@@ -909,7 +1136,7 @@
             <div class="card-content">
               <h2 class="card-title">Private Drivers</h2>
               <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-              <a href="#" class="card-button">More</a>
+              <a href="#private_driver" class="card-button">More</a>
             </div>
           </div>
     
@@ -918,7 +1145,7 @@
             <div class="card-content">
               <h2 class="card-title">Photography</h2>
               <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-              <a href="#" class="card-button">More</a>
+              <a href="#private_photography" class="card-button">More</a>
             </div>
           </div>
     
@@ -970,87 +1197,341 @@
 
 
 
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Choose from our wide range of travel services</p>
+    <section id="taxy_service">
+        <div class="taxi-service">
+            <!-- Previous content remains the same -->
+            <div class="hero-section">
+                <h1>Professional Taxi Service</h1>
+                <p>Your reliable transportation partner 24/7</p>
             </div>
+    
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-image">
-                        <img src="/api/placeholder/600/400" alt="Tour Package">
-                    </div>
-                    <div class="service-content">
-                        <h3>Tour Packages</h3>
-                        <p>Customized tour packages for all your travel needs. Includes accommodation, transportation, and guided tours.</p>
-                        <p class="price">From $499</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+                    <h3>Airport Transfers</h3>
+                    <p>Reliable and punctual airport pickup and drop-off services. We track flight times to ensure we're always there when you need us.</p>
                 </div>
-
+    
                 <div class="service-card">
-                    <div class="service-image">
-                        <img src="/api/placeholder/600/400" alt="Taxi Service">
-                    </div>
-                    <div class="service-content">
-                        <h3>Taxi Service</h3>
-                        <p>Reliable and comfortable taxi services for local transportation with experienced drivers.</p>
-                        <p class="price">From $25/hour</p>
-                        <a href="#" class="btn">Book Now</a>
-                    </div>
+                    <h3>City Tours</h3>
+                    <p>Explore the city with our experienced drivers who know all the best routes and attractions. Custom tours available.</p>
                 </div>
-
+    
                 <div class="service-card">
-                    <div class="service-image">
-                        <img src="/api/placeholder/600/400" alt="Ticket Booking">
-                    </div>
-                    <div class="service-content">
-                        <h3>Ticket Booking</h3>
-                        <p>Easy and secure booking for flights, trains, and local attractions at the best prices.</p>
-                        <p class="price">Service fee from $10</p>
-                        <a href="#" class="btn">Book Tickets</a>
-                    </div>
+                    <h3>Corporate Service</h3>
+                    <p>Professional transportation solutions for business clients. Corporate accounts and billing available.</p>
                 </div>
-
+    
                 <div class="service-card">
-                    <div class="service-image">
-                        <img src="/api/placeholder/600/400" alt="Private Drivers">
-                    </div>
-                    <div class="service-content">
-                        <h3>Private Drivers</h3>
-                        <p>Professional chauffeur services for personalized travel experience with local expertise.</p>
-                        <p class="price">From $50/hour</p>
-                        <a href="#" class="btn">Hire Driver</a>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="/api/placeholder/600/400" alt="Camping">
-                    </div>
-                    <div class="service-content">
-                        <h3>Camping Adventures</h3>
-                        <p>Guided camping experiences with all necessary equipment and experienced instructors.</p>
-                        <p class="price">From $199/night</p>
-                        <a href="#" class="btn">Plan Trip</a>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="/api/placeholder/600/400" alt="Photography">
-                    </div>
-                    <div class="service-content">
-                        <h3>Photography & Videography</h3>
-                        <p>Professional photo and video services to capture your travel memories.</p>
-                        <p class="price">From $299/day</p>
-                        <a href="#" class="btn">Book Session</a>
-                    </div>
+                    <h3>Special Events</h3>
+                    <p>Wedding, prom, or special occasion? We provide luxury vehicles and professional service for your important moments.</p>
                 </div>
             </div>
-        </div>
+    
+            <div class="features-section">
+                <h2>Why Choose Our Service</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <img src="https://img.freepik.com/free-vector/by-my-car-illustration-concept_114360-831.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="Professional Drivers">
+                        <h3>Professional Drivers</h3>
+                        <p>Licensed and experienced drivers</p>
+                    </div>
+    
+                    <div class="feature-item">
+                        <img src="https://img.freepik.com/premium-vector/sedan-car-flat-line-art-style_1375-11471.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="Clean Vehicles">
+                        <h3>Modern Fleet</h3>
+                        <p>Clean and well-maintained vehicles</p>
+                    </div>
+    
+                    <div class="feature-item">
+                        <img src="https://img.freepik.com/free-vector/247-open-service-background-business-marketing_1017-54485.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="24/7 Service">
+                        <h3>24/7 Service</h3>
+                        <p>Available any time, any day</p>
+                    </div>
+    
+                    <div class="feature-item">
+                        <img src="https://img.freepik.com/free-vector/city-driver-concept-illustration_114360-1321.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="Fixed Rates">
+                        <h3>Fixed Rates</h3>
+                        <p>No hidden charges or surprises</p>
+                    </div>
+                    <a href="https://wa.me/1234567890" target="_blank" style="text-decoration: none;">
+                        <button style="
+                            background-color: #25D366; 
+                            color: white; 
+                            border: none; 
+                            border-radius: 5px; 
+                            padding: 10px 20px; 
+                            font-size: 16px; 
+                            cursor: pointer;">
+                            <i class="fa-brands fa-whatsapp"></i>Whatapp
+                        </button>
+                    </a>
+                </div>
+            </div>    
+        </div>  
     </section>
+
+
+
+    <section id="ticket_booking">
+        <div class="taxi-service">
+            <!-- Previous content remains the same -->
+            <div class="hero-section" style="background-image: url('https://laundi.ru/upload/iblock/6b9/14977070973678_1920x1200.jpg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;">
+                <h1>Book Your Tickets with Ease</h1>
+                <p>Your trusted partner for flight, train, and bus ticket bookings 24/7</p>
+            </div>
+            
+            
+    
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Flight Ticket Booking</h3>
+                    <p>Hassle-free flight ticket booking for domestic and international destinations. Compare prices and find the best deals.</p>
+                </div>
+            
+                <div class="service-card">
+                    <h3>Train Ticket Booking</h3>
+                    <p>Plan your rail journey effortlessly with our train ticket booking services. Seat availability and fare details at your fingertips.</p>
+                </div>
+            
+                <div class="service-card">
+                    <h3>Bus Ticket Booking</h3>
+                    <p>Reserve bus tickets for local and long-distance travel. Choose your preferred operators and seating options.</p>
+                </div>
+            
+                <div class="service-card">
+                    <h3>Group Booking</h3>
+                    <p>Specialized services for group travel. Discounts and flexible booking options for flights, trains, and buses to suit your needs.</p>
+                </div>
+            </div>
+            
+    
+            <div class="features-section">
+                <h2>Why Choose Our Service</h2>
+                <div class="booking-container">
+                    <!-- Flight Booking Section -->
+                    <div class="booking-section">
+                        <div class="section-icon"><img src="https://img.freepik.com/free-vector/airplane-takeoff_1284-43060.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt=""></div>
+                        <h2 class="section-title">Flight Booking</h2>
+                        <button class="whatsapp-btn">
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20booking%20a%20flight" 
+                               target="_blank" 
+                               style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.447.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg>
+                                Book Flight
+                            </a>
+                        </button>
+                        
+                    </div>
+            
+                    <!-- Train Booking Section -->
+                    <div class="booking-section">
+                        <div class="section-icon"><img src="https://img.freepik.com/premium-vector/train-logo-silhouette-vector-file-train-black-icon_856335-2000.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt=""></div>
+                        <h2 class="section-title">Train Booking</h2>
+                        <button class="whatsapp-btn">
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20booking%20a%20flight" 
+                               target="_blank" 
+                               style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.447.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg>
+                                Book Train
+                            </a>
+                        </button>
+                        
+                    </div>
+            
+                    <!-- Bus Booking Section -->
+                    <div class="booking-section">
+                        <div class="section-icon"><img src="https://img.freepik.com/premium-vector/bus-vehicle-template-vector-isolated-white-background_1222386-7836.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt=""></div>
+                        <h2 class="section-title">Bus Booking</h2>
+                        <button class="whatsapp-btn">
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20booking%20a%20flight" 
+                               target="_blank" 
+                               style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.447.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg>
+                                Book Bus
+                            </a>
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>    
+        </div>  
+    </section>
+    
+
+
+
+
+    <section id="private_driver">
+        <div class="taxi-service">
+            <!-- Previous content remains the same -->
+            <div class="hero-section" style="background-image: url('https://media.baamboozle.com/uploads/images/44822/1615995971_256612_url.jpeg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;">
+                <h1>Private Drivers at Your Service</h1>
+                <p>Enjoy the luxury of private transportation tailored to your schedule and preferences, available 24/7.</p>
+            </div>
+    
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Luxury Chauffeurs</h3>
+                    <p>Experience comfort and class with our luxury chauffeur services, perfect for business trips or special events.</p>
+                </div>
+    
+                <div class="service-card">
+                    <h3>Daily Commutes</h3>
+                    <p>Reliable private drivers for your everyday needs, ensuring a smooth and stress-free journey.</p>
+                </div>
+    
+                <div class="service-card">
+                    <h3>Airport Transfers</h3>
+                    <p>On-time pickups and drop-offs for a hassle-free airport experience. Travel with peace of mind.</p>
+                </div>
+    
+                <div class="service-card">
+                    <h3>Customizable Trips</h3>
+                    <p>Plan your itinerary and leave the driving to us. Perfect for sightseeing, road trips, and personalized travel.</p>
+                </div>
+            </div>
+    
+            <div class="features-section">
+                <h2>Why Choose Our Service</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <img src="https://img.freepik.com/premium-vector/car-silhouette-illustration-silhouette-vector-isolated-white-background-83_666870-5543.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="Luxury Cars">
+                        <h3>Luxury Vehicles</h3>
+                        <p>Travel in style with our fleet of premium vehicles equipped with top-tier amenities.</p>
+                    </div>
+    
+                    <div class="feature-card">
+                        <img src="https://img.freepik.com/premium-vector/graphic-car-with-protective-shield-symbolizing-insurance-safety_98402-167503.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="Safety First">
+                        <h3>Safety First</h3>
+                        <p>Professional drivers with extensive experience and a commitment to safety.</p>
+                    </div>
+    
+                    <div class="feature-card">
+                        <img src="https://img.freepik.com/premium-vector/one-continuous-single-drawing-black-line-doodle-person-shaking-hands-through-computer-screen_1098986-7843.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="24/7 Availability">
+                        <h3>24/7 Availability</h3>
+                        <p>Book our services anytime, anywhere, and enjoy uninterrupted transportation.</p>
+                    </div>
+    
+                    <div class="feature-card">
+                        <img src="https://img.freepik.com/premium-vector/circle-arrow-24-hours-help-symbol-round-clock-work-vector-illustration-eps-10_797523-567.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt="24/7 Availability">
+                        <h3>24/7 Availability</h3>
+                        <p>Book our services anytime, anywhere, and enjoy uninterrupted transportation.</p>
+                    </div>
+                    <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20hiring%20a%20private%20driver" 
+   target="_blank" 
+   style="text-decoration: none; color: inherit;">
+    <button style="display: flex; align-items: center; background-color: #25D366; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.447.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+        Need a Driver
+    </button>
+</a>
+
+                </div>
+            </div>    
+        </div>  
+    </section>
+
+
+
+
+    <section id="private_photography">
+        <div class="taxi-service">
+            <!-- Hero Section with Background Image -->
+            <div class="hero-section" style="background-image: url('https://s.marketwatch.com/public/resources/images/MW-HX226_Liv_tr_ZG_20191219150649.jpg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;">
+                <h1>Capture Your Moments with Ease</h1>
+                <p>Your trusted partner for private photography and videography services 24/7</p>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Private Photography</h3>
+                    <p>Professional photographers for personal events like weddings, family portraits, and special occasions. High-quality images that tell your story.</p>
+                </div>
+    
+                <div class="service-card">
+                    <h3>Event Videography</h3>
+                    <p>Capture your events with cinematic videos. From small gatherings to large celebrations, we provide high-definition videography services.</p>
+                </div>
+    
+                <div class="service-card">
+                    <h3>Corporate & Lifestyle Shoots</h3>
+                    <p>Tailored photography and videography services for businesses, portfolios, and lifestyle content. Elevate your brand with stunning visuals.</p>
+                </div>
+    
+                <div class="service-card">
+                    <h3>Custom Packages</h3>
+                    <p>We offer flexible packages to suit your needs, including post-production editing and creative storytelling for memorable moments.</p>
+                </div>
+            </div>
+    
+            <!-- Features Section -->
+            <div class="features-section">
+                <h2>Why Choose Our Services</h2>
+                <div class="booking-container">
+                    <!-- Private Photography Section -->
+                    <div class="booking-section">
+                        <div class="section-icon"><img src="https://img.freepik.com/premium-vector/drawing-hand-with-vintage-camera_252525-657.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt=""></div>
+                        <h2 class="section-title">Private Photography</h2>
+                        <button class="whatsapp-btn">
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20private%20photography" 
+                               target="_blank" 
+                               style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.447.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg>
+                                Book Photography
+                            </a>
+                        </button>
+                    </div>
+    
+                    <!-- Event Videography Section -->
+                    <div class="booking-section">
+                        <div class="section-icon"><img src="https://img.freepik.com/premium-vector/sketch-two-hands-holding-camera_97378-629.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt=""></div>
+                        <h2 class="section-title">Event Videography</h2>
+                        <button class="whatsapp-btn">
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20event%20videography" 
+                               target="_blank" 
+                               style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.447.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg>
+                                Book Videography
+                            </a>
+                        </button>
+                    </div>
+                    <div class="booking-section">
+                        <div class="section-icon"><img src="https://img.freepik.com/premium-vector/photographer-cemera-man-pencil-sketch-art-silhouette-style-vector-design_1149283-1840.jpg?ga=GA1.1.429714915.1680186335&semt=ais_hybrid" alt=""></div>
+                        <h2 class="section-title"> Your Perfect Capture</h2>
+                        <button class="whatsapp-btn">
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20event%20videography" 
+                               target="_blank" 
+                               style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.447.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg>
+                                Your Perfect Capture
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>    
+        </div>  
+    </section>
+    
+
+
+
+
+
 
 
 
@@ -1081,6 +1562,12 @@
             </div>
           </div>
         </div>
+      </section>
+
+
+
+      <section>
+        
       </section>
     
 
