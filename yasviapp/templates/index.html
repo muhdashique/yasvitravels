@@ -489,9 +489,10 @@
         }
 
         .testimonials-title {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
             color: #333;
+            font-weight: 700;
         }
 
         .testimonials-subtitle {
@@ -574,6 +575,7 @@
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
+
     }
 
     .testimonials-wrapper {
@@ -1476,10 +1478,10 @@
                     <img src="https://images.pexels.com/photos/1479860/pexels-photo-1479860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tropical beach with water villas">
                 </div>
                 <div class="text-card">
-                    <h2>Yasvi Travels: Your Gateway to Unforgettable Journeys</h2>
-                    <p>Welcome to Yasvi Travels, your trusted companion for unforgettable journeys!
+                    <h2>Discover Our World</h2>
+                    <p>Welcome to Yasvi Travels, your trusted companion for unforgettable journeys
 
-At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenate, and create memories that last a lifetime. With a passion for travel and a commitment to excellence, we specialize in crafting personalized travel experiences that cater to your dreams and preferences.</p>
+                        At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenate, and create memories that last a lifetime. With a passion for travel and a commitment to excellence, we specialize in crafting personalized travel experiences that cater to your dreams and preferences.</p>
                     <a href="{% url 'about' %}" class="button">LEARN MORE</a>
                 </div>
             </div>
@@ -1487,8 +1489,9 @@ At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenat
     </section>
     <section class="destinations-section">
         <div class="destinations-container">
-            <h1 class="destinations-title">Popular Travel Destination<br>Types</h1>
-            <p class="destinations-subtitle">Browse the topics below to find travel agents who are experts on that destination or travel style.</p>
+            <h1 class="destinations-title">Explore Top Travel Destinations</h1>
+            <p class="destinations-subtitle">Discover incredible destinations and travel styles tailored to your preferences. Let our experts guide you to your next unforgettable journey!</p>
+            
             
             <div class="destinations-grid">
                 {% for destination in destinations %}
@@ -1517,8 +1520,9 @@ At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenat
     
 
     <section class="tours-section">
-        <h1 class="camping-title"> Find<br>your Categories</h1>
-        <p class="camping-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      <h1 class="camping-title">Explore Your Adventure</h1>
+<p class="camping-description">Discover a variety of categories tailored to your perfect outdoor experience. Whether it's a serene escape or a thrilling adventure, we've got you covered!</p>
+
         
         <div class="tours-grid">
             {% for category in categories %}
@@ -1556,43 +1560,6 @@ At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenat
     </section>
 
 
-    <!-- <section class="services container">
-        <h2>Complete Interior Design Service</h2>
-        <div class="services-grid">
-            <div class="service-card">
-               <a href=""> <img src="/api/placeholder/400/300" alt="Design consultation"></a>
-                <h3>LIVING DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Space planning">
-                <h3>BEDROOM DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Color consultation">
-                <h3>KITCHEN DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Furniture selection">
-                <h3>OFFICE DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Lighting design">
-                <h3>BATHROOM DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Accessory selection">
-                <h3>DINING DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Project management">
-                <h3>OUTDOOR DESIGN</h3>
-            </div>
-            <div class="service-card">
-                <img src="/api/placeholder/400/300" alt="Final styling">
-                <h3>CUSTOM DESIGN</h3>
-            </div>
-        </div>
-    </section> -->
      
     
 
@@ -1601,8 +1568,9 @@ At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenat
 
     <section>
         <div class="packages-container">
-            <h1 class="camping-title"> Amazing<br>Tour Packages</h1>
-            <p class="camping-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <h1 class="camping-title">Unforgettable Tour Packages</h1>
+            <p class="camping-description">Embark on a journey of a lifetime with our handpicked tour packages. Whether you're seeking adventure, relaxation, or cultural experiences, we have something special for you.</p>
+            
     
             <div class="packages-grid">
                 {% for package in packages %}
@@ -1632,8 +1600,9 @@ At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenat
     <section class="camping-section">
         <div class="camping-container">
           <div class="content-section">
-            <h1 class="camping-title"> Amazing<br>Camping Tours</h1>
-            <p class="camping-description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <h1 class="camping-title">Spectacular Camping Adventures</h1>
+            <p class="camping-description">Immerse yourself in the beauty of nature with our carefully curated camping tours. From serene landscapes to thrilling outdoor activities, your next adventure awaits!</p>
+            
             <!-- <a href="{% url 'login' %}" class="learn-more-btn">Add New Image</a> -->
             
             <div class="image-gallery">
@@ -1666,8 +1635,9 @@ At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenat
     <!-- TESTIMONIAL SECTION -->
     <section>
         <div class="testimonials-container">
-            <h1 class="testimonials-title">Testimonials</h1>
-            <p class="testimonials-subtitle">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h1 class="testimonials-title">What Our Guests Say</h1>
+            <p class="testimonials-subtitle">Hear from our happy customers who have shared their experiences of staying with us. Your satisfaction is our priority!</p>
+            
     
             <div class="testimonials-wrapper">
                 <button class="scroll-button left" onclick="scrollTestimonials('left')" id="scrollLeft"></button>
@@ -1692,7 +1662,9 @@ At Yasvi Travels, we believe that every trip has the power to inspire, rejuvenat
     
 <section class="travel-section">
     <div class="header">
-        <h1>Gallery</h1>
+        <h1 class="gallery-title">Our Stunning Gallery</h1>
+        <p class="gallery-description">Explore breathtaking moments and unforgettable experiences captured through our lens<br> Let the pictures tell the story of your next adventure!</p>
+        
     </div>
     
     <div class="gallery-grid">

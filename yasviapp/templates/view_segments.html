@@ -63,7 +63,7 @@
                               <span class="segment-title text-xl font-semibold mb-2 block">{{ segment.name|upper }}</span>
                           </a>
                           <p class="segment-description text-gray-600 mb-4">{{ segment.description }}</p>
-                          <a href="{% url 'view_segment_images' segment.id %}" class="inline-block text-orange-600 hover:text-orange-700 font-medium">MORE</a>
+                          <a href="{% url 'view_segment_images' segment.id %}" class="inline-block text-orange-600 hover:text-orange-700 font-medium"></a>
                       </div>
                   </div>
               {% empty %}

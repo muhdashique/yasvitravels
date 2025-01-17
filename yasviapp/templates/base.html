@@ -5,7 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}YASVI TRAVELS{% endblock %}</title>
+    
+        <title>{% block title %}YASVI TRAVELS{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{% static 'images\fevicon.png' %}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 
@@ -136,6 +141,7 @@
 .whatsapp-float:hover {
     transform: scale(1.1);
     background-color: #128C7E;
+    animation: pulse 2s infinite;
 }
 
 .whatsapp-link {
@@ -164,6 +170,116 @@
 .whatsapp-float:hover .tooltip {
     display: block;
 }
+/* call button */
+.floating-call-button {
+      position: fixed;
+      bottom: 130px;
+      right: 40px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #fa0606;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-call-button:hover {
+      background-color: #45a049;
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .floating-call-button:active {
+      transform: scale(0.95);
+    }
+
+    .call-icon {
+      width: 24px;
+      height: 24px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'/%3E%3C/svg%3E") no-repeat center center;
+      background-size: contain;
+    }
+
+    /* Tooltip */
+    .floating-call-button::before {
+      content: "Call Now";
+      position: absolute;
+      right: 70px;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      border-radius: 4px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      font-family: Arial, sans-serif;
+    }
+
+    .floating-call-button:hover::before {
+      opacity: 1;
+    }
+
+    /* Pulse animation */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(76, 175, 80, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+      }
+    }
+
+    .floating-call-button {
+      animation: pulse 2s infinite;
+    }
+
+    /* email floting */
+    .floating-email-btn {
+        position: fixed;
+      bottom: 210px;
+      right: 40px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #25d366;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+}
+
+.floating-email-btn:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+.floating-email-btn span {
+    display: none;
+    white-space: nowrap;
+}
+
+.floating-email-btn:hover span {
+    display: inline;
+}
         </style>
         
 </head>
@@ -178,13 +294,23 @@
         <a class="whatsapp-link" 
         href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F"
            target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 2.625.857 5.055 2.31 7.02L.816 23.85l4.83-1.494A11.943 11.943 0 0012 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm0 22c-2.475 0-4.77-.75-6.675-2.033l-.48-.288-3.045.945.96-3.045-.288-.48A9.917 9.917 0 010 12C0 6.48 5.385 2 12 2s12 4.48 12 10-5.385 10-12 10zm6.72-7.32c-.39-.195-2.31-1.14-2.67-1.275-.36-.135-.615-.195-.87.195-.255.39-.975 1.275-1.2 1.53-.225.255-.45.285-.84.09-2.28-1.14-3.78-2.04-5.28-4.62-.39-.675.39-.63.39-.63s1.005-1.035 1.26-1.425c.255-.39.255-.72.09-.99-.165-.27-1.59-3.84-2.175-5.25-.57-1.38-.57-1.14-.78-1.17s-.435-.015-.675-.015c-.24 0-.615.09-.93.42-.315.33-1.2 1.17-1.2 2.865 0 1.695 1.23 3.33 1.41 3.57.18.24 2.535 3.87 6.15 5.43 3.615 1.545 3.615 1.035 4.275.96.66-.075 2.13-.87 2.43-1.71.3-.84.3-1.56.21-1.71-.09-.15-.345-.24-.735-.435z"/>
-            </svg>
+           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.1-.472-.149-.672.149s-.773.967-.947 1.166c-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.789-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.348.447-.522.149-.174.199-.298.298-.497.099-.199.05-.373-.025-.522-.075-.149-.672-1.611-.923-2.214-.242-.581-.487-.502-.672-.511-.173-.008-.372-.01-.572-.01s-.522.075-.796.373c-.273.298-1.045 1.021-1.045 2.494 0 1.473 1.068 2.898 1.216 3.097.149.199 2.102 3.21 5.094 4.503.713.308 1.27.492 1.703.63.715.228 1.364.196 1.878.119.572-.085 1.758-.719 2.008-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.199-.57-.348zm-5.472 7.618c-1.961 0-3.842-.524-5.485-1.515l-3.938 1.03 1.05-3.843c-.986-1.64-1.523-3.514-1.523-5.441 0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10zm0-18c-4.418 0-8 3.582-8 8 0 1.591.467 3.117 1.347 4.432l.208.314-.623 2.28 2.34-.613.304.183c1.271.766 2.73 1.176 4.424 1.176 4.418 0 8-3.582 8-8s-3.582-8-8-8z"/>
+        </svg>        
             <span class="tooltip">Click to chat on WhatsApp</span>
         </a>
     </div>
+
+
+    <a href="tel:+919778518451" class="floating-call-button" aria-label="Call 9778518451">
+        <span class="call-icon"></span>
+      </a>
     
+      <a href="mailto:yasvitravels@gmail.com" class="floating-email-btn">
+        <i class="fa-solid fa-envelope"></i>
+        <span></span>
+    </a>
+
 
     <!-- Footer Section -->
     <footer class="footer">
@@ -232,7 +358,7 @@
 
             <div class="footer-info">
                 <div class="language-selector">
-                    <img src="{% static 'images\file.png' %}" alt="Your Logo" class="login-icon" style="width: 150px; height: auto;">
+                    <img src="{% static 'images\Fevicon.png' %}" alt="Your Logo" class="login-icon" style="width: 150px; height: auto;">
                     
                 </div>
                 <p class="footer-description">
@@ -243,13 +369,13 @@
                 </p>
                 <div class="social-links">
                     <a href="https://www.facebook.com/share/186GrnxYLL/"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <!-- <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a> -->
                     <a href="https://www.instagram.com/yasvitravels_wayanad?igsh=MWptOG55bDE5bjJtMg=="><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fas fa-phone"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <!-- <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fas fa-phone"></i></a> -->
+                    <a href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
