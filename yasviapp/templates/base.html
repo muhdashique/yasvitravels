@@ -126,8 +126,8 @@
     position: fixed;
     width: 60px;
     height: 60px;
-    bottom: 40px;
-    right: 40px;
+    bottom: 90px;
+    right: 38px;
     background-color: #25d366;
     color: #FFF;
     border-radius: 50px;
@@ -173,12 +173,12 @@
 /* call button */
 .floating-call-button {
       position: fixed;
-      bottom: 130px;
+      bottom: 170px;
       right: 40px;
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background-color: #fa0606;
+      background-color: #25d366;
       color: white;
       border: none;
       cursor: pointer;
@@ -192,7 +192,7 @@
     }
 
     .floating-call-button:hover {
-      background-color: #45a049;
+      background-color: #8a0909;
       transform: scale(1.1);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     }
@@ -249,7 +249,7 @@
     /* email floting */
     .floating-email-btn {
         position: fixed;
-      bottom: 210px;
+      bottom: 250px;
       right: 40px;
       width: 60px;
       height: 60px;
@@ -280,6 +280,57 @@
 .floating-email-btn:hover span {
     display: inline;
 }
+
+/*  */
+.scroll-progress {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            /* background: white; */
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-progress:hover {
+            transform: scale(1.1);
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle {
+            fill: none;
+            stroke-width: 3;
+        }
+
+        .progress-circle-bg {
+            stroke: #1d1d1d;
+        }
+
+        .progress-circle-fill {
+            stroke: #3b82f6;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.1s ease;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid #3b82f6;
+            border-top: 2px solid #3b82f6;
+            transform: rotate(45deg);
+            margin-bottom: 4px;
+        }
         </style>
         
 </head>
@@ -310,6 +361,18 @@
         <i class="fa-solid fa-envelope"></i>
         <span></span>
     </a>
+
+
+    <div class="scroll-progress" onclick="scrollToTop()">
+        <svg class="progress-ring" width="48" height="48">
+            <circle class="progress-circle progress-circle-bg" 
+                    cx="24" cy="24" r="20"/>
+            <circle class="progress-circle progress-circle-fill" 
+                    cx="24" cy="24" r="20"/>
+        </svg>
+        <span class="scroll-arrow"></span>
+    </div>
+
 
 
     <!-- Footer Section -->
@@ -384,5 +447,35 @@
             <p>Copyright © 2023 Yasvi Travels. All Rights Reserved</p>
         </div>
     </footer>
+
+    <script>
+        const circle = document.querySelector('.progress-circle-fill');
+        const circumference = 2 * Math.PI * 20; // 20 is the radius
+
+        circle.style.strokeDasharray = circumference;
+        circle.style.strokeDashoffset = circumference;
+
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            const offset = circumference - (scrollPercent * circumference);
+            circle.style.strokeDashoffset = offset;
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Update on scroll
+        window.addEventListener('scroll', updateProgress);
+        
+        // Initial update
+        updateProgress();
+    </script>
+
 </body>
 </html>

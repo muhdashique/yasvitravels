@@ -11,6 +11,9 @@ from .models import Segment, Image
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 
@@ -581,27 +584,21 @@ def delete_campingimage(request, image_id):
 
 
 
-
-
 def send_email(request):
     if request.method == 'POST':
-        name = request.POST.get('fullName')  # Ensure correct field names
-        email = request.POST.get('userEmail')
-        message = request.POST.get('userMessage')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject', 'No Subject')
+        message = request.POST.get('message', 'No Message')
 
-        print(f"Name: {name}, Email: {email}, Message: {message}")  # Debugging line
-
-        subject = f"New Message from {name}"
-        email_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
-
-        send_mail(
-            subject,
-            email_message,
-            'yasvitravels@gmail.com',
-            ['yasvitravels@gmail.com'],
-            fail_silently=False,
-        )
-        return JsonResponse({ 'Email sent successfully!'})
-
-    return render(request, 'contact.html')
-
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,  # Sender email (configured in settings.py)
+                [email],                   # Recipient email
+            )
+            return JsonResponse({'status': 'success', 'message': 'Email sent successfully!'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    else:
+        return render(request, 'send_email.html')  # Adjust to your form template

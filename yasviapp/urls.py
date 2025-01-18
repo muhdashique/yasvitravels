@@ -55,7 +55,7 @@ urlpatterns = [
       path('add_segment/', views.add_segment, name='add_segment'),
     path('get_categories/', views.get_categories, name='get_categories'),
      path('get_segments/', views.get_segments, name='get_segments'),
-    #  path('send-email/', views.send_email, name='send_email'),
+    path('send-email/', views.send_email, name='send_email'),
 ]
 
     

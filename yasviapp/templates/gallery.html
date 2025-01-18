@@ -453,6 +453,46 @@
         height: 100px;
     }
 }
+/*  */
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 80%;
+    margin: auto;
+    display: block;
+}
+
+.modal .close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#modalCaption {
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
     </style>
 </head>
 <body>
@@ -610,14 +650,47 @@
         <div class="gallery-grid">
             {% for image in gallery_images %}
                 <div class="gallery-card">
-                    <img src="{{ image.image.url }}" alt="{{ image.category }}">
+                    <img 
+                        src="{{ image.image.url }}" 
+                        alt="{{ image.category }}" 
+                        class="gallery-image"
+                        onclick="openModal('{{ image.image.url }}', '{{ image.category }}', '{{ image.description }}')"
+                    >
                     <div class="gallery-title">{{ image.category }}</div>
                     <p>{{ image.description }}</p>
                 </div>
             {% endfor %}
         </div>
+        
+        <!-- Modal -->
+        <div id="imageModal" class="modal" onclick="closeModal()">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <div id="modalCaption"></div>
+        </div>
     </section>
     
+    
+
+<script>
+    function openModal(imageUrl, category, description) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+
+    modal.style.display = 'flex';
+    modalImage.src = imageUrl;
+    modalCaption.innerHTML = `<h2>${category}</h2><p>${description}</p>`;
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+}
+
+</script>
+
+
 </body>
 </html>
 {% endblock %}

@@ -836,7 +836,7 @@ body {
 
     <section class="products">
         <div class="container">
-            <h1 class="destinations-title">Popular Travel Destinations<br>& Types</h1>
+            <h1 class="destinations-title">Your Desired Destination</h1>
             <div class="scroll-container">
                 <button class="scroll-button left" aria-label="Scroll Left">‹</button>
                 <div class="destinations-grid">
@@ -869,7 +869,7 @@ body {
     
     
 
-    <section class="tours-section">
+    <!-- <section class="tours-section">
         <h1 class="section-title text-center">{{ section_title|default:"Room Categories" }}</h1>
         
         <div class="tours-grid">
@@ -905,9 +905,143 @@ body {
             Images from <a href="https://freepik.com">Freepik</a>
         </div>
         {% endif %}
-    </section>
+    </section> -->
 
  
+
+
+    {% load static %}
+
+    <section class="tours-section">
+        <h1 class="section-title text-center">{{ section_title|default:"Tourist Destinations" }}</h1>
+        
+        <div class="grid-container">
+            {% for category in categories %}
+            <div class="card">
+                <div class="image-wrapper">
+                    <a href="{% url 'view_segments' category.id %}">
+                        {% if category.category_image %}
+                            <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
+                        {% else %}
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfrsgni2CRG5CcMq7t8Xk0c0JdtsIGL-CBJA&s" alt="{{ category.name }}" class="tour-image">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="location-label">
+                    <a href="{% url 'view_segments' category.id %}">{{ category.name }}</a>
+                    {% if category.price %}
+                    <span class="tour-price">${{ category.price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-categories text-center">
+                <p>No room categories available.</p>
+            </div>
+            {% endfor %}
+        </div>
+    
+        {% if show_attribution %}
+        <div class="attribution text-center">
+            Images from <a href="https://freepik.com">Freepik</a>
+        </div>
+        {% endif %}
+    
+        <style>
+            .tours-section {
+                padding: 40px 10px;
+            }
+    
+            .section-title {
+                margin-bottom: 30px;
+                font-size: 2rem;
+                color: #333;
+            }
+    
+            .text-center {
+                text-align: center;
+            }
+    
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+    
+            .card {
+                position: relative;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+                aspect-ratio: 4/3;
+            }
+    
+            .card:hover {
+                transform: translateY(-5px);
+            }
+    
+            .image-wrapper {
+                width: 100%;
+                height: 100%;
+            }
+    
+            .destination-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+    
+            .location-label {
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 12px 20px;
+                border-radius: 20px;
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+    
+            .location-label a {
+                color: #333;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 16px;
+            }
+    
+            .price {
+                color: #2c5282;
+                font-weight: bold;
+            }
+    
+            .no-destinations {
+                grid-column: 1 / -1;
+                padding: 40px;
+                background: #f7f7f7;
+                border-radius: 15px;
+            }
+    
+            .attribution {
+                margin-top: 20px;
+                font-size: 14px;
+                color: #666;
+            }
+    
+            .attribution a {
+                color: #2c5282;
+                text-decoration: none;
+            }
+        </style>
+    </section>
+
+
+
  
     
     
