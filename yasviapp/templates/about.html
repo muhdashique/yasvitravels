@@ -22,7 +22,7 @@
         }
 
         .hero {
-            background-color: #f8f8f8;
+            background-color: #ffffff;
             padding: 4rem 2rem;
             display: flex;
             align-items: center;
@@ -68,7 +68,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            background-color: #f8f8f8;
+            background-color: #ffffff;
         }
 
         .experience-content {
@@ -398,7 +398,7 @@
 
 .read-more-btn {
     display: inline-block;
-    background: #e85d04;
+    background: #2389B5;
     color: white;
     padding: 12px 30px;
     border-radius: 25px;
@@ -534,6 +534,361 @@
         height: 200px;
     }
 }
+
+/* new */
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            /* padding: 2rem; */
+        }
+
+        .amazing-places {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .mountain-img {
+            grid-column: 1;
+            grid-row: 1;
+            height: 200px;
+        }
+
+        .forest-img {
+            grid-column: 1;
+            grid-row: 2;
+            height: 250px;
+        }
+
+        .road-img {
+            grid-column: 2 / span 2;
+            grid-row: 1 / span 2;
+            height: 100%;
+        }
+
+        .content-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 300px;
+            z-index: 2;
+        }
+
+        .content-box h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .content-box p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .main-text {
+            grid-column: 2 / span 2;
+            color: #434141;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .learn-more {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s ease;
+        }
+
+        .learn-more:hover {
+            background: #1b5e20;
+        }
+        /* mobile view */
+        /* Add these styles at the end of your existing <style> tag */
+
+/* Mobile Navigation */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-item {
+        flex: 0 1 calc(33.333% - 10px);
+        padding: 8px;
+    }
+
+    .icons {
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav-text, .nav-text-small {
+        font-size: 14px;
+    }
+}
+
+/* Mobile Banner */
+@media screen and (max-width: 768px) {
+    .banner {
+        height: auto;
+        min-height: 70vh;
+    }
+
+    .title {
+        font-size: 48px;
+        margin-bottom: 15px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        padding: 0 15px;
+    }
+
+    .scroll-indicator {
+        bottom: 20px;
+    }
+}
+
+/* Mobile Services Section */
+@media screen and (max-width: 576px) {
+    .services-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .service-card {
+        padding: 20px 15px;
+    }
+}
+
+/* Mobile Mission Section */
+@media screen and (max-width: 576px) {
+    .mission-section {
+        padding: 15px;
+        height: auto;
+        min-height: auto;
+    }
+
+    .mission-card {
+        margin: 30px 15px;
+        padding: 25px;
+        border-radius: 25px;
+    }
+
+    .mission-title {
+        font-size: 28px;
+    }
+
+    .mission-text {
+        font-size: 16px;
+    }
+}
+
+/* Mobile Amazing Places Section */
+@media screen and (max-width: 768px) {
+    .amazing-places {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .mountain-img,
+    .forest-img,
+    .road-img {
+        grid-column: auto;
+        grid-row: auto;
+        height: 250px;
+    }
+
+    .content-box {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 20px 0;
+        max-width: 100%;
+    }
+
+    .main-text {
+        grid-column: auto;
+    }
+}
+
+/* Mobile Storytelling Section */
+@media screen and (max-width: 576px) {
+    .storytelling-section {
+        margin: 30px auto;
+    }
+
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+        padding: 0 15px;
+    }
+
+    .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .experience-card {
+        margin-bottom: 20px;
+    }
+
+    .card-image {
+        height: 200px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    .card-description {
+        font-size: 14px;
+    }
+}
+
+/* General Mobile Optimizations */
+@media screen and (max-width: 576px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .button,
+    .learn-more,
+    .read-more-btn {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+}
+
+/* Additional Mobile Optimizations */
+@media screen and (max-width: 480px) {
+    .banner-content {
+        padding: 0 15px;
+    }
+
+    .nav-item {
+        flex: 0 1 calc(50% - 10px);
+    }
+
+    .service-card {
+        margin: 10px 0;
+    }
+
+    .mission-card {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .amazing-places {
+        gap: 15px;
+    }
+
+    .content-box {
+        padding: 15px;
+    }
+
+    .content-box h2 {
+        font-size: 24px;
+    }
+
+    .content-box p {
+        font-size: 14px;
+    }
+
+    .main-text {
+        font-size: 14px;
+        padding: 0 15px;
+    }
+}
+
+/* Tablet Optimizations */
+@media screen and (min-width: 577px) and (max-width: 1024px) {
+    .services-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experience-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mission-card {
+        max-width: 80%;
+    }
+
+    .content-box {
+        max-width: 250px;
+    }
+}
+
+/* Landscape Mode Optimizations */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .banner {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+
+    .mission-section {
+        min-height: 100vh;
+    }
+}
     </style>
 </head>
 <body>
@@ -541,7 +896,7 @@
         <div class="banner">
             
             <div class="banner-content">
-                <h1 class="title">HIKING<br>TOURS</h1>
+                <h1 class="title">Yasvi<br>Travels</h1>
                 <p class="subtitle">Explore. Discover. Experience. Your Journey Begins Here with Yasvi Travels.</p>
                 <p class="attribution"></p>
             </div>
@@ -695,22 +1050,27 @@
     </div>
 </section>
 
-    <section class="experiences">
-        <div class="experience-content">
-            <h2 class="section-title">Experiences Are More Satisfying Than Things</h2>
-            <p>Research shows that investing in experiences brings longer-lasting happiness than material purchases. Create memories that last a lifetime through meaningful travel adventures.</p>
+<section class="amazing-places">
+    <div class="image-container mountain-img">
+        <img src="https://images.pexels.com/photos/2265876/pexels-photo-2265876.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mountain landscape">
+    </div>
+    
+    <div class="image-container forest-img">
+        <img src="https://images.pexels.com/photos/238622/pexels-photo-238622.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Misty forest">
+    </div>
+    
+    <div class="image-container road-img">
+        <img src="https://images.pexels.com/photos/2114206/pexels-photo-2114206.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Winding road through mountains">
+        <div class="content-box">
+            <h2>Yasvi Travels</h2>
+            <p>Your ultimate partner in creating seamless, luxurious, and memorable travel experiences.</p>
         </div>
-        <img src="https://images.pexels.com/photos/551851/pexels-photo-551851.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Travel experiences" class="experience-image">
-    </section>
-
-    <section class="relax-section">
-        <img src="https://images.pexels.com/photos/161950/skogafoss-waterfall-dinamet7-water-161950.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Person relaxing" class="experience-image">
-        <div class="experience-content">
-            <h2 class="section-title">Travel Gives You Time to Relax</h2>
-            <p>Escape the daily routine and find peace in new surroundings. Take time to recharge and return refreshed with new perspectives.</p>
-            <a href="#" class="button">Plan Your Escape</a>
-        </div>
-    </section>
+    </div>
+    
+    <p class="main-text">Yasvi Travels - Where every journey becomes a cherished memory. Your trusted companion for seamless and unforgettable travel experiencesYasvi Travels - Where every journey becomes a cherished memory. Your trusted companion for seamless and unforgettable travel experiences.</p>
+    
+    <a href="{% url 'gallery' %}" class="learn-more">Learn More</a>
+</section>
     <section class="storytelling-section">
         <h1 class="section-title">Our Travel Agency is all about storytelling and experience</h1>
         

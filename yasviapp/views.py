@@ -1,24 +1,28 @@
-from django.shortcuts import render, redirect
+from importlib.resources import Package
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import CampingImage, Destination, Category, GalleryImage, Segment, Image, Testimonial
-from .forms import CampingImageForm, DestinationForm, CategoryForm, GalleryImageForm, SegmentForm, ImageForm, TestimonialForm
-from django.shortcuts import render, get_object_or_404
-from .models import Category, Segment
-from django.shortcuts import render, get_object_or_404
-from .models import Segment, Image
-from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import get_object_or_404, render, redirect
 from django.core.mail import send_mail
 from django.http import JsonResponse
-from django.core.mail import send_mail
 from django.conf import settings
+from .models import Package
+
+
+from .models import (
+    CampingImage, Destination, Category, GalleryImage, 
+    Segment, Image, Testimonial
+)
+from .forms import (
+    CampingImageForm, ContactForm, DestinationForm, CategoryForm, 
+    GalleryImageForm, PackageForm, SegmentForm, ImageForm, TestimonialForm
+)
+from django.contrib.auth.forms import AuthenticationForm
 
 
 
 
-# Public Views
+# index View page
 def index(request):
     destinations = Destination.objects.all()[:8]
     categories = Category.objects.all()[:6]
@@ -28,15 +32,19 @@ def index(request):
     images = CampingImage.objects.all()[:6]
     return render(request, "index.html", {'destinations': destinations, 'categories': categories,'testimonials': testimonials,'gallery_images': gallery_images,'packages': packages,'images': images})
 
+
+# about page view
 def about(request):
     return render(request, 'about.html')
 
+
+# property page view
 def property(request):
-    destination_id = request.GET.get('destination_id')  # Get the destination ID from the query parameter
+    destination_id = request.GET.get('destination_id') 
     destinations = Destination.objects.all()
     
     if destination_id:
-        categories = Category.objects.filter(destination_id=destination_id)  # Filter by destination ID
+        categories = Category.objects.filter(destination_id=destination_id) 
     else:
         categories = Category.objects.all()
     
@@ -46,31 +54,32 @@ def property(request):
     })
 
 
+
+# travel and tour page view
 def travelandtour(request):
     packages = Package.objects.all()
     images = CampingImage.objects.all()
     return render(request, "travelandtour.html", {'packages': packages,'images': images})
 
+
+# gallery page view
 def gallery(request):
     images = Image.objects.all()
     gallery_images = GalleryImage.objects.all()
     return render(request, "gallery.html", {'images': images,'gallery_images': gallery_images})
  
 
-def blog(request):
-    return render(request, "blog.html")
-
+# services page view
 def service(request):
     return render(request, "service.html")
 
+
+# contact page view
 def contact(request):
     return render(request, "contact.html")
 
-# Authentication Views
-# views.py
 
-
-
+# login page view
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -80,19 +89,19 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('adminpannel')  # Redirect to admin panel after successful login
+                return redirect('adminpannel')  
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
 
 
-
+# logout view function
 def logout_view(request):
     logout(request)
     return redirect('index')
 
-# Admin Views - Protected with login_required
+# Adminpage landing page  View
 @login_required(login_url='login')
 def adminpannel(request):
     destinations = Destination.objects.all()
@@ -105,35 +114,118 @@ def adminpannel(request):
     }
     return render(request, 'adminpannel.html', context)
 
-@login_required(login_url='login')
 
+
+# destination add and related page function
+
+# add destination page view
+@login_required(login_url='login')
 def add_destination(request):
     if request.method == 'POST':
         form = DestinationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('add_destination')  # Reload the page to show the updated list
+            return redirect('add_destination') 
     else:
         form = DestinationForm()
     
-    destinations = Destination.objects.all()  # Fetch all destinations
+    destinations = Destination.objects.all()  
     return render(request, 'destinations.html', {'destination_form': form, 'destinations': destinations})
 
 
+# destination view page view
+def view_destinations(request):
+    destinations = Destination.objects.all()  
+    return render(request, 'destinations.html', {'destinations': destinations})
 
 
+
+# destination edit page
+def edit_destination(request, destination_id):
+    destination = get_object_or_404(Destination, id=destination_id)
+    if request.method == 'POST':
+        form = DestinationForm(request.POST, request.FILES, instance=destination)
+        if form.is_valid():
+            form.save()
+            return redirect('add_destination') 
+    else:
+        form = DestinationForm(instance=destination)
+    return render(request, 'edit_destination.html', {'destination_form': form, 'destination': destination})
+
+
+
+# delete destination views
+
+def delete_destination(request, destination_id):
+    destination = get_object_or_404(Destination, id=destination_id)
+    destination.delete()
+    return redirect('view_destinations')  
+
+
+# category related section page view
+
+# add category view funtion view
 @login_required(login_url='login')
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('manage_categories')  # Redirect to the index or another page
+            return redirect('manage_categories') 
     else:
         form = CategoryForm()
     return render(request, 'category.html', {'category_form': form})
 
+# category view function
+def manage_categories(request):
 
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_categories')
+    else:
+        form = CategoryForm()
+
+    categories = Category.objects.all()
+
+    return render(request, 'category.html', {'category_form': form, 'categories': categories})
+
+
+# edit category function view
+def edit_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_categories')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'edit_category.html', {'category_form': form, 'category': category})
+
+
+# delete category function view
+def delete_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    if request.method == 'POST':
+        category.delete()
+        return redirect('manage_categories')
+    
+
+# category get function
+def get_categories(request):
+    destination_id = request.GET.get('destination_id')
+    if destination_id:
+        categories = Category.objects.filter(destination_id=destination_id).values('id', 'name')
+        return JsonResponse(list(categories), safe=False)
+    return JsonResponse([], safe=False)
+
+
+
+# segment adding and related view functions
+
+# add segment view function
 @login_required(login_url='login')
 def add_segment(request):
     if request.method == 'POST':
@@ -148,13 +240,13 @@ def add_segment(request):
 
     segments = Segment.objects.all()
     context = {
-        'segment_form': form,  # Changed to match template
+        'segment_form': form,  
         'segments': segments
     }
     return render(request, 'segment.html', context)
 
 
-
+# segment view function
 def get_segments(request):
     category_id = request.GET.get('category_id')
     if category_id:
@@ -163,21 +255,48 @@ def get_segments(request):
     return JsonResponse([], safe=False)
 
 
+# segment view function
+def view_segments(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    segments = Segment.objects.filter(category=category)
+
+    return render(request, 'view_segments.html', {
+        'category': category,
+        'segments': segments,
+    })
 
 
-from django.http import JsonResponse
-from django.core.exceptions import ObjectDoesNotExist
-
-def get_categories(request):
-    destination_id = request.GET.get('destination_id')
-    if destination_id:
-        categories = Category.objects.filter(destination_id=destination_id).values('id', 'name')
-        return JsonResponse(list(categories), safe=False)
-    return JsonResponse([], safe=False)
 
 
-@login_required(login_url='login')
+# segment list view 
+def segment_list(request):
+    segments = Segment.objects.all()
+    return render(request, 'segment.html', {'segments': segments})
 
+# edit segment view
+def edit_segment(request, pk):
+    segment = Segment.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SegmentForm(request.POST, request.FILES, instance=segment)
+        if form.is_valid():
+            form.save()
+            return redirect('segment_list')
+    else:
+        form = SegmentForm(instance=segment)
+    return render(request, 'edit_segment.html', {'segment_form': form})
+
+# delete segment view
+def delete_segment(request, pk):
+    segment = Segment.objects.get(pk=pk)
+    if request.method == 'POST':
+        segment.delete()
+        return redirect('segment_list')
+    return render(request, 'delete_segment.html', {'segment': segment})
+
+
+# add room image view function and realated views
+
+# add room image views
 @login_required(login_url='login')
 def add_image(request):
     if request.method == "POST":
@@ -191,7 +310,7 @@ def add_image(request):
                 messages.error(request, f'Error saving image: {str(e)}')
         else:
             messages.error(request, 'Please correct the errors below.')
-            print("Form errors:", form.errors)  # For debugging
+            print("Form errors:", form.errors)  
     else:
         form = ImageForm()
     
@@ -202,37 +321,7 @@ def add_image(request):
     })
 
 
-def propertyview(request, destination_id):
-    # Get the selected destination
-    destination = Destination.objects.get(id=destination_id)
-
-    # Filter categories under this destination
-    categories = Category.objects.filter(destination=destination)
-
-    return render(request, "property_view.html", {
-        'destination': destination,
-        'categories': categories,
-    })
-
-
-
-# views.py
-
-
-def view_segments(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    segments = Segment.objects.filter(category=category)
-
-    return render(request, 'view_segments.html', {
-        'category': category,
-        'segments': segments,
-    })
-
-
-
-# views.py
-
-
+# view room image views
 def view_segment_images(request, segment_id):
     segment = get_object_or_404(Segment, id=segment_id)
     images = Image.objects.filter(segment=segment)
@@ -242,121 +331,7 @@ def view_segment_images(request, segment_id):
         'images': images,
     })
 
-
-
-
-from django.shortcuts import render
-from .models import Destination
-
-def view_destinations(request):
-    destinations = Destination.objects.all()  # Fetch destinations in the defined order
-    return render(request, 'destinations.html', {'destinations': destinations})
-
-
-from django.shortcuts import get_object_or_404, render, redirect
-from .forms import DestinationForm
-from .models import Destination
-
-def edit_destination(request, destination_id):
-    destination = get_object_or_404(Destination, id=destination_id)
-    if request.method == 'POST':
-        form = DestinationForm(request.POST, request.FILES, instance=destination)
-        if form.is_valid():
-            form.save()
-            return redirect('add_destination')  # Redirect to the destinations list after editing
-    else:
-        form = DestinationForm(instance=destination)
-    return render(request, 'edit_destination.html', {'destination_form': form, 'destination': destination})
-
-
-
-from django.shortcuts import get_object_or_404, redirect
-from .models import Destination
-
-def delete_destination(request, destination_id):
-    destination = get_object_or_404(Destination, id=destination_id)
-    destination.delete()
-    return redirect('view_destinations')  # Redirect to the destinations list after deletion
-
-
-
-
-
-
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category
-from .forms import CategoryForm
-
-def manage_categories(request):
-    # Handle category form submission
-    if request.method == 'POST':
-        form = CategoryForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('manage_categories')
-    else:
-        form = CategoryForm()
-
-    # Get all categories
-    categories = Category.objects.all()
-
-    return render(request, 'category.html', {'category_form': form, 'categories': categories})
-
-def edit_category(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    if request.method == 'POST':
-        form = CategoryForm(request.POST, request.FILES, instance=category)
-        if form.is_valid():
-            form.save()
-            return redirect('manage_categories')
-    else:
-        form = CategoryForm(instance=category)
-    return render(request, 'edit_category.html', {'category_form': form, 'category': category})
-
-
-def delete_category(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    if request.method == 'POST':
-        category.delete()
-        return redirect('manage_categories')
-
-
-def segment_list(request):
-    segments = Segment.objects.all()
-    return render(request, 'segment.html', {'segments': segments})
-
-
-
-def edit_segment(request, pk):
-    segment = Segment.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = SegmentForm(request.POST, request.FILES, instance=segment)
-        if form.is_valid():
-            form.save()
-            return redirect('segment_list')
-    else:
-        form = SegmentForm(instance=segment)
-    return render(request, 'edit_segment.html', {'segment_form': form})
-
-
-
-
-
-def delete_segment(request, pk):
-    segment = Segment.objects.get(pk=pk)
-    if request.method == 'POST':
-        segment.delete()
-        return redirect('segment_list')
-    return render(request, 'delete_segment.html', {'segment': segment})
-
-
-
-
-
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Image
-from .forms import ImageForm
-
+# room image manage views
 def manage_images(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
@@ -369,6 +344,7 @@ def manage_images(request):
     images = Image.objects.all()
     return render(request, 'add_image.html', {'form': form, 'images': images})
 
+# edit room image view
 def edit_image(request, image_id):
     image = get_object_or_404(Image, id=image_id)
     if request.method == 'POST':
@@ -380,6 +356,8 @@ def edit_image(request, image_id):
         form = ImageForm(instance=image)
     return render(request, 'edit_image.html', {'form': form, 'image': image})
 
+
+# delete room image views
 def delete_image(request, image_id):
     image = get_object_or_404(Image, id=image_id)
     image.delete()
@@ -387,14 +365,24 @@ def delete_image(request, image_id):
 
 
 
+def propertyview(request, destination_id):
+    destination = Destination.objects.get(id=destination_id)
+    categories = Category.objects.filter(destination=destination)
+
+    return render(request, "property_view.html", {
+        'destination': destination,
+        'categories': categories,
+    })
 
 
-# View to list testimonials
+
+
+#  testimonials view views
 def testimonials_view(request):
     testimonials = Testimonial.objects.all()
     return render(request, 'tl', {'testimonials': testimonials})
 
-# View to add a new testimonial
+# new testimonial add views
 def add_testimonial(request):
     if request.method == 'POST':
         form = TestimonialForm(request.POST, request.FILES)
@@ -408,7 +396,7 @@ def add_testimonial(request):
     return render(request, 'add_testimonial.html', {'form': form, 'testimonials': testimonials})
 
 
-# View to edit an existing testimonial
+# edit testimonials views
 def edit_testimonial(request, id):
     testimonial = get_object_or_404(Testimonial, id=id)
     if request.method == 'POST':
@@ -420,74 +408,68 @@ def edit_testimonial(request, id):
         form = TestimonialForm(instance=testimonial)
     return render(request, 'edit_testimonial.html', {'form': form})
 
-
-
-from django.shortcuts import get_object_or_404, redirect
-from .models import Testimonial
-from django.contrib import messages  # Optional, for feedback
-
+# delete testimonials views
 def delete_testimonial(request, id):
     testimonial = get_object_or_404(Testimonial, id=id)
     if request.method == 'POST':
         testimonial.delete()
-        messages.success(request, 'Testimonial deleted successfully')  # Optional
+        messages.success(request, 'Testimonial deleted successfully')  
         return redirect('add_testimonial')
     return redirect('add_testimonial')
 
-# views.py
+
+# gallery image add function and related function
+
+# image gallery views
 def gallery_view(request):
     gallery_images = GalleryImage.objects.all()
     return render(request, 'gallery_imageadd.html', {'gallery_images': gallery_images})
 
 
-# views.py
+# gallery image adding views
 def add_gallery_image(request):
     if request.method == 'POST':
         form = GalleryImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('add_gallery_image')  # Redirect to gallery page
+            return redirect('add_gallery_image')  
     else:
         form = GalleryImageForm()
     gallery_images = GalleryImage.objects.all()
     return render(request, 'gallery_imageadd.html', {'form': form, 'gallery_images': gallery_images})
 
 
-
-
+# edit gallery image views
 def edit_gallery_image(request, id):
     image = get_object_or_404(GalleryImage, id=id)
     if request.method == 'POST':
         form = GalleryImageForm(request.POST, request.FILES, instance=image)
         if form.is_valid():
             form.save()
-            return redirect('add_gallery_image')  # Redirect to the gallery page
+            return redirect('add_gallery_image') 
     else:
         form = GalleryImageForm(instance=image)
     return render(request, 'gallery_imageedit.html', {'form': form, 'image': image})
 
-
+# delete gallery image views
 def delete_gallery_image(request, id):
     image = get_object_or_404(GalleryImage, id=id)
     if request.method == 'POST':
         image.delete()
-        messages.success(request, 'image deleted successfully')  # Optional
+        messages.success(request, 'image deleted successfully')  
         return redirect('add_gallery_image')
     return redirect('add_gallery_image')
 
 
 
+# adding tour package and related function
 
-
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Package
-from .forms import PackageForm
-
+# view packages views
 def view_packages(request):
     packages = Package.objects.all()
     return render(request, 'package_form.html', {'packages': packages})
 
-
+# adding package views
 def package_add(request):
     if request.method == 'POST':
         print('POST request received')
@@ -503,6 +485,7 @@ def package_add(request):
     return render(request, 'package_form.html', {'form': form,'packages': packages})
 
 
+# edit package views
 def edit_package(request, id):
     package = Package.objects.get(pk=id)
     if request.method == 'POST':
@@ -515,29 +498,32 @@ def edit_package(request, id):
     return render(request, 'edit_package.html', {'form': form})
 
 
-
+# delete package views
 def delete_package(request, id):
     package = get_object_or_404(Package, id=id)
     if request.method == 'POST':
         package.delete()
-        messages.success(request, 'image deleted successfully')  # Optional
+        messages.success(request, 'image deleted successfully')  
         return redirect('package_add')
     return redirect('package_add')
 
 
+# campain details adding and related functions
+
+# adding camping image views
 def add_campingimage(request):
     if request.method == 'POST':
-        image = request.FILES.get('image')  # Handle the uploaded file
+        image = request.FILES.get('image') 
         description = request.POST.get('description', '')
-        name = request.POST.get('name', '')  # Ensure 'name' is properly captured
-        details = request.POST.get('details', '')  # Ensure 'details' is properly captured
-        amount = request.POST.get('amount', 0)  # Ensure 'amount' is properly captured
-        status = request.POST.get('status', True)  # Default to True (Available)
+        name = request.POST.get('name', '')  
+        details = request.POST.get('details', '') 
+        amount = request.POST.get('amount', 0)  
+        status = request.POST.get('status', True)  
 
-        # Convert status to a boolean value
+        
         status = True if status.lower() == 'true' else False
 
-        # Create a new CampingImage instance
+        
         CampingImage.objects.create(
             image=image,
             description=description,
@@ -549,12 +535,13 @@ def add_campingimage(request):
 
         return redirect('add_campingimage')
 
-    # Fetch all existing images to display on the page
+
     images = CampingImage.objects.all()
 
     return render(request, 'add_campingimage.html', {'images': images})
 
 
+# edit camping image views
 def edit_campingimage(request, image_id):
     image = get_object_or_404(CampingImage, id=image_id)
 
@@ -564,10 +551,10 @@ def edit_campingimage(request, image_id):
         image.description = request.POST.get('description', '')
         image.name = request.POST.get('name', '')
         image.details = request.POST.get('details', '')
-        image.amount = request.POST.get('amount', 0)  # Ensure 'amount' is properly captured
-        image.status = request.POST.get('status', True)  # Default to True (Available)
+        image.amount = request.POST.get('amount', 0)  
+        image.status = request.POST.get('status', True)  
 
-        # Convert status to a boolean value
+        
         image.status = True if image.status.lower() == 'true' else False
 
         image.save()
@@ -576,29 +563,45 @@ def edit_campingimage(request, image_id):
     return render(request, 'edit_campingimage.html', {'image': image})
 
 
-
+# delete camping image views
 def delete_campingimage(request, image_id):
     image = get_object_or_404(CampingImage, id=image_id)
     image.delete()
     return redirect('add_campingimage')
 
 
+# mail sending views
 
 def send_email(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        subject = request.POST.get('subject', 'No Subject')
-        message = request.POST.get('message', 'No Message')
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            message = form.cleaned_data['message']
 
-        try:
-            send_mail(
-                subject,
-                message,
-                settings.EMAIL_HOST_USER,  # Sender email (configured in settings.py)
-                [email],                   # Recipient email
+            # Format the message with all details
+            formatted_message = (
+                f"New Contact Form Submission:\n\n"
+                f"Name: {name}\n"
+                f"Email: {email}\n"
+                f"Phone: {phone}\n"
+                f"Message: {message}\n"
             )
-            return JsonResponse({'status': 'success', 'message': 'Email sent successfully!'})
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)})
+
+            try:
+                send_mail(
+                    f"Contact Form Submission by {name}",  # Email Subject
+                    formatted_message,                   # Email Message
+                    settings.EMAIL_HOST_USER,            # From Email
+                    [settings.EMAIL_HOST_USER],          # To Email
+                )
+                return JsonResponse({'status': 'success', 'message': 'Email sent successfully!'})
+            except Exception as e:
+                return JsonResponse({'status': 'error', 'message': str(e)})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Invalid form data.'})
     else:
-        return render(request, 'send_email.html')  # Adjust to your form template
+        form = ContactForm()
+        return render(request, 'contact.html', {'form': form})

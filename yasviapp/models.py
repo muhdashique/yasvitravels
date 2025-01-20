@@ -64,6 +64,9 @@ class GalleryImage(models.Model):
 
     def __str__(self):
         return self.category
+    
+
+    
 class Package(models.Model):
     name = models.CharField(max_length=255)
     details = models.TextField()
