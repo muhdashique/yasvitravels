@@ -939,7 +939,16 @@
                             <span class="nav-text-small">&Tourism</span>
                         </a>
                     </li>
-                    
+                    <li>
+                        <a href="{% url 'tourpackage' %}" class="nav-item {% if request.resolver_match.url_name == 'travel' %}active{% endif %}">
+                            <svg class="icons" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 6V4a2 2 0 0 0-2-2H10a2 2 0 0 0-2 2v2H3a1 1 0 0 0-1 1v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a1 1 0 0 0-1-1h-5ZM10 4h4v2h-4V4Zm11 15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8h18v11Z"/>
+                                <path d="M7 10h2v6H7v-6Zm8 0h2v6h-2v-6Z"/>
+                            </svg>
+                            <span class="nav-text">Tour</span>
+                            <span class="nav-text-small">Packages</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="{% url 'service' %}" class="nav-item {% if request.resolver_match.url_name == 'service' %}active{% endif %}">
                             <svg class="icons" viewBox="0 0 24 24" fill="currentColor">
@@ -996,8 +1005,8 @@
                 <path d="M10 3.5L10 20.5"></path>
                 <path d="M14 3.5L14 20.5"></path>
             </svg>
-            <h3 class="service-title">Traveller Tours</h3>
-            <p class="service-description">Sample text. Click to select the text box.</p>
+            <h3 class="service-title">Traveller <br> Tours</h3>
+            <p class="service-description">Discover the best travel experiences with our carefully curated tours.</p>
         </div>
 
         <div class="service-card">
@@ -1007,8 +1016,8 @@
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                 <path d="M2 12h20"></path>
             </svg>
-            <h3 class="service-title">Explore The World</h3>
-            <p class="service-description">Sample text. Click to select the text box.</p>
+            <h3 class="service-title">Explore <br> The World</h3>
+            <p class="service-description">Embark on a journey to discover breathtaking destinations around the globe.</p>
         </div>
 
         <div class="service-card">
@@ -1018,7 +1027,7 @@
                 <path d="M8 12L16 12"></path>
             </svg>
             <h3 class="service-title">Adventure Vacations</h3>
-            <p class="service-description">Sample text. Click to select the text box.</p>
+            <p class="service-description">Experience thrilling adventures and unforgettable moments with our hand-picked adventure vacation packages.</p>
         </div>
 
         <div class="service-card">
@@ -1029,8 +1038,8 @@
                 <path d="M7 7h.01"></path>
                 <path d="M17 7h.01"></path>
             </svg>
-            <h3 class="service-title">Luxurious Hotels</h3>
-            <p class="service-description">Sample text. Click to select the text box.</p>
+            <h3 class="service-title">Luxurious <br> Hotels</h3>
+            <p class="service-description">Indulge in comfort and elegance at our selection of luxurious hotels.</p>
         </div>
     </div>
 </section>
@@ -1077,8 +1086,8 @@
         <div class="experience-grid">
             <div class="experience-card">
                 <img src="https://cdn.outsideonline.com/wp-content/uploads/2018/09/11/family-hike-day_h.jpg?width=1200" alt="Traveler overlooking landscape" class="card-image">
-                <h2 class="card-title">Positive impact</h2>
-                <p class="card-description">Many travel companies talk about minimizing their impact. We aim to maximize ours. That's because all our trips are designed to do good.</p>
+                <h2 class="card-title">Personalized Journeys</h2>
+                <p class="card-description">Create unique travel experiences tailored to individual preferences, allowing clients to immerse themselves in the culture and history of destinations..</p>
             </div>
     
             <div class="experience-card">
@@ -1089,26 +1098,26 @@
     
             <div class="experience-card">
                 <img src="https://avatars.dzeninfra.ru/get-zen_doc/9661583/pub_64808a476094ff55e87cdfe1_64808acb6094ff55e87e0323/scale_1200" alt="Coastal view" class="card-image">
-                <h2 class="card-title">Special access</h2>
-                <p class="card-description">Our trips are capped at 12-14 travelers, allowing us to offer behind-the-scenes experiences that simply can't be had with larger groups.</p>
+                <h2 class="card-title">Narrative-Driven Travel</h2>
+                <p class="card-description"> Craft itineraries that weave together rich narratives, transforming trips into tales that capture the essence of destinations.</p>
             </div>
     
             <div class="experience-card">
-                <img src="https://i.ytimg.com/vi/kttOm2pN0lg/maxresdefault.jpg" alt="Mountain valley" class="card-image">
-                <h2 class="card-title">Curious co-travelers</h2>
-                <p class="card-description">Our travelers are curious, adventurous, and eager for the kinds of experiences that can't be found on a typical group tour.</p>
+                <img src="https://images.pexels.com/photos/868097/pexels-photo-868097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mountain valley" class="card-image">
+                <h2 class="card-title">Experience-based Activities</h2>
+                <p class="card-description"> Focus on experiences over sightseeing, offering activities like storytelling sessions, workshops, cooking classes, and local folklore tours..</p>
             </div>
     
             <div class="experience-card">
-                <img src="https://i.playground.ru/e/581vhPWy5gIOydpHZpP3Iw.jpeg" alt="Person enjoying view" class="card-image">
-                <h2 class="card-title">Places no one else goes</h2>
-                <p class="card-description">We uncover hidden wonders where you least expect them, seeking out the most incredible places that others overlook.</p>
+                <img src="https://images.pexels.com/photos/13308431/pexels-photo-13308431.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Person enjoying view" class="card-image">
+                <h2 class="card-title">Storytelling Guides</h2>
+                <p class="card-description">Employ guides who share personal anecdotes, legends, and historical narratives, enriching the travel experience with engaging stories.</p>
             </div>
     
             <div class="experience-card">
-                <img src="https://i.playground.ru/e/581vhPWy5gIOydpHZpP3Iw.jpeg" alt="Person on mountain" class="card-image">
-                <h2 class="card-title">Ut enim ad minim</h2>
-                <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <img src="https://images.pexels.com/photos/5029919/pexels-photo-5029919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Person on mountain" class="card-image">
+                <h2 class="card-title">Sustainability and Connection</h2>
+                <p class="card-description">Promote sustainable travel that connects travelers with local environments and ensures they leave a positive impact on the places visited..</p>
             </div>
         </div>
     </section>

@@ -8,7 +8,7 @@
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family:  "Barlow", serif;
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
@@ -165,6 +165,111 @@
             align-items: flex-start;
             min-height: 100vh;
         }
+        /* responsive */
+        /* Add these media queries after the existing CSS, just before the closing style tag */
+
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-top: 10px;
+    }
+
+    .sidebar a {
+        padding: 10px 15px;
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid #495057;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .container {
+        margin: 20px auto;
+        padding: 15px;
+        width: 95%;
+    }
+
+    .card-header {
+        padding: 12px;
+    }
+
+    .card-header h2 {
+        font-size: 1.2rem;
+    }
+
+    form input, 
+    form select, 
+    form textarea {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn-secondary {
+        width: 100%;
+        display: block;
+        margin: 10px 0;
+    }
+
+    /* Improve touch targets for mobile */
+    .sidebar a,
+    button,
+    .btn-secondary {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Adjust spacing for icons */
+    .card-header i,
+    button i,
+    .btn-secondary i {
+        margin-right: 8px;
+    }
+
+    /* Improve form readability on mobile */
+    form label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Add some spacing between form elements */
+    form p {
+        margin-bottom: 15px;
+    }
+}
+
+/* Additional breakpoint for very small devices */
+@media screen and (max-width: 480px) {
+    .container {
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    .card-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .sidebar a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
     </style>
 </head>
 <body>

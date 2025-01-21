@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Barlow", serif;
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
@@ -16,6 +16,7 @@
         .container {
             margin: 50px auto;
             max-width: 600px;
+            padding: 15px;
         }
 
         .card {
@@ -31,6 +32,7 @@
             padding: 15px;
             border-bottom: 1px solid #ddd;
             border-radius: 8px 8px 0 0;
+            text-align: center;
         }
 
         .card-header h2 {
@@ -98,7 +100,8 @@
             border-color: #007bff;
             outline: none;
         }
-          /* Side Navbar Styles */
+
+        /* Sidebar Styles */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -147,38 +150,80 @@
             background-color: #f8f9fa;
             min-height: 100vh;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+                box-shadow: none;
+            }
+
+            .sidebar a {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .sidebar .logout {
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                padding: 10px;
+                width: 100%;
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
-</div>
-<div class="sidebar">
-    <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
-    <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
-    <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
-    <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-    <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
-    <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
-    <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
-    <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
-    <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-   
-</div>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="h5"><i class="fas fa-edit me-2"></i>Edit Image</h2>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save me-1"></i>Save Changes
-                            </button>
-                            <a href="{% url 'manage_images' %}" class="btn btn-secondary">Cancel</a>
-                        </form>
+    <div class="sidebar">
+        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
+        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
+        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
+        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
+        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
+        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
+        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
+        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+    </div>
+
+    <div class="content">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="h5"><i class="fas fa-edit me-2"></i>Edit Image</h2>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save me-1"></i>Save Changes
+                                </button>
+                                <a href="{% url 'manage_images' %}" class="btn btn-secondary">Cancel</a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

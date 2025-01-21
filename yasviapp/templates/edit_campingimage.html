@@ -1,69 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Camping Image</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Barlow", serif;
         }
 
         body {
-            display: flex;
             background-color: #f5f5f5;
             min-height: 100vh;
-            margin: 0;
+            position: relative;
         }
 
-        .sidebar {
-            width: 250px;
-            background-color: #343a40;
-            color: #fff;
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Navigation Toggle for Mobile */
+        .nav-toggle {
+            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
+            background: #343a40;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .sidebar a {
-            text-decoration: none;
-            color: #fff;
-            padding: 15px 20px;
-            display: block;
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #007bff;
-        }
-
-        .sidebar .logout {
-            margin-top: auto;
-            text-align: center;
-            background-color: #6c757d;
-        }
-
-        .content {
-            margin-left: 250px;
-            width: calc(100% - 250px);
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
+        /* Heading Styles */
         h1 {
             color: #2c3e50;
             margin-bottom: 2rem;
             text-align: center;
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 600;
             position: relative;
         }
 
@@ -76,14 +59,58 @@
             margin: 10px auto;
         }
 
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Form Styles */
         form {
             background: white;
-            padding: 2.5rem;
+            padding: clamp(1.5rem, 5vw, 2.5rem);
             border-radius: 10px;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px;
             animation: slideIn 0.5s ease-out;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        legend {
+            font-size: 1.2em;
+            padding: 0 10px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
         label {
@@ -93,27 +120,50 @@
             font-weight: 500;
         }
 
+        input[type="text"],
+        input[type="number"],
         input[type="file"],
         textarea,
         select {
             width: 100%;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
+            padding: 0.8rem;
             border: 1px solid #cbd5e0;
             border-radius: 5px;
             font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
         }
 
-        input[type="file"]:hover,
+        input:focus,
         textarea:focus,
         select:focus {
+            outline: none;
             border-color: #3498db;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
 
-        button {
-            background-color: #3498db;
+        .current-image {
+            margin: 1rem 0;
+        }
+
+        .current-image img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Error Styles */
+        .errors {
+            list-style: none;
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        /* Button Styles */
+        button[type="submit"] {
+            background-color: #4CAF50;
             color: white;
             border: none;
             padding: 1rem;
@@ -125,45 +175,69 @@
             transition: all 0.3s ease;
         }
 
-        button:hover {
-            background-color: #2980b9;
+        button[type="submit"]:hover {
+            background-color: #45a049;
+            transform: translateY(-1px);
         }
 
-        .current-image {
-            text-align: center;
-            margin-bottom: 1.5rem;
+        /* Sidebar Links */
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .current-image img {
-            max-width: 100%;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #007bff;
         }
 
+        /* Mobile Responsive Styles */
         @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
             .sidebar {
-                width: 200px;
+                transform: translateX(-100%);
             }
 
-            .content {
-                margin-left: 200px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
+            .sidebar.active {
+                transform: translateX(0);
             }
 
             .content {
                 margin-left: 0;
-                padding: 10px;
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+                margin-top: 3rem;
+            }
+
+            fieldset {
+                padding: 1rem;
+            }
+
+            /* Improve touch targets */
+            input[type="text"],
+            input[type="number"],
+            input[type="file"],
+            textarea,
+            select,
+            button {
+                font-size: 16px;
+                padding: 0.8rem;
+            }
+
+            .sidebar a {
+                padding: 1rem 1.5rem;
             }
         }
 
@@ -180,6 +254,7 @@
     </style>
 </head>
 <body>
+    <button class="nav-toggle">☰ Menu</button>
     <div class="sidebar">
         <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
         <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
@@ -190,67 +265,100 @@
         <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
         <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
         <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-       
     </div>
+
     <div class="content">
-        <h1>Edit Camping Image</h1>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            {% if form.errors %}
-                <ul class="errors">
-                    {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            <li>{{ field }}: {{ error }}</li>
+        <div class="container">
+            <h1>Edit Camping Image</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                    <ul class="errors">
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ field }}: {{ error }}</li>
+                            {% endfor %}
                         {% endfor %}
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            
-            <fieldset style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
-                <legend style="font-size: 1.2em; padding: 0 10px;">Update Camping Image</legend>
+                    </ul>
+                {% endif %}
                 
-                <div style="margin-bottom: 20px;">
-                    <label for="image" style="display: block; font-weight: bold; margin-bottom: 5px;">Image:</label>
-                    <input type="file" name="image" id="image" style="width: 100%; padding: 8px;">
-                    {% if image.image %}
-                        <img src="{{ image.image.url }}" alt="Current Image" style="display: block; max-width: 100%; margin-top: 10px;">
-                    {% endif %}
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <label for="name" style="display: block; font-weight: bold; margin-bottom: 5px;">Name:</label>
-                    <input type="text" name="name" id="name" value="{{ image.name }}" required style="width: 100%; padding: 8px;">
-                </div>
-                
-               
-                
-                <div style="margin-bottom: 20px;">
-                    <label for="description" style="display: block; font-weight: bold; margin-bottom: 5px;">Description:</label>
-                    <textarea name="description" id="description" style="width: 100%; padding: 8px;" rows="4">{{ image.description }}</textarea>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <label for="amount" style="display: block; font-weight: bold; margin-bottom: 5px;">Amount:</label>
-                    <input type="number" name="amount" id="amount" value="{{ image.amount }}" required min="0" step="0.01" style="width: 100%; padding: 8px;">
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <label for="status" style="display: block; font-weight: bold; margin-bottom: 5px;">Status:</label>
-                    <select name="status" id="status" style="width: 100%; padding: 8px;">
-                        <option value="true" {% if image.status %}selected{% endif %}>Available</option>
-                        <option value="false" {% if not image.status %}selected{% endif %}>Not Available</option>
-                    </select>
-                </div>
-                
-                <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; font-size: 1em; border: none; border-radius: 5px; cursor: pointer;">
-                    Update Camping Image
-                </button>
-            </fieldset>
-        </form>
-        
-        
+                <fieldset>
+                    <legend>Update Camping Image</legend>
+                    
+                    <div class="form-group">
+                        <label for="image">Image:</label>
+                        <input type="file" name="image" id="image">
+                        {% if image.image %}
+                            <div class="current-image">
+                                <img src="{{ image.image.url }}" alt="Current Image">
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" value="{{ image.name }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea name="description" id="description" rows="4">{{ image.description }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" name="amount" id="amount" value="{{ image.amount }}" required min="0" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select name="status" id="status">
+                            <option value="true" {% if image.status %}selected{% endif %}>Available</option>
+                            <option value="false" {% if not image.status %}selected{% endif %}>Not Available</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit">Update Camping Image</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
-    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Navigation Toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+
+            navToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!sidebar.contains(e.target) && !navToggle.contains(e.target) && window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                }
+            });
+
+            // Form validation feedback
+            const form = document.querySelector('form');
+            const inputs = form.querySelectorAll('input[type="text"], input[type="number"], textarea, select');
+
+            inputs.forEach(input => {
+                input.addEventListener('invalid', function(e) {
+                    this.classList.add('error');
+                });
+
+                input.addEventListener('input', function(e) {
+                    if (this.validity.valid) {
+                        this.classList.remove('error');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

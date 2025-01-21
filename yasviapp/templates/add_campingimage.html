@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family:  "Barlow", serif;
     }
 
     body {
@@ -216,6 +216,7 @@
   </style>
 </head>
 <body>
+  
   <div class="sidebar">
     <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
     <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>

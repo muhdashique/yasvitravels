@@ -194,6 +194,36 @@
     </style>
 </head>
 <body>
+    <div>
+        <div class="back-button-container">
+            <button onclick="history.back()" class="btn">Back</button>
+        </div>
+        
+        <style>
+            .back-button-container {
+                position: absolute; /* Makes it easy to position the button */
+                top: 20px; /* Adjust as needed for vertical spacing */
+                left: 20px; /* Adjust as needed for horizontal spacing */
+            }
+        
+            .btn {
+                padding: 10px 15px;
+                color: white;
+                background-color: #007bff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                text-decoration: none;
+                font-size: 16px;
+            }
+        
+            .btn:hover {
+                background-color: #0056b3;
+            }
+        </style>
+        
+
+    </div>
     <div class="login-container">
         {% if messages %}
             {% for message in messages %}

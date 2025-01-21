@@ -8,7 +8,7 @@
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family:  "Barlow", serif;
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
@@ -134,6 +134,134 @@
 
         .cancel-link:hover {
             color: #495057;
+        }
+        /* responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                overflow-x: auto;
+            }
+
+            .sidebar a {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                flex: 0 0 auto;
+                border-radius: 4px;
+                background-color: #495057;
+                margin: 0.2rem;
+            }
+
+            .sidebar .logout {
+                margin-top: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+                min-height: calc(100vh - 120px);
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin: 1rem 0;
+            }
+
+            form label {
+                font-size: 0.95rem;
+            }
+
+            form input, 
+            form select, 
+            form textarea {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+                margin-top: 0.3rem;
+            }
+
+            button {
+                width: 100%;
+                padding: 0.8rem;
+                margin-top: 1rem;
+            }
+
+            .cancel-link {
+                display: block;
+                text-align: center;
+                padding: 0.8rem;
+                margin-top: 1rem;
+                background-color: #f8f9fa;
+                border-radius: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                padding: 0.3rem;
+            }
+
+            .sidebar a {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .container {
+                margin: 0.5rem;
+                padding: 0.8rem;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            form input, 
+            form select, 
+            form textarea {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Add smooth scrolling for sidebar */
+        .sidebar {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        /* Ensure form elements stay within bounds */
+        form input, 
+        form select, 
+        form textarea {
+            max-width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>

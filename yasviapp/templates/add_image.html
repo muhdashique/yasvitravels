@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family:  "Barlow", serif;
             background-color: #f8f9fa;
             margin: 0;
             display: flex;
@@ -303,9 +303,101 @@ td:last-child {
         height: 180px;
     }
 }
+/* responsive */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: none;
+    }
+
+    .sidebar a {
+        padding: 10px 15px;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .segments-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+
+    .segment-card {
+        margin-bottom: 1rem;
+    }
+
+    .segment-image-wrapper img {
+        height: 200px; /* Adjust the height for smaller screens */
+    }
+
+    .segment-info {
+        padding: 0.75rem;
+    }
+
+    .segment-title {
+        font-size: 1rem; /* Adjust font size */
+    }
+
+    .segment-description {
+        font-size: 0.875rem; /* Adjust font size */
+    }
+
+    .segment-actions .btn {
+        padding: 0.375rem 0.75rem; /* Adjust button size */
+    }
+
+    .no-segments {
+        padding: 1rem;
+    }
+}
+
+/* Ensuring form fields adapt */
+@media (max-width: 480px) {
+    .form-group select,
+    .form-group input,
+    .form-group textarea {
+        padding: 0.25rem; /* Adjust padding for inputs */
+    }
+
+    .btn-submit {
+        padding: 0.375rem 0.75rem; /* Adjust submit button size */
+    }
+}
+
+/* Navbar at the top */
+.navbar {
+    width: 100%;
+    background-color: #333; /* Example background color */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.navbar a:hover {
+    color: #ddd;
+}
+
+
     </style>
 </head>
 <body>
+    
    <div class="sidebar">
     <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i>Admin Panel</a>
     <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>

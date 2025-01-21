@@ -19,7 +19,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family:  "Barlow", serif;
         }
 
         body {
@@ -201,7 +201,7 @@
         }
 
         .title {
-            font-family: Arial, sans-serif;
+            font-family:  "Barlow", serif;
             font-size: 120px;
             font-weight: bold;
             letter-spacing: 2px;
@@ -262,7 +262,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Barlow", serif;
         }
 
         .nav-container {
@@ -341,7 +341,7 @@
 section {
     /* padding: 50px 20px; */
     background-color: #f9f9f9;
-    font-family: 'Arial', sans-serif;
+    font-family:  "Barlow", serif;
 }
 
 /* Container Styling */
@@ -411,7 +411,7 @@ section {
 }
 
 /* Button Styling */
-.send-button {
+.submit-button {
     display: inline-block;
     background-color: #4caf50;
     color: #fff;
@@ -628,6 +628,17 @@ section {
                             <span class="nav-text">&Tourism</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{% url 'tourpackage' %}" class="nav-item {% if request.resolver_match.url_name == 'travel' %}active{% endif %}">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 6V4a2 2 0 0 0-2-2H10a2 2 0 0 0-2 2v2H3a1 1 0 0 0-1 1v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a1 1 0 0 0-1-1h-5ZM10 4h4v2h-4V4Zm11 15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8h18v11Z"/>
+                                <path d="M7 10h2v6H7v-6Zm8 0h2v6h-2v-6Z"/>
+                            </svg>
+                            <span class="nav-text">Tour</span>
+                            <span class="nav-text-small">Packages</span>
+                        </a>
+                    </li>
                     
                     <li>
                         <a href="{% url 'service' %}" class="nav-item {% if request.resolver_match.url_name == 'service' %}active{% endif %}">
@@ -637,6 +648,7 @@ section {
                             <span class="nav-text">Services</span>
                         </a>
                     </li>
+                    
                     
                     <li>
                         <a href="{% url 'gallery' %}" class="nav-item {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">

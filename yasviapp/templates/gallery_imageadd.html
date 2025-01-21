@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family:  "Barlow", serif;
         }
 
         body {
@@ -225,6 +225,136 @@
             form {
                 margin: 1rem;
             }
+        }
+        /* responsive */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Barlow", serif;
+        }
+
+        /* ... (all original styles remain the same until media queries) ... */
+
+        /* Enhanced Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                transform: none;
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar a {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+                border-radius: 4px;
+                background-color: #495057;
+                flex: 0 1 auto;
+                text-align: center;
+                margin: 0.2rem;
+            }
+
+            .sidebar .logout {
+                margin-top: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 0.5rem;
+            }
+
+            .navbar {
+                display: none; /* Hide the navbar since we're showing the sidebar */
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .gallery-card {
+                margin: 0.5rem 0;
+            }
+
+            form {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .header {
+                padding: 0.5rem 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .gallery-title {
+                font-size: 1rem;
+            }
+
+            .gallery-card img {
+                height: 180px;
+            }
+
+            .gallery-actions {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.5rem 1rem 1rem;
+            }
+
+            .gallery-actions .btn {
+                flex: 1;
+                margin: 0 0.25rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .content {
+                padding: 0.5rem;
+            }
+
+            .gallery-grid {
+                gap: 0.5rem;
+            }
+
+            .gallery-card img {
+                height: 160px;
+            }
+
+            form {
+                padding: 0.5rem;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Smooth transitions */
+        .content, .sidebar a {
+            transition: all 0.3s ease-in-out;
         }
     </style>
 </head>

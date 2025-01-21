@@ -38,6 +38,12 @@ def about(request):
     return render(request, 'about.html')
 
 
+
+def tourpackage(request):
+    packages = Package.objects.all()
+    return render(request,"tourpackage.html",{'packages': packages})
+
+
 # property page view
 def property(request):
     destination_id = request.GET.get('destination_id') 

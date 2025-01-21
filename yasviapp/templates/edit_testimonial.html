@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family:  "Barlow", serif;
         }
 
         body {
@@ -231,6 +231,161 @@
             background-color: #f8f9fa;
             min-height: 100vh;
         }
+        /* responsive */
+        /* Add these media queries at the end of your existing CSS */
+
+@media screen and (max-width: 1024px) {
+    .content {
+        margin-left: 200px;  /* Slightly reduce margin for medium screens */
+    }
+    
+    .sidebar {
+        width: 200px;  /* Reduce sidebar width */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding-top: 10px;
+        overflow-x: auto;
+    }
+
+    .sidebar a {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #495057;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 15px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin: 1.5rem 0;
+    }
+
+    form {
+        padding: 1.2rem;
+        margin: 1rem;
+        width: calc(100% - 2rem);
+        max-width: none;
+    }
+
+    form p {
+        margin-bottom: 1rem;
+    }
+
+    form label {
+        font-size: 0.9rem;
+    }
+
+    form input[type="text"],
+    form textarea,
+    form input[type="file"] {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    button[type="submit"] {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .current-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Improve touch targets */
+    .sidebar a,
+    button[type="submit"],
+    input[type="file"] {
+        min-height: 44px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .sidebar a {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .helptext {
+        font-size: 0.75rem;
+    }
+
+    .errorlist {
+        font-size: 0.75rem;
+    }
+
+    /* Stack form elements more compactly */
+    form p {
+        margin-bottom: 0.8rem;
+    }
+
+    /* Adjust file input for very small screens */
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Add hamburger menu for mobile */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .sidebar.active {
+        max-height: 100vh;
+    }
+
+    .menu-toggle {
+        display: block;
+        padding: 15px;
+        background: #343a40;
+        color: white;
+        text-align: right;
+        cursor: pointer;
+    }
+
+    .menu-toggle:before {
+        content: '☰';
+        font-size: 1.5rem;
+    }
+}
+        
     </style>
 </head>
 <body>

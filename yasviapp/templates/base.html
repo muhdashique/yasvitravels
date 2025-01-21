@@ -23,7 +23,7 @@
             background-color: #1e2430;
             color: #8b95a5;
             padding: 40px 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family:  "Barlow", serif;
         }
         
         .footer-container {
@@ -164,7 +164,7 @@
     font-size: 14px;
     display: none;
     white-space: nowrap;
-    font-family: Arial, sans-serif;
+    font-family:  "Barlow", serif;
 }
 
 .whatsapp-float:hover .tooltip {
@@ -222,7 +222,7 @@
       transition: opacity 0.3s ease;
       pointer-events: none;
       white-space: nowrap;
-      font-family: Arial, sans-serif;
+      font-family: "Barlow", serif;
     }
 
     .floating-call-button:hover::before {
@@ -331,6 +331,13 @@
             transform: rotate(45deg);
             margin-bottom: 4px;
         }
+        /* sociam media */
+        .social-links {
+    display: flex; /* Align links in a row */
+    gap: 70px; /* Space between links */
+    justify-content: center; /* Optional: Center align the icons */
+}
+
         </style>
         
 </head>
@@ -381,41 +388,44 @@
             <div class="footer-column">
                 <h3>Community</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Tutorials</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Forum</a></li>
-                    <li><a href="#">Download</a></li>
-                    <li><a href="#">Github</a></li>
-                    <li><a href="#">Runbot</a></li>
-                    <li><a href="#">Translations</a></li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'property' %}">Rooms&Villa</a></li>
+                    <li><a href="{% url 'travelandtour' %}">Travel&Tour</a></li>
+                    <li><a href="{% url 'service' %}">Service</a></li>
+                    <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+
                 </ul>
             </div>
 
             <div class="footer-column">
                 <h3>Services</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Odoo.sh Hosting</a></li>
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">Upgrade</a></li>
-                    <li><a href="#">Custom Developments</a></li>
-                    <li><a href="#">Education</a></li>
-                    <li><a href="#">Find an Accountant</a></li>
-                    <li><a href="#">Find a Partner</a></li>
-                    <li><a href="#">Become a Partner</a></li>
+                    <li><a href="{% url 'service' %}#Solutions">Solutions</a></li>
+                    <li><a href="{% url 'service' %}#Branding">Brandingt</a></li>
+                    <li><a href="{% url 'service' %}#Business_Consulting">Business Consulting</a></li>
+                    <li><a href="{% url 'service' %}#Advertisement">Advertisemen</a></li>
+                    <li><a href="{% url 'service' %}#Digital_Marketing">Digital Marketing</a></li>
+                    <li><a href="{% url 'service' %}#Interviews">Interviews</a></li>
+                    <li><a href="{% url 'service' %}#Graphic Designing">Graphic Designing</a></li>
+                    <li><a href="{% url 'service' %}#Blogging">Blogging</a></li>
+                    <li><a href="{% url 'service' %}#Sociam_Media">Sociam Media handling</a></li>
+
                 </ul>
             </div>
 
             <div class="footer-column">
-                <h3>About us</h3>
+                <h3>Addtress</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Our company</a></li>
-                    <li><a href="#">Brand Assets</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Jobs</a></li>
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Podcast</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Customers</a></li>
+                    <li><a href="#">YASVI TRAVELS</a></li>
+                    <li><a href="#">Chundale</a></li>
+                    <li><a href="#">Wayanad</a></li>
+                    <li><a href="#">Kerala</a></li>
+                    <li><a href="#">India</a></li>
+                    <li><a href="#">yasvitravels@gmail.com</a></li>
+                    <li><a href="#">9778518451</a></li>
                 </ul>
             </div>
 
@@ -431,15 +441,11 @@
                     
                 </p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/share/186GrnxYLL/"><i class="fab fa-facebook-f"></i></a>
-                    <!-- <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a> -->
-                    <a href="https://www.instagram.com/yasvitravels_wayanad?igsh=MWptOG55bDE5bjJtMg=="><i class="fab fa-instagram"></i></a>
-                    <!-- <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fas fa-phone"></i></a> -->
-                    <a href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/share/186GrnxYLL/" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/yasvitravels_wayanad?igsh=MWptOG55bDE5bjJtMg==" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F" class="social-link"><i class="fab fa-whatsapp"></i></a>
                 </div>
+                
             </div>
         </div>
 

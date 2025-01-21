@@ -1186,6 +1186,18 @@
                         <span class="nav-text">&Tourism</span>
                     </a>
                 </li>
+
+                
+                <li>
+                    <a href="{% url 'tourpackage' %}" class="nav-item {% if request.resolver_match.url_name == 'travel' %}active{% endif %}">
+                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 6V4a2 2 0 0 0-2-2H10a2 2 0 0 0-2 2v2H3a1 1 0 0 0-1 1v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a1 1 0 0 0-1-1h-5ZM10 4h4v2h-4V4Zm11 15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8h18v11Z"/>
+                            <path d="M7 10h2v6H7v-6Zm8 0h2v6h-2v-6Z"/>
+                        </svg>
+                        <span class="nav-text">Tour</span>
+                        <span class="nav-text-small">Packages</span>
+                    </a>
+                </li>
                 
                 <li>
                     <a href="{% url 'service' %}" class="nav-item {% if request.resolver_match.url_name == 'service' %}active{% endif %}">
@@ -1297,41 +1309,7 @@
 
 
 
-<section>
-        <div class="packages-container" id="tour_package">
-            <h1 class="camping-title" style="color: #2e2d2d;">Unforgettable Tour Packages</h1>
-            <p class="camping-description" style="color: #2e2d2d;">Embark on a journey of a lifetime with our handpicked tour packages. Whether you're seeking adventure, relaxation, or cultural experiences, we have something special for you.</p>
-    
-            <div class="packages-grid">
-                {% for package in packages %}
-                    <div class="package-card">
-                        <img 
-                            src="{{ package.image.url }}" 
-                            alt="{{ package.name }}" 
-                            class="package-image" 
-                            onclick="openPackageModal('{{ package.image.url }}', '{{ package.name }}', '{{ package.details }}', '{{ package.amount }}', '{{ package.get_status_display }}')"
-                        >
-                        <div class="package-overlay">
-                            <div class="package-name">{{ package.name }}</div>
-                            <div class="package-description">{{ package.details }}</div>
-                            <div class="package-amount">Price: ₹{{ package.amount }}</div>
-                            <div class="package-status">
-                                Status: {{ package.get_status_display }}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            
-            <!-- Modal -->
-            <div id="packageModal" class="modal" onclick="closePackageModal()">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="packageModalImage">
-                <div id="packageModalDetails"></div>
-            </div>
-            
-        </div>
-    </section>
+
 
 
 
