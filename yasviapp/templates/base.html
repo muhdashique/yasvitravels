@@ -141,7 +141,7 @@
 .whatsapp-float:hover {
     transform: scale(1.1);
     background-color: #128C7E;
-    animation: pulse 2s infinite;
+    /* animation: pulse 2s infinite; */
 }
 
 .whatsapp-link {
@@ -171,7 +171,7 @@
     display: block;
 }
 /* call button */
-.floating-call-button {
+.floating-call-buttons {
       position: fixed;
       bottom: 170px;
       right: 40px;
@@ -191,13 +191,13 @@
       z-index: 1000;
     }
 
-    .floating-call-button:hover {
+    .floating-call-buttons:hover {
       background-color: #8a0909;
       transform: scale(1.1);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     }
 
-    .floating-call-button:active {
+    .floating-call-buttons:active {
       transform: scale(0.95);
     }
 
@@ -209,7 +209,7 @@
     }
 
     /* Tooltip */
-    .floating-call-button::before {
+    .floating-call-buttons::before {
       content: "Call Now";
       position: absolute;
       right: 70px;
@@ -225,7 +225,7 @@
       font-family: "Barlow", serif;
     }
 
-    .floating-call-button:hover::before {
+    .floating-call-buttons:hover::before {
       opacity: 1;
     }
 
@@ -241,10 +241,10 @@
         box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
       }
     }
-
-    .floating-call-button {
+/* 
+    .floating-call-buttons {
       animation: pulse 2s infinite;
-    }
+    } */
 
     /* email floting */
     .floating-email-btn {
@@ -355,12 +355,12 @@
            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.1-.472-.149-.672.149s-.773.967-.947 1.166c-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.789-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.348.447-.522.149-.174.199-.298.298-.497.099-.199.05-.373-.025-.522-.075-.149-.672-1.611-.923-2.214-.242-.581-.487-.502-.672-.511-.173-.008-.372-.01-.572-.01s-.522.075-.796.373c-.273.298-1.045 1.021-1.045 2.494 0 1.473 1.068 2.898 1.216 3.097.149.199 2.102 3.21 5.094 4.503.713.308 1.27.492 1.703.63.715.228 1.364.196 1.878.119.572-.085 1.758-.719 2.008-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.199-.57-.348zm-5.472 7.618c-1.961 0-3.842-.524-5.485-1.515l-3.938 1.03 1.05-3.843c-.986-1.64-1.523-3.514-1.523-5.441 0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10zm0-18c-4.418 0-8 3.582-8 8 0 1.591.467 3.117 1.347 4.432l.208.314-.623 2.28 2.34-.613.304.183c1.271.766 2.73 1.176 4.424 1.176 4.418 0 8-3.582 8-8s-3.582-8-8-8z"/>
         </svg>        
-            <span class="tooltip">Click to chat on WhatsApp</span>
+            
         </a>
     </div>
 
 
-    <a href="tel:+919778518451" class="floating-call-button" aria-label="Call 9778518451">
+    <a href="tel:+919778518451" class="floating-call-buttons" aria-label="Call 9778518451">
         <span class="call-icon"></span>
       </a>
     
