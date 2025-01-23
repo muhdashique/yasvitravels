@@ -13,6 +13,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+
 
 
     {% block extra_css %}
@@ -338,6 +340,7 @@
     justify-content: center; /* Optional: Center align the icons */
 }
 
+
         </style>
         
 </head>
@@ -347,7 +350,7 @@
     <!-- Main content goes here -->
     {% endblock %}
     <!-- watsapp button -->
-    <div class="whatsapp-float">
+    <div class="md:whatsapp-float w-[40px] h-[40px] fixed right-[20px] bottom-20 bg-[#25d366] rounded-full z-[100]">
         <!-- Added your number with India's country code (91) -->
         <a class="whatsapp-link" 
         href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F"
@@ -360,11 +363,12 @@
     </div>
 
 
-    <a href="tel:+919778518451" class="floating-call-buttons" aria-label="Call 9778518451">
-        <span class="call-icon"></span>
+    <a href="tel:+919778518451" class="md:floating-call-buttons flex justify-center items-center text-[#fff] w-[40px] h-[40px] fixed right-[20px] bottom-[130px] bg-[#25d366] rounded-full z-[100]" aria-label="Call 9778518451">
+        <i class="fa-solid fa-phone"></i>
+        <!-- <span class="md:call-icon"></span> -->
       </a>
     
-      <a href="mailto:yasvitravels@gmail.com" class="floating-email-btn">
+      <a href="mailto:yasvitravels@gmail.com" class="md:floating-email-btn flex justify-center items-center text-[#fff] w-[40px] h-[40px] fixed right-[20px] bottom-[180px] bg-[#25d366] rounded-full z-[100]">
         <i class="fa-solid fa-envelope"></i>
         <span></span>
     </a>
@@ -431,7 +435,7 @@
 
             <div class="footer-info">
                 <div class="language-selector">
-                    <img src="{% static 'images\Fevicon.png' %}" alt="Your Logo" class="login-icon" style="width: 150px; height: auto;">
+                    <img src="{% static 'images\fevicon.png' %}" alt="Your Logo" class="login-icon" style="width: 150px; height: auto;">
                     
                 </div>
                 <p class="footer-description">

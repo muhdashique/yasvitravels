@@ -550,7 +550,7 @@
                 <p class="attribution"></p>
             </div>
             <nav class="nav-container relative z-[999]">
-                <ul class="nav-menu">
+                <ul class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9">
                     <li>
                         <a href="{% url 'index' %}" class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
                             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">

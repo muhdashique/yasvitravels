@@ -4,58 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Experiences Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --hover-color: #2980b9;
+            --text-color: #ecf0f1;
+            --sidebar-width: 280px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+    
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
         }
-
         /* Sidebar Styles */
         .sidebar {
-            width: 250px;
+            width: var(--sidebar-width);
             height: 100vh;
-            background-color: #343a40;
-            color: #fff;
+            background: var(--primary-color);
+            color: var(--text-color);
             position: fixed;
             top: 0;
             left: 0;
             display: flex;
             flex-direction: column;
-            padding-top: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-
         .sidebar a {
             text-decoration: none;
-            color: #fff;
-            padding: 15px 20px;
-            display: block;
-            transition: background-color 0.3s ease;
+            color: var(--text-color);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
         }
 
+        .sidebar a i {
+            width: 24px;
+            margin-right: 12px;
+            font-size: 1.1em;
+        }
         .sidebar a:hover {
-            background-color: #495057;
+            background-color: var(--secondary-color);
+            border-left-color: var(--accent-color);
+            padding-left: 28px;
         }
 
         .sidebar a.active {
-            background-color: #007bff;
+            background-color: var(--secondary-color);
+            border-left-color: var(--accent-color);
+            position: relative;
         }
-
+        .sidebar a.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent #f5f6fa transparent transparent;
+        }
         .sidebar .logout {
             margin-top: auto;
-            background-color: #6c757d;
-            text-align: center;
+            background-color: #c0392b;
+            border-left: none !important;
+            transition: all 0.3s ease;
         }
 
         .sidebar .logout:hover {
-            background-color: #5a6268;
+            background-color: #e74c3c;
+            padding-left: 24px;
         }
 
         /* Main Content Styles */
@@ -259,10 +291,7 @@
     border-radius: 16px;
     color: #666;
 }
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .segments-grid {
+.segments-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 1rem;
     }
@@ -270,8 +299,7 @@
     .segment-info {
         padding: 1rem;
     }
-}
-        
+/* Responsive adjustments */       
 /* check filter */
 .form-group {
             margin-bottom: 1rem;
@@ -314,20 +342,9 @@
         /* responsive */
         /* Responsive adjustments */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        box-shadow: none;
-    }
-
-    .sidebar a {
-        padding: 10px 15px;
-    }
-
     .content {
-        margin-left: 0;
-        padding: 10px;
+        margin-left: 70px;
+        width: 100%;
     }
 
     .segments-grid {
@@ -362,6 +379,24 @@
     .no-segments {
         padding: 1rem;
     }
+    .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+
+            .sidebar a span {
+                display: none;
+            }
+
+            .sidebar a {
+                padding: 20px;
+                justify-content: center;
+            }
+
+            .sidebar a i {
+                margin: 0;
+                font-size: 1.4em;
+            }
 }
 
 /* Ensuring form fields adapt */
@@ -383,133 +418,153 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="sidebar">
-        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
-        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
-        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
-        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Images</a>
-        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
-        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
-        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
-        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-    </div>
-
-    <div class="content">
-        <section>
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="h5">Add Segment</h2>
+    <div class="overflow-hidden flex justify-between">
+        <div class="sidebar fixed top-0 bottom-0 left-0">
+            <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">
+            <i class="fas fa-tachometer-alt text-[#fff]"></i>
+            <span>Admin Panel</span></a>
+            <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Destinations</span></a>
+            <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">
+            <i class="fas fa-list"></i>
+            <span>Categories</span></a>
+            <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">
+            <i class="fas fa-th-large"></i>    
+            <span>Segments</span></a>
+            <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">
+            <i class="fas fa-images"></i>   
+                <span>Room Images</span></a>
+            <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">
+            <i class="fas fa-images"></i>   
+            <span>Add Testimonial</span></a>
+            <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">
+            <i class="fas fa-comment-alt"></i> 
+            <span>Gallery Image</span></a>
+            <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">
+            <i class="fas fa-box"></i> 
+                <span>Package</span></a>
+            <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">
+            <i class="fas fa-campground"></i>
+                <span>Camping Image</span></a>
+        </div>
+    
+        <div class="content overflow-auto">
+            <section>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="h5">Add Segment</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'add_segment' %}" enctype="multipart/form-data" id="segmentForm">
+                            {% csrf_token %}
+                        
+                            {% if segment_form.destination %}
+                            <div class="form-group">
+                                <label for="id_destination">Destination:</label>
+                                {{ segment_form.destination }}
+                                {% if segment_form.destination.errors %}
+                                    <div class="error-message">{{ segment_form.destination.errors }}</div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        
+                            {% if segment_form.category %}
+                            <div class="form-group">
+                                <label for="id_category">Category:</label>
+                                {{ segment_form.category }}
+                                {% if segment_form.category.errors %}
+                                    <div class="error-message">{{ segment_form.category.errors }}</div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        
+                            {% if segment_form.name %}
+                            <div class="form-group">
+                                <label for="id_name">Name:</label>
+                                {{ segment_form.name }}
+                                {% if segment_form.name.errors %}
+                                    <div class="error-message">{{ segment_form.name.errors }}</div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        
+                            {% if segment_form.description %}
+                            <div class="form-group">
+                                <label for="id_description">Description:</label>
+                                {{ segment_form.description }}
+                                {% if segment_form.description.errors %}
+                                    <div class="error-message">{{ segment_form.description.errors }}</div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        
+                            {% if segment_form.segment_image %}
+                            <div class="form-group">
+                                <label for="id_segment_image">Image:</label>
+                                {{ segment_form.segment_image }}
+                                {% if segment_form.segment_image.errors %}
+                                    <div class="error-message">{{ segment_form.segment_image.errors }}</div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        
+                            <button type="submit" class="btn-submit">Add Segment</button>
+                        </form>
+                        
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form method="post" action="{% url 'add_segment' %}" enctype="multipart/form-data" id="segmentForm">
-                        {% csrf_token %}
-                    
-                        {% if segment_form.destination %}
-                        <div class="form-group">
-                            <label for="id_destination">Destination:</label>
-                            {{ segment_form.destination }}
-                            {% if segment_form.destination.errors %}
-                                <div class="error-message">{{ segment_form.destination.errors }}</div>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    
-                        {% if segment_form.category %}
-                        <div class="form-group">
-                            <label for="id_category">Category:</label>
-                            {{ segment_form.category }}
-                            {% if segment_form.category.errors %}
-                                <div class="error-message">{{ segment_form.category.errors }}</div>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    
-                        {% if segment_form.name %}
-                        <div class="form-group">
-                            <label for="id_name">Name:</label>
-                            {{ segment_form.name }}
-                            {% if segment_form.name.errors %}
-                                <div class="error-message">{{ segment_form.name.errors }}</div>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    
-                        {% if segment_form.description %}
-                        <div class="form-group">
-                            <label for="id_description">Description:</label>
-                            {{ segment_form.description }}
-                            {% if segment_form.description.errors %}
-                                <div class="error-message">{{ segment_form.description.errors }}</div>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    
-                        {% if segment_form.segment_image %}
-                        <div class="form-group">
-                            <label for="id_segment_image">Image:</label>
-                            {{ segment_form.segment_image }}
-                            {% if segment_form.segment_image.errors %}
-                                <div class="error-message">{{ segment_form.segment_image.errors }}</div>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    
-                        <button type="submit" class="btn-submit">Add Segment</button>
-                    </form>
-                    
-                </div>
-            </div>
-        </section>
-        
-
-        <section>
-            <div class="container">
-                <h1 class="text-4xl text-center">Unique travel experiences</h1>
-                <p class="text-center">From renovations and room additions to masonry and other handyman services</p>
-        
-                <div class="segments-grid">
-                    {% for segment in segments %}
-                    <div class="segment-card">
-                        <div class="segment-image-wrapper">
-                            {% if segment.segment_image %}
-                                <img src="{{ segment.segment_image.url }}" alt="{{ segment.name }}" />
-                            {% else %}
-                                <img src="/api/placeholder/400/320" alt="{{ segment.name }}" />
-                            {% endif %}
-                        </div>
-                        <div class="segment-info">
-                            <span class="segment-title">{{ segment.name|upper }}</span>
-                            <p class="segment-description">{{ segment.description }}</p>
-                            
-                            <!-- Display Destination and Category -->
-                            <p class="segment-meta">
-                                <strong>Destination:</strong> {{ segment.destination.name }}<br />
-                                <strong>Category:</strong> {{ segment.category.name }}
-                            </p>
-        
-                            <div class="segment-actions">
-                                <a href="{% url 'edit_segment' segment.id %}" class="btn btn-warning">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
-                                <form method="post" action="{% url 'delete_segment' segment.id %}" style="display:inline;">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </button>
-                                </form>
+            </section>
+            
+    
+            <section>
+                <div class="container">
+                    <h1 class="text-4xl text-center">Unique travel experiences</h1>
+                    <p class="text-center">From renovations and room additions to masonry and other handyman services</p>
+            
+                    <div class="segments-grid">
+                        {% for segment in segments %}
+                        <div class="segment-card">
+                            <div class="segment-image-wrapper">
+                                {% if segment.segment_image %}
+                                    <img src="{{ segment.segment_image.url }}" alt="{{ segment.name }}" />
+                                {% else %}
+                                    <img src="/api/placeholder/400/320" alt="{{ segment.name }}" />
+                                {% endif %}
+                            </div>
+                            <div class="segment-info">
+                                <span class="segment-title">{{ segment.name|upper }}</span>
+                                <p class="segment-description">{{ segment.description }}</p>
+                                
+                                <!-- Display Destination and Category -->
+                                <p class="segment-meta">
+                                    <strong>Destination:</strong> {{ segment.destination.name }}<br />
+                                    <strong>Category:</strong> {{ segment.category.name }}
+                                </p>
+            
+                                <div class="segment-actions">
+                                    <a href="{% url 'edit_segment' segment.id %}" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <form method="post" action="{% url 'delete_segment' segment.id %}" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                        {% empty %}
+                        <div class="no-segments">
+                            <p>No segments available for this category.</p>
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% empty %}
-                    <div class="no-segments">
-                        <p>No segments available for this category.</p>
-                    </div>
-                    {% endfor %}
                 </div>
-            </div>
-        </section>
-        
+            </section>
+            
+        </div>
     </div>
     <script>
         $(document).ready(function() {

@@ -4,55 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Categories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family:  "Barlow", serif;
-            background-color: #f8f9fa;
-            color: #333;
-            margin: 0;
+       :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --hover-color: #2980b9;
+            --text-color: #ecf0f1;
+            --sidebar-width: 280px;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family:  "Barlow", serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f5f6fa;
+        }
         /* Sidebar Styles */
         .sidebar {
-            width: 250px;
+            width: var(--sidebar-width);
             height: 100vh;
-            background-color: #343a40;
-            color: #fff;
+            background: var(--primary-color);
+            color: var(--text-color);
             position: fixed;
             top: 0;
             left: 0;
             display: flex;
             flex-direction: column;
-            padding-top: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-
         .sidebar a {
             text-decoration: none;
-            color: #fff;
-            padding: 15px 20px;
-            display: block;
-            transition: background-color 0.3s ease;
+            color: var(--text-color);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
         }
 
+        .sidebar a i {
+            width: 24px;
+            margin-right: 12px;
+            font-size: 1.1em;
+        }
         .sidebar a:hover {
-            background-color: #495057;
+            background-color: var(--secondary-color);
+            border-left-color: var(--accent-color);
+            padding-left: 28px;
         }
 
         .sidebar a.active {
-            background-color: #007bff;
+            background-color: var(--secondary-color);
+            border-left-color: var(--accent-color);
+            position: relative;
         }
-
+        .sidebar a.active::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent #f5f6fa transparent transparent;
+        }
         .sidebar .logout {
             margin-top: auto;
-            background-color: #6c757d;
-            text-align: center;
+            background-color: #c0392b;
+            border-left: none !important;
+            transition: all 0.3s ease;
         }
 
         .sidebar .logout:hover {
-            background-color: #5a6268;
+            background-color: #e74c3c;
+            padding-left: 24px;
         }
-
         /* Main Content */
         .content {
             margin-left: 270px;
@@ -149,14 +185,8 @@
             padding: 20px;
             text-align: center;
         }
-
         /* Responsive Design */
         @media (max-width: 768px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
 
             .content {
                 margin-left: 0;
@@ -171,20 +201,56 @@
             .tour-card {
                 width: 100%;
             }
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+
+            .sidebar a span {
+                display: none;
+            }
+
+            .sidebar a {
+                padding: 20px;
+                justify-content: center;
+            }
+
+            .sidebar a i {
+                margin: 0;
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
-        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
-        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
-        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
-        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
-        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
-        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
-        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">
+        <i class="fas fa-tachometer-alt text-[#fff]"></i>
+            <span>Admin Panel</span></a>
+        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Destinations</span></a>
+        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">
+        <i class="fas fa-list"></i>
+            <span>Categories</span></a>
+        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">
+            <i class="fas fa-th-large"></i>
+            <span>Segments</span></a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">
+        <i class="fas fa-images"></i>
+            <span>Room Images</span></a>
+        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">
+        <i class="fas fa-images"></i>
+        <span>Add Testimonial</span></a>
+        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">
+        <i class="fas fa-comment-alt"></i>   
+        <span>Gallery Image</span></a>
+        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">
+        <i class="fas fa-box"></i>  
+        <span>Package</span></a>
+        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">
+        <i class="fas fa-campground"></i>
+            <span>Camping Image</span></a>
        
     </div>
 

@@ -1090,7 +1090,7 @@
         cursor: pointer;
     }
     /* responsive */
-    
+
 /* Mobile Banner */
 @media screen and (max-width: 768px) {
     .banner {
@@ -1309,6 +1309,43 @@
 
 
 
+<section class="camping-section" id="campain_tour">
+    <div class="camping-container">
+        <div class="content-section">
+            <h1 class="camping-title">Spectacular Camping Adventures</h1>
+            <p class="camping-description">
+                Immerse yourself in the beauty of nature with our carefully curated camping tours. From serene landscapes to thrilling outdoor activities, your next adventure awaits!
+            </p>
+            
+            <div class="image-gallery">
+                {% for image in images %}
+                    <div class="package-card">
+                        <img src="{{ image.image.url }}" alt="{{ image.name }}" onclick="openPreview('{{ image.image.url }}')">
+                        <div class="package-overlay">
+                            <p><strong></strong> {{ image.description }}</p>
+                            <p><strong></strong> {{ image.name }}</p>
+                            <p><strong></strong> {{ image.details }}</p>
+                            <p><strong></strong> ${{ image.amount }}</p>
+                            <p><strong></strong> {{ image.status|yesno:"Available,Not Available" }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="no-images-message">
+                        <p>No camping images available.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Image Preview -->
+    <div id="imagePreviewModal" class="modal" onclick="closePreview()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="previewImage">
+    </div>
+</section>
+
+
 
 
 
@@ -1372,7 +1409,7 @@
                         <p>Fixed Rates
                             No hidden charges or surprises.</p>
                     </div>
-                    <a href="https://wa.me/1234567890" target="_blank" style="text-decoration: none;">
+                    <a href="https://wa.me/9778518451" target="_blank" style="text-decoration: none;">
                         <button style="
                             background-color: #25D366; 
                             color: white; 
@@ -1450,7 +1487,7 @@
                         <div class="section-icon"><i class="fa-solid fa-train"></i></div>
                         <h2 class="section-title">Train Booking</h2>
                         <button class="whatsapp-btn">
-                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20booking%20a%20flight" 
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20booking%20a%20Train" 
                                target="_blank" 
                                style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
@@ -1467,7 +1504,7 @@
                         <div class="section-icon"><i class="fa-solid fa-bus"></i></div>
                         <h2 class="section-title">Bus Booking</h2>
                         <button class="whatsapp-btn">
-                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20booking%20a%20flight" 
+                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20booking%20a%20Bus" 
                                target="_blank" 
                                style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
@@ -1631,7 +1668,7 @@
                         <div class="section-icon"><i class="fa-solid fa-image"></i></div>
                         <h2 class="section-title"> Your Perfect Capture</h2>
                         <button class="whatsapp-btn">
-                            <a href="https://wa.me/9778518451?text=I%20am%20interested%20in%20event%20videography" 
+                            <a href="https://wa.me/9778518451?text=I%20am%20Need%20in%20a%20Private%20a%20Photographer " 
                                target="_blank" 
                                style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
@@ -1654,41 +1691,7 @@
 
 
 
-    <section class="camping-section" id="campain_tour">
-        <div class="camping-container">
-            <div class="content-section">
-                <h1 class="camping-title">Spectacular Camping Adventures</h1>
-                <p class="camping-description">
-                    Immerse yourself in the beauty of nature with our carefully curated camping tours. From serene landscapes to thrilling outdoor activities, your next adventure awaits!
-                </p>
-                
-                <div class="image-gallery">
-                    {% for image in images %}
-                        <div class="package-card">
-                            <img src="{{ image.image.url }}" alt="{{ image.name }}" onclick="openPreview('{{ image.image.url }}')">
-                            <div class="package-overlay">
-                                <p><strong></strong> {{ image.description }}</p>
-                                <p><strong></strong> {{ image.name }}</p>
-                                <p><strong></strong> {{ image.details }}</p>
-                                <p><strong></strong> ${{ image.amount }}</p>
-                                <p><strong></strong> {{ image.status|yesno:"Available,Not Available" }}</p>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div class="no-images-message">
-                            <p>No camping images available.</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
     
-        <!-- Modal for Image Preview -->
-        <div id="imagePreviewModal" class="modal" onclick="closePreview()">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="previewImage">
-        </div>
-    </section>
 
 
 <script>
