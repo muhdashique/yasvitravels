@@ -894,14 +894,17 @@
 <body>
     <section>
         <div class="banner">
-            
-            <div class="banner-content">
-                <h1 class="title">HIKING<br>TOURS</h1>
-                <p class="subtitle">Explore. Discover. Experience. Your Journey Begins Here with Yasvi Travels.</p>
+            <div class="banner-content mt-10">
+                <div>
+                    <div>
+                        <h1 class="title">HIKING<br>TOURS</h1>
+                <p class="subtitle">Explore. Discover. Experience. Your Journey Begins Here with Yasvi Travels</p>
                 <p class="attribution"></p>
+                    </div>
+                </div>
             </div>
             <nav class="nav-container relative z-[999]">
-                <ul class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 place-items-center">
+                <ul class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 place-items-center place-content-center" style="margin-bottom: 15%;">
                     <li>
                         <a href="{% url 'index' %}" class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
                             <svg class="icons" viewBox="0 0 24 24" fill="currentColor">

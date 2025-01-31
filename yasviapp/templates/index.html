@@ -12,6 +12,11 @@
     <title>Travel Agency</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <style>
         /* banner */
@@ -414,7 +419,6 @@
             list-style: none;
             padding: 15px 0;
             border-bottom: 1px solid #eee;
-            
         }
 
         .nav-item {
@@ -475,107 +479,32 @@
         }
         /* testimonial */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
 
-        .testimonials-container {
-            max-width: 1500px;
-            margin: 80px auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .testimonials-title {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #333;
-            font-weight: 700;
-        }
-
-        .testimonials-subtitle {
-            color: #666;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .testimonial-card {
-            background: #f8f8f8;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: left;
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-name {
-            font-weight: bold;
-            color: #333;
-            background: #f0e6e6;
-            padding: 8px 20px;
-            border-radius: 20px;
-            margin-right: 15px;
-        }
-
-        .testimonial-image {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .testimonial-text {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .credits {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-        .credits a {
-            color: #666;
-            text-decoration: none;
-        }
-        .testimonials-container {
+    .testimonials-container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 40px 20px;
+        text-align: center;
         position: relative;
     }
 
     .testimonials-title {
-        text-align: center;
         font-size: 2.5rem;
         margin-bottom: 1rem;
         color: #333;
     }
 
     .testimonials-subtitle {
-        text-align: center;
         color: #666;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
-
     }
 
     .testimonials-wrapper {
@@ -586,43 +515,48 @@
 
     .testimonials-grid {
         display: flex;
-        transition: transform 0.5s ease-in-out;
-        gap: 30px;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+    }
+
+    .testimonials-grid::-webkit-scrollbar {
+        display: none;
     }
 
     .testimonial-card {
-        flex: 0 0 calc(33.333% - 20px);
-        min-width: calc(33.333% - 20px);
+        flex: 0 0 300px;
         background: #2389B5;
         border-radius: 10px;
         padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        color: white;
     }
 
     .testimonial-header {
         display: flex;
         align-items: center;
+        gap: 10px;
         margin-bottom: 15px;
-        gap: 15px;
     }
 
     .testimonial-name {
         font-weight: bold;
         font-size: 1.1rem;
-        color: #333;
+        color: #000000;
     }
 
     .testimonial-image {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         object-fit: cover;
     }
 
     .testimonial-text {
-        color: #ffffff;
-        line-height: 1.6;
-        margin: 0;
+        line-height: 1.5;
     }
 
     .scroll-button {
@@ -645,48 +579,19 @@
 
     .scroll-button:hover {
         background: #f0f0f0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .scroll-button.left {
-        left: 0;
+        left: 10px;
     }
 
     .scroll-button.right {
-        right: 0;
+        right: 10px;
     }
 
-    .scroll-button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .scroll-button::before {
-        content: '';
-        width: 10px;
-        height: 10px;
-        border-style: solid;
-        border-width: 2px 2px 0 0;
-        display: inline-block;
-    }
-
-    .scroll-button.left::before {
-        transform: rotate(-135deg);
-        margin-left: 5px;
-    }
-
-    .scroll-button.right::before {
-        transform: rotate(45deg);
-        margin-right: 5px;
-    }
-
-    /* Auto-scroll control button */
     .auto-scroll-control {
-        position: absolute;
-        bottom: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 5px 15px;
+        margin-top: 20px;
+        padding: 10px 20px;
         border: none;
         border-radius: 15px;
         background: #333;
@@ -698,6 +603,21 @@
 
     .auto-scroll-control:hover {
         background: #555;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .testimonials-wrapper {
+            padding: 0;
+        }
+
+        .testimonial-card {
+            flex: 0 0 80%;
+        }
+
+        .scroll-button {
+            display: none;
+        }
     }
         /* destination */
         .destinations-container {
@@ -1401,101 +1321,51 @@
         font-size: 14px;
     }
 }
-
-/* Responsive testimonials */
-.testimonials-container {
-    padding: 20px;
-    text-align: center;
-}
-
-.testimonials-title {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.testimonials-subtitle {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    color: #666;
-}
-
-.testimonials-wrapper {
-    position: relative;
-    overflow: hidden; /* Ensures only one card is visible */
-    max-width: 100%; /* Responsive width */
-}
-
-.scroll-button {
-    background-color: #ddd;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-}
-
-.scroll-button.left {
-    left: 10px;
-}
-
-.scroll-button.right {
-    right: 10px;
-}
-
-.auto-scroll-control {
-    margin-top: 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.testimonials-grid {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease-in-out; /* Smooth scrolling */
-    width: 100%;
-}
-
+/* Testimonial Card */
 .testimonial-card {
-    flex: 0 0 100%; /* Ensure each card takes full width */
-    background-color: #f9f9f9;
+    text-align: center;
+    padding: 20px;
+    background: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: left;
-}
-
-.testimonial-header {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 200px; /* Ensures minimum height but allows expansion */
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.testimonial-name {
-    font-weight: bold;
-    margin-right: 10px;
-}
-
-.testimonial-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: height 0.3s ease-in-out; /* Smooth transition */
 }
 
 .testimonial-text {
     font-size: 0.9rem;
     color: #555;
+    overflow: hidden;
+    position: relative;
 }
 
-        
+.short-text {
+    margin: 0;
+}
+
+.full-text {
+    margin: 0;
+    display: none;
+}
+
+.see-more-btn {
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 0.8rem;
+}
+
+.see-more-btn:hover {
+    background: #ffffff;
+}
+    
 
     </style>
 </head>
@@ -1503,9 +1373,7 @@
     <section>
         
         <div class="banner">
-            <div style="margin-right: 90%;margin-top: 5%;">
-            </div>
-            <div class="banner-content">
+            <div class="banner-content mt-10">
                 <div>
                     <div>
                         <h1 class="title">HIKING<br>TOURS</h1>
@@ -1697,7 +1565,7 @@
         
         {% if show_attribution %}
         <div class="attribution text-center">
-            Images from <a href="https://freepik.com">Freepik</a>
+           
         </div>
         {% endif %}
     </section>
@@ -1765,29 +1633,39 @@
 
     <!-- TESTIMONIAL SECTION -->
     <section>
-        <div class="testimonials-container">
+        <div class="testimonials-container max-w-[1200px] mx-auto overflow-hidden">
             <h1 class="testimonials-title">What Our Guests Say</h1>
-            <p class="testimonials-subtitle">Hear from our happy customers who have shared their experiences of staying with us. Your satisfaction is our priority!</p>
-            
-            <div class="testimonials-wrapper">
-                <button class="scroll-button left" onclick="scrollTestimonials('left')" id="scrollLeft">←</button>
-                <div class="testimonials-grid" id="testimonialsGrid">
+            <p class="testimonials-subtitle">
+                Hear from our happy customers who have shared their experiences of staying with us. Your satisfaction is our priority!
+            </p>
+    
+            <!-- Swiper Container -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
                     {% for testimonial in testimonials %}
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <span class="testimonial-name">{{ testimonial.name }}</span>
-                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" class="testimonial-image">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" class="testimonial-image">
+                                <span class="testimonial-name">{{ testimonial.name }}</span>
+                            </div>
+                            <div class="testimonial-text">
+                                <p class="short-text">{{ testimonial.review|truncatechars:100 }}</p>
+                                <p class="full-text" style="display: none;">{{ testimonial.review }}</p>
+                                <button class="see-more-btn">See More</button>
+                            </div>
                         </div>
-                        <p class="testimonial-text">{{ testimonial.review }}</p>
                     </div>
                     {% endfor %}
                 </div>
-                <button class="scroll-button right" onclick="scrollTestimonials('right')" id="scrollRight">→</button>
-                <button class="auto-scroll-control" id="autoScrollControl">Pause</button>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Navigation Buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </section>
-    
         
 
     
@@ -1810,7 +1688,7 @@
 </section>
     
 
-        <script>
+        <!-- <script>
             let currentPosition = 0;
             const grid = document.getElementById('testimonialsGrid');
             const cards = grid.getElementsByClassName('testimonial-card');
@@ -1881,7 +1759,107 @@
             updateButtonStates();
 
             
-        </script>
+        </script> -->
+
+<!-- <script>
+    function scrollTestimonials(direction) {
+        const container = document.getElementById('testimonialsGrid');
+        const scrollAmount = 320; 
+ 
+        if (direction === 'left') {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+
+    let autoScroll;
+    const autoScrollButton = document.getElementById('autoScrollControl');
+    const testimonialContainer = document.getElementById('testimonialsGrid');
+
+    function startAutoScroll() {
+        autoScroll = setInterval(() => {
+            testimonialContainer.scrollBy({ left: 320, behavior: 'smooth' });
+            if (testimonialContainer.scrollLeft + testimonialContainer.clientWidth >= testimonialContainer.scrollWidth) {
+                testimonialContainer.scrollTo({ left: 0, behavior: 'smooth' });
+            }
+        }, 3000);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScroll);
+    }
+
+    autoScrollButton.addEventListener('click', function () {
+        if (autoScrollButton.innerText === 'Pause') {
+            stopAutoScroll();
+            autoScrollButton.innerText = 'Play';
+        } else {
+            startAutoScroll();
+            autoScrollButton.innerText = 'Pause';
+        }
+    });
+
+    startAutoScroll();
+</script> -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Swiper
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: { slidesPerView: 1, spaceBetween: 20 },
+            768: { slidesPerView: 2, spaceBetween: 30 },
+            1024: { slidesPerView: 3, spaceBetween: 40 },
+        },
+    });
+
+     // Pause autoplay on hover
+     const swiperContainer = document.querySelector('.swiper-container');
+
+    swiperContainer.addEventListener('mouseenter', () => {
+        swiper.autoplay.stop(); // Stop autoplay when hovered
+    });
+
+    swiperContainer.addEventListener('mouseleave', () => {
+        swiper.autoplay.start(); // Resume autoplay when mouse leaves
+    });
+
+    // Handle "See More" button click
+    document.querySelectorAll('.see-more-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const card = this.closest('.testimonial-card');
+            const shortText = card.querySelector('.short-text');
+            const fullText = card.querySelector('.full-text');
+
+            if (fullText.style.display === 'none' || fullText.style.display === '') {
+                fullText.style.display = 'block';
+                shortText.style.display = 'none';
+                this.textContent = 'See Less';
+                card.style.height = 'auto'; // Allow expansion
+            } else {
+                fullText.style.display = 'none';
+                shortText.style.display = 'block';
+                this.textContent = 'See More';
+                card.style.height = ''; // Reset to default height
+            }
+        });
+    });
+});
+
+</script>
 
 </body>
 </html>

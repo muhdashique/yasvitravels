@@ -356,6 +356,7 @@
       margin: 0 auto;
       padding: 40px 20px;
       background-color: #f5f5f5;
+      width: 100%;
     }
 
     .header {
@@ -374,12 +375,12 @@
       font-style: italic;
     }
 
-    .grid {
+    /* .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
       padding: 20px;
-    }
+    } */
 
     .card {
       background: white;
@@ -1141,14 +1142,17 @@
 <body>
   <section>
     <div class="banner">
-        
-        <div class="banner-content">
-            <h1 class="title">HIKING<br>TOURS</h1>
+        <div class="banner-content mt-10">
+            <div>
+                <div>
+                    <h1 class="title">HIKING<br>TOURS</h1>
             <p class="subtitle">Explore. Discover. Experience. Your Journey Begins Here with Yasvi Travels</p>
             <p class="attribution"></p>
+                </div>
+            </div>
         </div>
         <nav class="nav-container relative z-[999]">
-            <ul class="nav-menu">
+            <ul class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 place-items-center place-content-center" style="margin-bottom: 15%;">
                 <li>
                     <a href="{% url 'index' %}" class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
                         <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
