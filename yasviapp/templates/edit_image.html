@@ -5,103 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Image</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <style>
         body {
-            font-family: "Barlow", serif;
+            font-family: "Barlow", sans-serif;
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
-        }
-
-        .container {
-            margin: 50px auto;
-            max-width: 600px;
-            padding: 15px;
-        }
-
-        .card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            border-radius: 8px 8px 0 0;
-            text-align: center;
-        }
-
-        .card-header h2 {
-            margin: 0;
-            font-size: 1.25rem;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 16px;
-            font-size: 0.875rem;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            margin-right: 10px;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: #fff;
-            border: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        form {
             display: flex;
-            flex-direction: column;
         }
 
-        form .form-group {
-            margin-bottom: 15px;
-        }
-
-        input[type="text"],
-        input[type="file"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
-
-        input[type="text"]:focus,
-        input[type="file"]:focus,
-        textarea:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        /* Sidebar Styles */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -114,6 +27,7 @@
             flex-direction: column;
             padding-top: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
         }
 
         .sidebar a {
@@ -124,77 +38,52 @@
             transition: background-color 0.3s ease;
         }
 
-        .sidebar a:hover {
-            background-color: #495057;
-        }
-
-        .sidebar a.active {
+        .sidebar a:hover, .sidebar a.active {
             background-color: #007bff;
         }
 
-        .sidebar .logout {
-            margin-top: auto;
-            background-color: #6c757d;
-            text-align: center;
+        .menu-button {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1000;
         }
 
-        .sidebar .logout:hover {
-            background-color: #5a6268;
-        }
-
-        /* Main Content Styles */
         .content {
             margin-left: 250px;
             padding: 20px;
             flex-grow: 1;
-            background-color: #f8f9fa;
             min-height: 100vh;
+            width: 100%;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .content {
-                margin-left: 0;
-                padding: 10px;
-                width: 100%;
-            }
-
             .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-                box-shadow: none;
+                transform: translateX(-100%);
             }
-
-            .sidebar a {
-                padding: 10px;
-                font-size: 14px;
+            .menu-button {
+                display: block;
             }
-
-            .sidebar .logout {
-                margin: 10px 0;
+            .sidebar.show {
+                transform: translateX(0);
             }
-        }
-
-        @media (max-width: 576px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-            }
-
             .content {
-                padding: 10px;
-                width: 100%;
                 margin-left: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <!-- <button class="menu-button" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar" id="sidebar">
         <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
         <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
         <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
@@ -204,30 +93,30 @@
         <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
         <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
         <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-    </div>
+    </div> -->
 
     <div class="content">
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="h5"><i class="fas fa-edit me-2"></i>Edit Image</h2>
-                        </div>
-                        <div class="card-body">
-                            <form method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-save me-1"></i>Save Changes
-                                </button>
-                                <a href="{% url 'manage_images' %}" class="btn btn-secondary">Cancel</a>
-                            </form>
-                        </div>
-                    </div>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-edit"></i> Edit Image</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Changes</button>
+                        <a href="{% url 'manage_images' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('show');
+        }
+    </script>
 </body>
 </html>

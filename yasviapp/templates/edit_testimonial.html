@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Testimonial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family:  "Barlow", serif;
+            font-family: "Barlow", serif;
         }
 
         body {
@@ -101,7 +104,6 @@
             transform: translateY(0);
         }
 
-        /* File input styling */
         input[type="file"] {
             background: #f8f9fa;
             cursor: pointer;
@@ -124,7 +126,6 @@
             background: #2980b9;
         }
 
-        /* Help text styling */
         .helptext {
             display: block;
             color: #666;
@@ -132,7 +133,6 @@
             margin-top: 0.25rem;
         }
 
-        /* Error message styling */
         .errorlist {
             color: #e74c3c;
             list-style: none;
@@ -151,26 +151,6 @@
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            form {
-                padding: 1.5rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            button[type="submit"] {
-                padding: 0.8rem 1.5rem;
-            }
-        }
-
-        /* Current image preview if applicable */
         .current-image {
             margin-bottom: 1rem;
             text-align: center;
@@ -182,8 +162,8 @@
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-         /* Side Navbar Styles */
-         .sidebar {
+
+        .sidebar {
             width: 250px;
             height: 100vh;
             background-color: #343a40;
@@ -195,6 +175,7 @@
             flex-direction: column;
             padding-top: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
         .sidebar a {
@@ -223,7 +204,6 @@
             background-color: #5a6268;
         }
 
-        /* Main Content Styles */
         .content {
             margin-left: 250px;
             padding: 20px;
@@ -231,186 +211,64 @@
             background-color: #f8f9fa;
             min-height: 100vh;
         }
-        /* responsive */
-        /* Add these media queries at the end of your existing CSS */
 
-@media screen and (max-width: 1024px) {
-    .content {
-        margin-left: 200px;  /* Slightly reduce margin for medium screens */
-    }
-    
-    .sidebar {
-        width: 200px;  /* Reduce sidebar width */
-    }
-}
+        .menu-toggle {
+            display: none;
+            padding: 15px;
+            background: #343a40;
+            color: white;
+            text-align: right;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
 
-@media screen and (max-width: 768px) {
-    body {
-        padding: 0;
-        flex-direction: column;
-    }
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
 
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding-top: 10px;
-        overflow-x: auto;
-    }
+            .sidebar.active {
+                transform: translateX(0);
+            }
 
-    .sidebar a {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-        border-bottom: 1px solid #495057;
-    }
+            .content {
+                margin-left: 0;
+            }
 
-    .content {
-        margin-left: 0;
-        padding: 15px;
-        width: 100%;
-    }
-
-    h1 {
-        font-size: 1.8rem;
-        margin: 1.5rem 0;
-    }
-
-    form {
-        padding: 1.2rem;
-        margin: 1rem;
-        width: calc(100% - 2rem);
-        max-width: none;
-    }
-
-    form p {
-        margin-bottom: 1rem;
-    }
-
-    form label {
-        font-size: 0.9rem;
-    }
-
-    form input[type="text"],
-    form textarea,
-    form input[type="file"] {
-        padding: 0.6rem;
-        font-size: 0.9rem;
-    }
-
-    button[type="submit"] {
-        padding: 0.8rem;
-        font-size: 0.9rem;
-    }
-
-    .current-image img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    /* Improve touch targets */
-    .sidebar a,
-    button[type="submit"],
-    input[type="file"] {
-        min-height: 44px;
-    }
-
-    input[type="file"]::-webkit-file-upload-button {
-        padding: 0.8rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    body {
-        padding: 0;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    form {
-        padding: 1rem;
-        margin: 0.5rem;
-    }
-
-    .sidebar a {
-        padding: 10px;
-        font-size: 0.85rem;
-    }
-
-    .helptext {
-        font-size: 0.75rem;
-    }
-
-    .errorlist {
-        font-size: 0.75rem;
-    }
-
-    /* Stack form elements more compactly */
-    form p {
-        margin-bottom: 0.8rem;
-    }
-
-    /* Adjust file input for very small screens */
-    input[type="file"]::-webkit-file-upload-button {
-        padding: 0.5rem;
-        font-size: 0.8rem;
-    }
-}
-
-/* Add hamburger menu for mobile */
-@media screen and (max-width: 768px) {
-    .sidebar {
-        height: auto;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out;
-    }
-
-    .sidebar.active {
-        max-height: 100vh;
-    }
-
-    .menu-toggle {
-        display: block;
-        padding: 15px;
-        background: #343a40;
-        color: white;
-        text-align: right;
-        cursor: pointer;
-    }
-
-    .menu-toggle:before {
-        content: '☰';
-        font-size: 1.5rem;
-    }
-}
-        
+            .menu-toggle {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
-</div>
-<div class="sidebar">
-    <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
-    <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
-    <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
-    <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-    <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
-    <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
-    <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
-    <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
-    <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-   
-</div>
-    <h1>Edit Testimonial</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
+    <!-- <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+    <div class="sidebar">
+        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
+        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
+        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
+        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
+        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
+        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
+        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
+        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
+        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
+    </div> -->
+    <div class="content">
+        <h1>Edit Testimonial</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
 
     <script>
-        // Add form submission feedback
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+
         const form = document.querySelector('form');
         const submitButton = document.querySelector('button[type="submit"]');
 
@@ -419,7 +277,6 @@
             submitButton.disabled = true;
         });
 
-        // Add file input preview if there's an image field
         const fileInput = document.querySelector('input[type="file"]');
         if (fileInput) {
             fileInput.addEventListener('change', function(e) {

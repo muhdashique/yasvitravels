@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Destinations</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.tailwindcss.com"></script>
-    
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-         :root {
+        :root {
             --primary-color: #2c3e50;
             --secondary-color: #34495e;
             --accent-color: #3498db;
@@ -23,13 +24,15 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family:  "Barlow", serif;
+            font-family: "Barlow", serif;
             margin: 0;
             padding: 0;
             display: flex;
             background-color: #f5f6fa;
         }
+
         /* Sidebar Styles */
         .sidebar {
             width: var(--sidebar-width);
@@ -38,12 +41,18 @@
             color: var(--text-color);
             position: fixed;
             top: 0;
-            left: 0;
+            left: -280px; /* Hide sidebar by default on mobile */
             display: flex;
             flex-direction: column;
             box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            z-index: 1000;
         }
+
+        .sidebar.active {
+            left: 0; /* Show sidebar when active */
+        }
+
         .sidebar a {
             text-decoration: none;
             color: var(--text-color);
@@ -59,6 +68,7 @@
             margin-right: 12px;
             font-size: 1.1em;
         }
+
         .sidebar a:hover {
             background-color: var(--secondary-color);
             border-left-color: var(--accent-color);
@@ -70,6 +80,7 @@
             border-left-color: var(--accent-color);
             position: relative;
         }
+
         .sidebar a.active::before {
             content: '';
             position: absolute;
@@ -80,6 +91,7 @@
             border-style: solid;
             border-color: transparent #f5f6fa transparent transparent;
         }
+
         .sidebar .logout {
             margin-top: auto;
             background-color: #c0392b;
@@ -92,15 +104,33 @@
             padding-left: 24px;
         }
 
-
+        /* Mobile Menu Button */
+        .mobile-menu-button {
+            display: none; /* Hide by default on desktop */
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 1001;
+        }
 
         /* Main Content Styles */
         .content {
-            margin-left: var(--sidebar-width);
-            padding: 30px;
+            margin-left: 0; /* No margin on mobile */
+            padding: 20px;
             flex-grow: 1;
+            background-color: #f8f9fa;
             min-height: 100vh;
-            background-color: #f5f6fa;
+            transition: margin-left 0.3s ease;
+        }
+
+        .content.shifted {
+            margin-left: 280px; /* Shift content when sidebar is open */
         }
 
         .content h1 {
@@ -119,7 +149,6 @@
             font-size: 1.1em;
         }
 
-       
         /* Section Styling */
         section {
             margin: 30px 0;
@@ -251,102 +280,97 @@
             opacity: 0.8;
         }
 
-        
-
-        
-@media (max-width: 768px) {
-    .destinations-title {
-                font-size: 1.8rem;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: block; /* Show on mobile */
             }
 
-            .destinations-subtitle {
-                font-size: 1rem;
-            }
-    .content {
-        margin-left: 70px;
-        padding: 10px;
-    }
-
-    .destinations-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-    }
-
-    .destination-card img {
-        height: auto; /* Ensures images scale proportionally */
-        width: 100%;
-    }
-
-    .destination-card {
-        margin-bottom: 15px; /* Adds spacing between cards for smaller screens */
-    }
-
-    .destination-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .btn {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-    .sidebar {
-                width: 70px;
-                overflow: hidden;
+            .sidebar {
+                left: -280px; /* Hide sidebar by default on mobile */
             }
 
-            .sidebar a span {
-                display: none;
+            .sidebar.active {
+                left: 0; /* Show sidebar when active */
             }
 
-            .sidebar a {
-                padding: 20px;
-                justify-content: center;
+            .content.shifted {
+                margin-left: 0; /* Reset margin when sidebar is open */
             }
 
-            .sidebar a i {
-                margin: 0;
-                font-size: 1.4em;
+            .destinations-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
             }
-}
 
+            .destination-card img {
+                height: auto; /* Ensures images scale proportionally */
+                width: 100%;
+            }
+
+            .destination-card {
+                margin-bottom: 15px; /* Adds spacing between cards for smaller screens */
+            }
+
+            .destination-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
     </style>
 </head>
 <body>
-   <div class="flex justify-between overflow-hidden">
-     <!-- Sidebar -->
-     <div class="sidebar fixed left-0 top-0 bottom-0">
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
         <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">
-        <i class="fas fa-tachometer-alt text-[#fff]"></i>
-        <span> Admin Panel</span></a>
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Admin Panel</span>
+        </a>
         <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">
             <i class="fas fa-map-marker-alt"></i>
-            <span>Destinations</span></a>
+            <span>Destinations</span>
+        </a>
         <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">
             <i class="fas fa-list"></i>
-            <span>Categories</span></a>
+            <span>Categories</span>
+        </a>
         <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">
-        <i class="fas fa-th-large"></i>
-            <span>Segments</span></a>
+            <i class="fas fa-th-large"></i>
+            <span>Segments</span>
+        </a>
         <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">
-        <i class="fas fa-images"></i>
-            <span>Room Images</span></a>
+            <i class="fas fa-images"></i>
+            <span>Room Images</span>
+        </a>
         <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">
-        <i class="fas fa-images"></i>
-           <span> Add Testimonial</span></a>
+            <i class="fas fa-images"></i>
+            <span>Add Testimonial</span>
+        </a>
         <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">
-        <i class="fas fa-comment-alt"></i>
-            <span>Gallery Image</span></a>
+            <i class="fas fa-comment-alt"></i>
+            <span>Gallery Image</span>
+        </a>
         <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">
-        <i class="fas fa-box"></i>
-            <span>Package</span></a>
+            <i class="fas fa-box"></i>
+            <span>Package</span>
+        </a>
         <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">
-        <i class="fas fa-campground"></i>
-        <span>Camping Image</span></a>
-       
+            <i class="fas fa-campground"></i>
+            <span>Camping Image</span>
+        </a>
     </div>
 
     <!-- Main Content -->
-    <div class="content overflow-auto">
+    <div class="content" id="content">
         <!-- Add Destination Section -->
         <section>
             <div class="card">
@@ -375,27 +399,25 @@
                 <div class="destinations-grid">
                     {% for destination in destinations %}
                     <div class="destination-card">
-                        
-                            {% if destination.destination_image %}
-                            <img 
-                                src="{{ destination.destination_image.url }}" 
-                                alt="{{ destination.name }}"
-                                width="250"
-                                height="200"
-                                loading="lazy"
-                            >
-                            {% else %}
-                            <img 
-                                src="https://via.placeholder.com/250x200" 
-                                alt="{{ destination.name }}"
-                                width="250"
-                                height="200"
-                            >
-                            {% endif %}
-                            <div class="destination-overlay">
-                                <div class="destination-name">{{ destination.name }}</div>
-                            </div>
-                        </a>
+                        {% if destination.destination_image %}
+                        <img 
+                            src="{{ destination.destination_image.url }}" 
+                            alt="{{ destination.name }}"
+                            width="250"
+                            height="200"
+                            loading="lazy"
+                        >
+                        {% else %}
+                        <img 
+                            src="https://via.placeholder.com/250x200" 
+                            alt="{{ destination.name }}"
+                            width="250"
+                            height="200"
+                        >
+                        {% endif %}
+                        <div class="destination-overlay">
+                            <div class="destination-name">{{ destination.name }}</div>
+                        </div>
                         <div class="destination-actions">
                             <a href="{% url 'edit_destination' destination.id %}" class="btn btn-warning">Edit</a>
                             <a href="{% url 'delete_destination' destination.id %}" 
@@ -412,6 +434,38 @@
             </div>
         </section>
     </div>
-   </div>
+
+    <!-- JavaScript to Toggle Sidebar -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            sidebar.classList.toggle('active');
+            content.classList.toggle('shifted');
+        }
+
+        // Automatically show sidebar on desktop view
+        window.addEventListener('resize', () => {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            if (window.innerWidth > 768) {
+                sidebar.classList.add('active');
+                content.classList.add('shifted');
+            } else {
+                sidebar.classList.remove('active');
+                content.classList.remove('shifted');
+            }
+        });
+
+        // Initialize sidebar state on page load
+        window.addEventListener('load', () => {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            if (window.innerWidth > 768) {
+                sidebar.classList.add('active');
+                content.classList.add('shifted');
+            }
+        });
+    </script>
 </body>
 </html>

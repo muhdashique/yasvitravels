@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Camping Image</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family:  "Barlow", serif;
+      font-family: "Barlow", serif;
     }
 
     body {
@@ -20,6 +23,7 @@
       min-height: 100vh;
     }
 
+    /* Sidebar Styles */
     .sidebar {
       width: 250px;
       height: 100vh;
@@ -32,6 +36,8 @@
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
+      transition: transform 0.3s ease;
+      z-index: 1000;
     }
 
     .sidebar a {
@@ -60,10 +66,27 @@
       background-color: #5a6268;
     }
 
+    /* Mobile Menu Button */
+    .menu-btn {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: #343a40;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1001;
+      border-radius: 5px;
+    }
+
+    /* Main Content */
     .content-wrapper {
       margin-left: 250px;
       padding: 20px;
       flex-grow: 1;
+      transition: margin-left 0.3s ease;
     }
 
     h1 {
@@ -200,24 +223,36 @@
       grid-column: 1 / -1;
     }
 
+    /* Responsive Design */
     @media (max-width: 768px) {
+      .menu-btn {
+        display: block;
+      }
+
       .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        box-shadow: none;
+        transform: translateX(-100%);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
       }
 
       .content-wrapper {
         margin-left: 0;
-        padding: 10px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  
-  <div class="sidebar">
+  <!-- Mobile Menu Button -->
+  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
     <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
     <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
     <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
@@ -229,7 +264,8 @@
     <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
   </div>
 
-  <div class="content-wrapper">
+  <!-- Main Content -->
+  <div class="content-wrapper" id="content-wrapper">
     <h1>Add a New Camping Image</h1>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
@@ -266,7 +302,7 @@
           <div class="package-overlay">
               <p><strong>Description:</strong> {{ image.description }}</p>
               <p><strong>Name:</strong> {{ image.name }}</p>
-              <p><strong>Amount:</strong> {{ image.amount }}</p> <!-- Added amount -->
+              <p><strong>Amount:</strong> {{ image.amount }}</p>
               <p><strong>Status:</strong> {{ image.status|yesno:"Available,Not Available" }}</p>
               <div class="action-buttons">
                   <a href="{% url 'edit_campingimage' image.id %}" class="edit-btn">Edit</a>
@@ -279,8 +315,16 @@
           <p>No camping images available.</p>
       </div>
       {% endfor %}
+    </div>
   </div>
-  
-  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const contentWrapper = document.getElementById('content-wrapper');
+      sidebar.classList.toggle('active');
+      contentWrapper.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>

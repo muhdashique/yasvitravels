@@ -5,115 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Category</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
         body {
-            font-family:  "Barlow", serif;
+            font-family: "Barlow", sans-serif;
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: row;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 40px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .card {
-            border: none;
-            border-radius: 8px;
-        }
-
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 15px;
-            border-radius: 8px 8px 0 0;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .card-header h2 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-        .card-header i {
-            margin-right: 10px;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        form label {
-            font-weight: bold;
-            color: #495057;
-        }
-
-        form input, form select, form textarea {
-            width: 100%;
-            margin-top: 8px;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        form input:focus, form select:focus, form textarea:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
-        }
-
-        button {
-            display: inline-block;
-            padding: 10px 15px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-secondary {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #6c757d;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        /* Align Back Button */
-        .btn-container {
-            text-align: center;
-        }
-
-        /* Sidebar Styles */
+        /* Sidebar */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -126,6 +30,7 @@
             flex-direction: column;
             padding-top: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
         .sidebar a {
@@ -136,155 +41,115 @@
             transition: background-color 0.3s ease;
         }
 
-        .sidebar a:hover {
-            background-color: #495057;
-        }
-
-        .sidebar a.active {
+        .sidebar a:hover, .sidebar a.active {
             background-color: #007bff;
         }
 
-        .sidebar .logout {
-            margin-top: auto;
-            background-color: #6c757d;
-            text-align: center;
+        .menu-btn {
+            display: none;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 5px;
         }
 
-        .sidebar .logout:hover {
-            background-color: #5a6268;
-        }
-
-        /* Main Content Styles */
         .content {
             margin-left: 250px;
             padding: 20px;
-            flex-grow: 1;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
+            width: 100%;
         }
-        /* responsive */
-        /* Add these media queries after the existing CSS, just before the closing style tag */
 
-@media screen and (max-width: 768px) {
-    body {
-        flex-direction: column;
-    }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
 
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding-top: 10px;
-    }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+        }
 
-    .sidebar a {
-        padding: 10px 15px;
-        display: block;
-        text-align: left;
-        border-bottom: 1px solid #495057;
-    }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
 
-    .content {
-        margin-left: 0;
-        padding: 15px;
-        width: 100%;
-    }
+        .card-body {
+            padding: 20px;
+        }
 
-    .container {
-        margin: 20px auto;
-        padding: 15px;
-        width: 95%;
-    }
+        form input, form select, form textarea {
+            width: 100%;
+            margin-top: 8px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
 
-    .card-header {
-        padding: 12px;
-    }
+        button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    .card-header h2 {
-        font-size: 1.2rem;
-    }
+        .btn-secondary {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            text-align: center;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
 
-    form input, 
-    form select, 
-    form textarea {
-        padding: 8px;
-        font-size: 0.9rem;
-    }
-
-    button {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .btn-secondary {
-        width: 100%;
-        display: block;
-        margin: 10px 0;
-    }
-
-    /* Improve touch targets for mobile */
-    .sidebar a,
-    button,
-    .btn-secondary {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Adjust spacing for icons */
-    .card-header i,
-    button i,
-    .btn-secondary i {
-        margin-right: 8px;
-    }
-
-    /* Improve form readability on mobile */
-    form label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    /* Add some spacing between form elements */
-    form p {
-        margin-bottom: 15px;
-    }
-}
-
-/* Additional breakpoint for very small devices */
-@media screen and (max-width: 480px) {
-    .container {
-        margin: 10px auto;
-        padding: 10px;
-    }
-
-    .card-header h2 {
-        font-size: 1.1rem;
-    }
-
-    .sidebar a {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-    }
-}
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+            }
+            .menu-btn {
+                display: block;
+            }
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            .content {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <a href="{% url 'adminpannel' %}" class="{% if request.resolver_match.url_name == 'adminpannel' %}active{% endif %}">Admin Panel</a>
-        <a href="{% url 'view_destinations' %}" class="{% if request.resolver_match.url_name == 'view_destinations' %}active{% endif %}">Destinations</a>
-        <a href="{% url 'manage_categories' %}" class="{% if request.resolver_match.url_name == 'manage_categories' %}active{% endif %}">Categories</a>
-        <a href="{% url 'segment_list' %}" class="{% if request.resolver_match.url_name == 'segment_list' %}active{% endif %}">Segments</a>
-        <a href="{% url 'manage_images' %}" class="{% if request.resolver_match.url_name == 'manage_images' %}active{% endif %}">Room Images</a>
-        <a href="{% url 'add_testimonial' %}" class="{% if request.resolver_match.url_name == 'add_testimonial' %}active{% endif %}">Add Testimonial</a>
-        <a href="{% url 'add_gallery_image' %}" class="{% if request.resolver_match.url_name == 'add_gallery_image' %}active{% endif %}">Gallery Image</a>
-        <a href="{% url 'package_add' %}" class="{% if request.resolver_match.url_name == 'package_add' %}active{% endif %}">Package</a>
-        <a href="{% url 'add_campingimage' %}" class="{% if request.resolver_match.url_name == 'add_campingimage' %}active{% endif %}">Camping Image</a>
-       
-    </div>
+    <!-- <button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    <div class="sidebar" id="sidebar">
+        <a href="#" class="active">Admin Panel</a>
+        <a href="#">Destinations</a>
+        <a href="#">Categories</a>
+        <a href="#">Segments</a>
+        <a href="#">Room Images</a>
+        <a href="#">Gallery Image</a>
+    </div> -->
     <div class="content">
         <div class="container">
             <div class="card">
@@ -308,5 +173,10 @@
             </div>
         </div>
     </div>
+    <script>
+        function toggleMenu() {
+            document.getElementById("sidebar").classList.toggle("show");
+        }
+    </script>
 </body>
 </html>
