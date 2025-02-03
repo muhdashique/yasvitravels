@@ -788,7 +788,7 @@ body {
     </style>
 </head>
 <body>
-    <section>
+    <section class="w-full">
         <div class="banner">
             <div class="banner-content w-full lg:pt-40">
                 <div class="w-full">
@@ -800,8 +800,14 @@ body {
                             
                             <div class="flex justify-center items-start gap-10">
                                 <div class="hidden md:flex flex-col justify-center">
-                                    <div>yasvitravels@gmail.com</div>
-                                    <div class="flex w-full">9778518451</div>    
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <span>yasvitravels@gmail.com</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <span>9778518451</span>
+                                    </div>    
                                 </div>
                                 <div>
                                     <a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
@@ -901,14 +907,14 @@ body {
                             <span class="nav-text">Contact Us</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{% url 'login' %}" class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
                             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z"/>
                             </svg>
                             <span class="nav-text">Login</span>
                         </a>
-                    </li>
+                    </li> -->
                     
                     
                 </ul>

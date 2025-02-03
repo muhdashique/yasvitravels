@@ -201,14 +201,18 @@
 </head>
 <body>
     <div>
-        <div class="back-button-container">
-            <button onclick="history.back()" class="btn">Back</button>
-        </div>
+       <section style="margin-bottom: 40px;">
+        <div>
+            <div class="back-button-container" style="margin-bottom: 10%;">
+                <button onclick="history.back()" class="btn">Back</button>
+            </div>
+       </div>
+       </section>
         
         <style>
             .back-button-container {
                 position: absolute; /* Makes it easy to position the button */
-                top: 20px; /* Adjust as needed for vertical spacing */
+                top: 40px; /* Adjust as needed for vertical spacing */
                 left: 20px; /* Adjust as needed for horizontal spacing */
             }
         
@@ -229,7 +233,7 @@
         </style>
         
     </div>
-    <section class="imageview-section">
+    <section class="imageview-section" style="margin-top: 70px;">
         <h1 class="section-title">{{ segment.name }}</h1>
         <p class="segment-description">
             Explore images available for {{ segment.name }}

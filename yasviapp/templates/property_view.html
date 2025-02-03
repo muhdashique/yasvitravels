@@ -579,10 +579,6 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
             .tours-grid {
                 gap: 1rem;
             }
@@ -598,6 +594,7 @@
     .banner {
         height: auto;
         min-height: 70vh;
+        width: 100%;
     }
 
     .title {
@@ -731,14 +728,14 @@
                             <span class="nav-text">Contact Us</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{% url 'login' %}" class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
                             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z"/>
                             </svg>
                             <span class="nav-text">Login</span>
                         </a>
-                    </li>
+                    </li> -->
                  </ul>
             </nav>
              </div>
