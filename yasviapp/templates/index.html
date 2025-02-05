@@ -33,6 +33,7 @@
             width: 100%;
             height: 100vh;
             background-image: url('static/images/homebanner.jpg');
+            /* background-color: #012c6c; */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -298,7 +299,7 @@
             position: absolute;
             width: 80%;
             height: 500px;
-            background-color: #2389B5;
+            background-color: #121D27;
             border-radius: 25px;
             top: 40px;
             right: 0;
@@ -309,7 +310,7 @@
             position: absolute;
             width: 70%;
             height: 450px;
-            background-color: #0066cc;
+            background-color: #2973B2;
             border-radius: 25px;
             top: 20px;
             left: 0;
@@ -360,7 +361,7 @@
         .button {
             display: inline-block;
             padding: 12px 24px;
-            background-color: #2389B5;
+            background-color: #121D27;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -439,7 +440,7 @@
         }
 
         .nav-item.active {
-            color: #007bff;
+            color: #2389B5;
         }
 
         .nav-item.active::after {
@@ -1369,9 +1370,69 @@
 }
     
 
+
+
+
     </style>
 </head>
 <body>
+
+    <style>
+        #loader {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: white;
+          z-index: 9999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .spinner-container {
+          position: relative;
+          width: 120px;
+          height: 120px;
+        }
+        .loader-image {
+          width: 100px;
+          height: 100px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+        }
+        .spinner {
+          width: 120px;
+          height: 120px;
+          border: 5px solid #f3f3f3;
+          border-top: 5px solid #3498db;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+      
+      <div id="loader">
+        <div class="spinner-container">
+          <div class="spinner"></div>
+          <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\fevicon.png' %}" alt="Loader Image" class="loader-image">
+        </div>
+      </div>
+      
+      <script>
+        setTimeout(function() {
+          document.getElementById("loader").style.display = "none";
+        }, 300);  // Loader disappears after 1 second
+      </script>
+      
+    
+
     <section>
         
         <div class="banner">
@@ -1380,7 +1441,7 @@
                     <div class="w-full">
                         <div class="relative flex items-start justify-between w-full lg:pt-10">
                             <div class="w-auto h-[70px] lg:h-[100px]"> <!-- Logo positioned at the left corner -->
-                                <img src="{% static 'images/logowhite.png' %}" alt="Logo" class="h-full w-full object-contain">
+                                <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\logowhite.png' %}" alt="Logo" class="h-full w-full object-contain">
                             </div>
                             
                             <div class="flex justify-center items-start gap-10">
@@ -1391,16 +1452,13 @@
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <i class="fa-solid fa-phone"></i>
-                                        <span>&nbsp; 9778518451</span>
+                                        <span>&nbsp; +91 9778518451</span>
                                     </div>    
                                 </div>
                                 
-                                <div>
+                                <div style="font-weight: 700; font-size: x-large;">
                                     <a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-                                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                                            <path
-                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z" />
-                                        </svg>
+                                        <i class="fa-solid fa-right-to-bracket"></i>
                                         <span class="nav-text">Login</span>
                                     </a>
                                 </div>
@@ -1534,7 +1592,7 @@
     <section class="destinations-section">
         <div class="destinations-container">
             <h1 class="destinations-title">Explore Top Travel Destinations</h1>
-            <p class="destinations-subtitle">Discover incredible destinations and travel styles tailored to your preferences. Let our experts guide you to your next unforgettable journey!</p>
+            <p class="destinations-subtitle">Discover incredible destinations and travel styles tailored to your preferences. <br> Let our experts guide you to your next unforgettable journey</p>
             
             
             <div class="destinations-grid">
@@ -1565,7 +1623,7 @@
 
     <section class="tours-section">
       <h1 class="camping-title">Explore Your Adventure</h1>
-<p class="camping-description">Discover a variety of categories tailored to your perfect outdoor experience. Whether it's a serene escape or a thrilling adventure, we've got you covered!</p>
+<p class="camping-description">Discover a variety of categories tailored to your perfect outdoor experience. Whether it's a serene escape or a thrilling adventure.</p>
 
         
         <div class="tours-grid">
@@ -1613,7 +1671,7 @@
     <section>
         <div class="packages-container">
             <h1 class="camping-title">Unforgettable Tour Packages</h1>
-            <p class="camping-description">Embark on a journey of a lifetime with our handpicked tour packages. Whether you're seeking adventure, relaxation, or cultural experiences, we have something special for you.</p>
+            <p class="camping-description">Embark on a journey of a lifetime with our handpicked tour packages. Whether you're seeking adventure, relaxation, or cultural experiences.</p>
             
     
             <div class="packages-grid">
@@ -1638,7 +1696,7 @@
         <div class="camping-container">
           <div class="content-section">
             <h1 class="camping-title">Spectacular Camping Adventures</h1>
-            <p class="camping-description">Immerse yourself in the beauty of nature with our carefully curated camping tours. From serene landscapes to thrilling outdoor activities, your next adventure awaits!</p>
+            <p class="camping-description">Immerse yourself in the beauty of nature with our carefully curated camping tours. From serene landscapes to thrilling outdoor activities.</p>
             
             <!-- <a href="{% url 'login' %}" class="learn-more-btn">Add New Image</a> -->
             
@@ -1893,7 +1951,6 @@
 });
 
 </script>
-
 </body>
 </html>
 {% endblock %}

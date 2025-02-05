@@ -374,7 +374,7 @@
 
         /* destination */
         .destinations-container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -806,15 +806,12 @@ body {
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <i class="fa-solid fa-phone"></i>
-                                        <span>9778518451</span>
+                                        <span>+91 9778518451</span>
                                     </div>    
                                 </div>
-                                <div>
+                                <div style="font-weight: 700; font-size: x-large;">
                                     <a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-                                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                                            <path
-                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z" />
-                                        </svg>
+                                        <i class="fa-solid fa-right-to-bracket"></i>
                                         <span class="nav-text">Login</span>
                                     </a>
                                 </div>
@@ -928,78 +925,197 @@ body {
     </section>
     
 
-    <section class="products">
-        <div class="container">
-            <h1 class="destinations-title">Your Desired Destination</h1>
-            <div class="scroll-container">
-                <button class="scroll-button left" aria-label="Scroll Left">‹</button>
-                <div class="destinations-grid">
-                    {% for destination in destinations %}
-                    <div class="destination-card">
-                        <a href="{% url 'propertyview' destination.id %}">
-                            {% if destination.destination_image %}
-                                <img src="{{ destination.destination_image.url }}" alt="{{ destination.name }}">
-                            {% else %}
-                                <img src="https://www.shutterstock.com/image-photo/happy-traveler-woman-on-boat-260nw-2337247887.jpg" alt="{{ destination.name }}">
-                            {% endif %}
-                            <div class="destination-overlay">
-                                <div class="destination-name">{{ destination.name }}</div>
-                            </div>
-                        </a>
-                    </div>
-                    {% empty %}
-                    <p>No destinations available.</p>
-                    {% endfor %}
-                </div>
-                <button class="scroll-button right " aria-label="Scroll Right">›</button>
-            </div>
-        </div>
-    </section>
-    
-    
-
-
-    
-    
-    
-
-    <!-- <section class="tours-section">
-        <h1 class="section-title text-center">{{ section_title|default:"Room Categories" }}</h1>
-        
-        <div class="tours-grid">
-            {% for category in categories %}
-            <div class="tour-card">
-                <div class="tour-image-wrapper">
-                    <a href="{% url 'view_segments' category.id %}">
-                        {% if category.category_image %}
-                            <img src="{{ category.category_image.url }}" alt="{{ category.name }}" class="tour-image">
+    <!-- Template HTML -->
+<section class="products">
+    <div class="container">
+        <h1 class="destinations-title">Your Desired Destination</h1>
+        <div class="scroll-container">
+            <button class="scroll-button left" aria-label="Scroll Left">‹</button>
+            <div class="destinations-grid">
+                {% for destination in destinations %}
+                <div class="destination-card">
+                    <a href="{% url 'propertyview' destination.id %}">
+                        {% if destination.destination_image %}
+                            <img src="{{ destination.destination_image.url }}" alt="{{ destination.name }}">
                         {% else %}
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfrsgni2CRG5CcMq7t8Xk0c0JdtsIGL-CBJA&s" alt="{{ category.name }}" class="tour-image">
+                            <img src="https://www.shutterstock.com/image-photo/happy-traveler-woman-on-boat-260nw-2337247887.jpg" alt="{{ destination.name }}">
                         {% endif %}
+                        <div class="destination-overlay">
+                            <div class="destination-name">{{ destination.name }}</div>
+                        </div>
                     </a>
                 </div>
-                <div class="tour-info">
-                    <span class="tour-title">
-                        <a href="{% url 'view_segments' category.id %}">{{ category.name }}</a>
-                    </span>
-                    {% if category.price %}
-                    <span class="tour-price">${{ category.price }}</span>
-                    {% endif %}
-                </div>
+                {% empty %}
+                <p>No destinations available.</p>
+                {% endfor %}
             </div>
-            {% empty %}
-            <div class="no-categories text-center">
-                <p>No room categories available.</p>
-            </div>
-            {% endfor %}
+            <button class="scroll-button right" aria-label="Scroll Right">›</button>
         </div>
-        
-        {% if show_attribution %}
-        <div class="attribution text-center">
-            Images from <a href="https://freepik.com">Freepik</a>
-        </div>
-        {% endif %}
-    </section> -->
+    </div>
+</section>
+
+<!-- CSS -->
+<style>
+.products {
+    padding: 40px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.destinations-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.destinations-grid {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 20px 0;
+}
+
+.destinations-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.destination-card {
+    flex: 0 0 300px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.destination-card:hover {
+    transform: translateY(-5px);
+}
+
+.destination-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.destination-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 20px;
+    color: white;
+}
+
+.destination-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.scroll-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    z-index: 2;
+}
+
+.scroll-button:hover {
+    background: #555;
+}
+
+.scroll-button:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .destination-card {
+        flex: 0 0 250px;
+    }
+    
+    .scroll-button {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+}
+</style>
+
+<!-- JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollContainer = document.querySelector('.destinations-grid');
+    const leftButton = document.querySelector('.scroll-button.left');
+    const rightButton = document.querySelector('.scroll-button.right');
+    
+    // Scroll amount for each click (adjust as needed)
+    const scrollAmount = 300;
+    
+    // Left button click handler
+    leftButton.addEventListener('click', function() {
+        scrollContainer.scrollLeft -= scrollAmount;
+    });
+    
+    // Right button click handler
+    rightButton.addEventListener('click', function() {
+        scrollContainer.scrollLeft += scrollAmount;
+    });
+    
+    // Auto scroll functionality
+    let autoScrollInterval;
+    
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
+                scrollContainer.scrollLeft = 0;
+            } else {
+                scrollContainer.scrollLeft += scrollAmount;
+            }
+        }, 5000); // Scroll every 5 seconds
+    }
+    
+    // Start auto-scroll
+    startAutoScroll();
+    
+    // Pause on hover
+    scrollContainer.addEventListener('mouseenter', () => {
+        clearInterval(autoScrollInterval);
+    });
+    
+    // Resume on mouse leave
+    scrollContainer.addEventListener('mouseleave', () => {
+        startAutoScroll();
+    });
+});
+</script>
+    
+    
+
+
 
  
 
@@ -1007,7 +1123,7 @@ body {
     {% load static %}
 
     <section class="tours-section">
-        <h1 class="section-title text-center">{{ section_title|default:"Tourist Destinations" }}</h1>
+        <h1 class="section-title text-center">{{ section_title|default:"Property Categories" }}</h1>
         
         <div class="grid-container">
             {% for category in categories %}
@@ -1037,7 +1153,7 @@ body {
     
         {% if show_attribution %}
         <div class="attribution text-center">
-            Images from <a href="https://freepik.com">Freepik</a>
+           
         </div>
         {% endif %}
     
@@ -1156,6 +1272,59 @@ body {
     </script>
     
     
+    <style>
+        #loader {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: white;
+          z-index: 9999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .spinner-container {
+          position: relative;
+          width: 120px;
+          height: 120px;
+        }
+        .loader-image {
+          width: 100px;
+          height: 100px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+        }
+        .spinner {
+          width: 120px;
+          height: 120px;
+          border: 5px solid #f3f3f3;
+          border-top: 5px solid #3498db;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+      
+      <div id="loader">
+        <div class="spinner-container">
+          <div class="spinner"></div>
+          <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\fevicon.png' %}" alt="Loader Image" class="loader-image">
+        </div>
+      </div>
+      
+      <script>
+        setTimeout(function() {
+          document.getElementById("loader").style.display = "none";
+        }, 1000);  // Loader disappears after 1 second
+      </script>
     
 </body>
 </html>

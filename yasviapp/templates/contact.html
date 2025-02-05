@@ -602,15 +602,12 @@ section {
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <i class="fa-solid fa-phone"></i>
-                                        <span>9778518451</span>
+                                        <span>+91 9778518451</span>
                                     </div>    
                                 </div>
-                                <div>
+                                <div style="font-weight: 700; font-size: x-large;">
                                     <a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-                                        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                                            <path
-                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z" />
-                                        </svg>
+                                        <i class="fa-solid fa-right-to-bracket"></i>
                                         <span class="nav-text">Login</span>
                                     </a>
                                 </div>
@@ -893,6 +890,63 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     </script>
+
+
+<style>
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .spinner-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .loader-image {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+    .spinner {
+      width: 120px;
+      height: 120px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  
+  <div id="loader">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\fevicon.png' %}" alt="Loader Image" class="loader-image">
+    </div>
+  </div>
+  
+  <script>
+    setTimeout(function() {
+      document.getElementById("loader").style.display = "none";
+    }, 1000);  // Loader disappears after 1 second
+  </script>
+
+
 </body>
 </html>
 {% endblock %}

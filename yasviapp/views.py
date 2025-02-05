@@ -587,7 +587,6 @@ def send_email(request):
             phone = form.cleaned_data['phone']
             message = form.cleaned_data['message']
 
-            # Format the message with all details
             formatted_message = (
                 f"New Contact Form Submission:\n\n"
                 f"Name: {name}\n"
@@ -598,10 +597,10 @@ def send_email(request):
 
             try:
                 send_mail(
-                    f"Contact Form Submission by {name}",  # Email Subject
-                    formatted_message,                   # Email Message
-                    settings.EMAIL_HOST_USER,            # From Email
-                    [settings.EMAIL_HOST_USER],          # To Email
+                    f"Contact Form Submission by {name}",  
+                    formatted_message,                   
+                    settings.EMAIL_HOST_USER,           
+                    [settings.EMAIL_HOST_USER],         
                 )
                 return JsonResponse({'status': 'success', 'message': 'Email sent successfully!'})
             except Exception as e:

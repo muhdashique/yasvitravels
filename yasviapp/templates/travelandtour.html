@@ -814,12 +814,15 @@
         .hero-section {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://storage.googleapis.com/production-hostgator-v1-0-8/588/349588/h0cXJnxB/99c8c80d286944e4a6d2f8626b8dd230');
             background-size: cover;
-            background-position: center;
+            /* background-position: center; */
             color: white;
             padding: 60px 20px;
             text-align: center;
             border-radius: 10px;
             margin-bottom: 40px;
+            width: 1150px;
+            
+            height: 60vh;
         }
 
         .hero-section h1 {
@@ -1161,15 +1164,12 @@
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <i class="fa-solid fa-phone"></i>
-                                    <span>9778518451</span>
+                                    <span>+91 9778518451</span>
                                 </div>    
                             </div>
-                            <div>
+                            <div style="font-weight: 700; font-size: x-large;">
                                 <a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-                                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path
-                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z" />
-                                    </svg>
+                                    <i class="fa-solid fa-right-to-bracket"></i>
                                     <span class="nav-text">Login</span>
                                 </a>
                             </div>
@@ -1288,7 +1288,7 @@
         
         <div class="gride">
           <div class="card">
-            <img src="https://media-cdn.tripadvisor.com/media/photo-s/12/c8/c7/d8/bawal-taxi-service-in.jpg" alt="African Safari" class="card-image">
+            <img src="https://jodhpurcabservice.com/wp-content/uploads/2023/05/taxi-in-jodhpu-family.jpg" alt="African Safari" class="card-image">
             <div class="card-content">
               <h2 class="card-title">Taxi Services</h2>
               <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
@@ -1297,7 +1297,7 @@
           </div>
     
           <div class="card">
-            <img src="https://5.imimg.com/data5/SELLER/Default/2022/7/JN/NA/QM/153681987/domestic-air-ticketing-agents-for-corporate-500x500.jpeg" alt="Planning" class="card-image">
+            <img src="https://images.pexels.com/photos/3769146/pexels-photo-3769146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Planning" class="card-image">
             <div class="card-content">
               <h2 class="card-title">Ticket Booking</h2>
               <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
@@ -1324,7 +1324,7 @@
           </div>
     
           <div class="card">
-            <img src="https://i.ytimg.com/vi/Kur7JuBy7S0/maxresdefault.jpg" alt="Romantic Tours" class="card-image">
+            <img src="https://images.pexels.com/photos/1275393/pexels-photo-1275393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Romantic Tours" class="card-image">
             <div class="card-content">
               <h2 class="card-title">Tour Packages</h2>
               <p class="card-text">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
@@ -1562,7 +1562,7 @@
 
 
     <section id="private_driver">
-        <div class="taxi-service">
+        <div class="taxi-service" style="object-fit: fill;">
             <!-- Previous content remains the same -->
             <div class="hero-section" style="background-image: url('https://media.baamboozle.com/uploads/images/44822/1615995971_256612_url.jpeg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;">
                 <h1>Private Drivers at Your Service</h1>
@@ -1596,8 +1596,8 @@
                 <div class="features-grid">
                     <div class="booking-section">
                         <div class="section-icon"><i class="fa-solid fa-car"></i></div>
-                        <h2 class="section-title">Luxury Vehicles</h2>   
-                        <p>Travel in style with our fleet of premium vehicles equipped with top-tier amenities.</p>
+                        <h2 class="section-title">Experienced Drivers</h2>   
+                        <p>Travel in style with our fleet of experienced drivers, each equipped with top-tier amenities</p>
                     </div>
     
                     <div class="booking-section">
@@ -1636,9 +1636,9 @@
 
 
     <section id="private_photography">
-        <div class="taxi-service">
+        <div class="taxi-service" style="object-fit: cover;">
             <!-- Hero Section with Background Image -->
-            <div class="hero-section" style="background-image: url('https://s.marketwatch.com/public/resources/images/MW-HX226_Liv_tr_ZG_20191219150649.jpg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;">
+            <div class="hero-section" style="background-image: url('https://iso.500px.com/wp-content/uploads/2016/10/stock-photo-159358357-1500x982.jpg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;">
                 <h1>Capture Your Moments with Ease</h1>
                 <p>Your trusted partner for private photography and videography services 24/7</p>
             </div>
@@ -1770,6 +1770,59 @@ function openPreview(imageUrl) {
 
 
     
+<style>
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .spinner-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .loader-image {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+    .spinner {
+      width: 120px;
+      height: 120px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  
+  <div id="loader">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\fevicon.png' %}" alt="Loader Image" class="loader-image">
+    </div>
+  </div>
+  
+  <script>
+    setTimeout(function() {
+      document.getElementById("loader").style.display = "none";
+    }, 1000);  // Loader disappears after 1 second
+  </script>
 
     
 </body>
