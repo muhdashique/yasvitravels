@@ -3,17 +3,21 @@
 from django import forms
 from .models import CampingImage, Destination, Category, GalleryImage, Package, Segment, Image, Testimonial
 
+
+#destination adding form
 class DestinationForm(forms.ModelForm):
     class Meta:
         model = Destination
         fields = ['name', 'destination_image']
 
+
+#category adding form
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['destination', 'name', 'category_image']
 
-
+#segment adding form
 class SegmentForm(forms.ModelForm):
     class Meta:
         model = Segment
@@ -44,11 +48,10 @@ class SegmentForm(forms.ModelForm):
             raise forms.ValidationError("Selected category does not belong to the selected destination.")
         
         return cleaned_data
+    
 
-# forms.py
-from django import forms
-from .models import Image, Category, Segment
 
+#image adding form
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
@@ -70,7 +73,6 @@ class ImageForm(forms.ModelForm):
                 category=instance.category
             )
         
-        # If we have POST data
         elif args and args[0]:
             destination_id = args[0].get('destination')
             category_id = args[0].get('category')
@@ -100,36 +102,37 @@ class ImageForm(forms.ModelForm):
             )
         
         return cleaned_data
+    
 
-
+#testimonial adding form
 class TestimonialForm(forms.ModelForm):
     class Meta:
         model = Testimonial
         fields = ['name', 'image', 'review']
 
 
+#gallery image adding form
 class GalleryImageForm(forms.ModelForm):
     class Meta:
         model = GalleryImage
         fields = ['image', 'category', 'description']
 
 
-
+#tour package adding form
 class PackageForm(forms.ModelForm):
     class Meta:
         model = Package
         fields = ['name', 'details', 'image', 'amount', 'status']
 
 
-
-
+#camping package adding form 
 class CampingImageForm(forms.ModelForm):
     class Meta:
         model = CampingImage
         fields = ['image', 'description', 'name', 'details', 'amount', 'status']
 
 
-
+#email sending form
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
     email = forms.EmailField(required=True)

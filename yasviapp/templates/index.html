@@ -1376,7 +1376,7 @@
     </style>
 </head>
 <body>
-
+<!-- page loader -->
     <style>
         #loader {
           position: fixed;
@@ -1421,7 +1421,7 @@
       <div id="loader">
         <div class="spinner-container">
           <div class="spinner"></div>
-          <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\fevicon.png' %}" alt="Loader Image" class="loader-image">
+          <img src="{% static 'images\fevicon.png' %}" alt="Loader Image" class="loader-image">
         </div>
       </div>
       
@@ -1430,7 +1430,7 @@
           document.getElementById("loader").style.display = "none";
         }, 300);  // Loader disappears after 1 second
       </script>
-      
+      <!-- page loader -->
     
 
     <section>
@@ -1951,6 +1951,11 @@
 });
 
 </script>
+
+<style>
+    
+</style>
+
 </body>
 </html>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# models.py
+# destination model
 
 class Destination(models.Model):
     name = models.CharField(max_length=100)
@@ -10,7 +10,7 @@ class Destination(models.Model):
     def __str__(self):
         return self.name
 
-
+#category model
 class Category(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -19,7 +19,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
+#segment model
 class Segment(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -32,7 +32,7 @@ class Segment(models.Model):
 
 
 
-
+#image model
 class Image(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -43,7 +43,7 @@ class Image(models.Model):
     def __str__(self):
         return self.title or "Image"
 
-
+#testimonial model
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='testimonials/')
@@ -55,8 +55,8 @@ class Testimonial(models.Model):
 
 
 
-from django.db import models
 
+#gallery image model
 class GalleryImage(models.Model):
     image = models.ImageField(upload_to='gallery/')
     category = models.CharField(max_length=100)
@@ -66,7 +66,7 @@ class GalleryImage(models.Model):
         return self.category
     
 
-    
+ #tour package model   
 class Package(models.Model):
     name = models.CharField(max_length=255)
     details = models.TextField()
@@ -81,7 +81,7 @@ class Package(models.Model):
 
 
 
-
+#camping package model
 class CampingImage(models.Model):
     image = models.ImageField(upload_to='camping_images/')
     description = models.TextField(blank=True, null=True)
