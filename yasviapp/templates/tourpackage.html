@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>YASVI TRAVELS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -387,7 +387,83 @@
     .nav-text, .nav-text-small {
         font-size: 14px;
     }
+    .modal-content{
+        display: flex;
+        flex-direction: column;
+    }
 }
+
+
+/* package image preview */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    display: flex;
+    max-width: 800px;
+    margin: 100px auto;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.modal-left {
+    flex: 1;
+}
+
+.modal-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-right {
+    flex: 1;
+    padding: 20px;
+}
+
+.modal-right h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.modal-right p {
+    margin: 5px 0;
+}
+
+.chat-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.chat-button i {
+    margin-right: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
     </style>
 </head>
 <body>
@@ -532,38 +608,50 @@
     <section>
         <div class="packages-container" id="tour_package">
             <h1 class="camping-title" style="color: #2e2d2d;">Unforgettable Tour Packages</h1>
-            <p class="camping-description" style="color: #2e2d2d;">Embark on a journey of a lifetime with our handpicked tour packages. Whether you're seeking adventure, relaxation, or cultural experiences, we have something special for you.</p>
+            <p class="camping-description" style="color: #2e2d2d;">
+                Embark on a journey of a lifetime with our handpicked tour packages. Whether you're seeking adventure, relaxation, or cultural experiences, we have something special for you.
+            </p>
     
             <div class="packages-grid">
                 {% for package in packages %}
-                    <div class="package-card">
-                        <img 
-                            src="{{ package.image.url }}" 
-                            alt="{{ package.name }}" 
-                            class="package-image" 
-                            onclick="openPackageModal('{{ package.image.url }}', '{{ package.name }}', '{{ package.details }}', '{{ package.amount }}', '{{ package.get_status_display }}')"
-                        >
-                        <div class="package-overlay">
-                            <div class="package-name">{{ package.name }}</div>
-                            <div class="package-description">{{ package.details }}</div>
-                            <div class="package-amount">Price: ₹{{ package.amount }}</div>
-                            <div class="package-status">
-                                Status: {{ package.get_status_display }}
-                            </div>
-                        </div>
+                <div class="package-card">
+                    <img 
+                        src="{{ package.image.url }}" 
+                        alt="{{ package.name }}" 
+                        class="package-image" 
+                        onclick="openPackageModal('{{ package.image.url }}', '{{ package.name }}', '{{ package.details }}', '{{ package.amount }}', '{{ package.get_status_display }}')"
+                    >
+                    <div class="package-overlay">
+                        <div class="package-name">{{ package.name }}</div>
+                        <!-- <div class="package-description">{{ package.details }}</div> -->
+                        <div class="package-amount"> ₹{{ package.amount }}</div>
+                        <div class="package-status"> {{ package.get_status_display }}</div>
                     </div>
+                </div>
                 {% endfor %}
             </div>
-            
+    
             <!-- Modal -->
-            <div id="packageModal" class="modal" onclick="closePackageModal()">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="packageModalImage">
-                <div id="packageModalDetails"></div>
+            <div id="packageModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-left">
+                        <img id="packageModalImage" src="" alt="Package Image">
+                    </div>
+                    <div class="modal-right">
+                        <h2 id="packageModalName"></h2>
+                        <p id="packageModalDetails"></p>
+                        <p id="packageModalAmount"></p>
+                        <p id="packageModalStatus"></p>
+                        <a id="chatButton" class="chat-button" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <span class="close" onclick="closePackageModal()">&times;</span>
             </div>
-            
         </div>
-</section>
+    </section>
+    
 
 
 <style>
@@ -610,7 +698,7 @@
   <div id="loader">
     <div class="spinner-container">
       <div class="spinner"></div>
-      <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\fevicon.png' %}" alt="Loader Image" class="loader-image">
+      <img src="{% static 'images\fevicon.png' %}" alt="Loader Image" class="loader-image">
     </div>
   </div>
   
@@ -618,6 +706,28 @@
     setTimeout(function() {
       document.getElementById("loader").style.display = "none";
     }, 1000);  // Loader disappears after 1 second
+
+
+
+    // tour package preview section
+    function openPackageModal(imageUrl, name, details, amount, status) {
+        document.getElementById('packageModalImage').src = imageUrl;
+        document.getElementById('packageModalName').innerText = name;
+        document.getElementById('packageModalDetails').innerText = "Details: " + details;
+        document.getElementById('packageModalAmount').innerText = "Price: ₹" + amount;
+        document.getElementById('packageModalStatus').innerText = "Status: " + status;
+
+        // Generate WhatsApp link with package details
+        const message = `Hello, I'm interested in the following package:\n\n*Package Name:* ${name}\n*Details:* ${details}\n*Price:* ₹${amount}\n*Status:* ${status}`;
+        const whatsappLink = `https://wa.me/919778518451?text=${encodeURIComponent(message)}`;
+        document.getElementById('chatButton').href = whatsappLink;
+
+        document.getElementById('packageModal').style.display = 'block';
+    }
+
+    function closePackageModal() {
+        document.getElementById('packageModal').style.display = 'none';
+    }
   </script>
 
 </body>

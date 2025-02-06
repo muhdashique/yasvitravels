@@ -237,13 +237,13 @@
             {% endfor %}
         {% endif %}
 
-        <div class="login-form">
-            <img src="{% static 'images\fevicon.png' %}" alt="Your Logo" class="login-icon" style="width: 150px; height: auto;">
+        <div class="login-form" style="margin-bottom: 15%;">
+            <img src="{% static 'images\fevicon.png' %}" alt="Your Logo" class="login-icon" style="width: 150px; height: 100px;">
 
             
             <h1>Admin Login</h1>
             
-            <form method="post">
+            <form method="post" >
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username" class="form-label">Username</label>
@@ -264,7 +264,7 @@
         
         <div class="login-welcome">
             <h1 class="welcome-text">YASVI TRAVELS</h1>
-            <h2 class="welcome-text">Welcome Back</h2>
+            <h2 class="welcome-text">Welcome </h2>
         </div>
     </div>
 

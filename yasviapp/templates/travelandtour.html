@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel & Tourism Services</title>
+    <title>Yasvi Travel </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -490,9 +490,9 @@
             background-color: #45a049;
         }
         .image-gallery {
-            display: grid;
+            /* display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 1.5rem; */
         }
         .package-card {
             position: relative;
@@ -696,10 +696,10 @@
 }
 
 .image-gallery {
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
-    padding: 20px 0;
+    padding: 20px 0; */
 }
 
 .package-card {
@@ -775,10 +775,10 @@
         padding: 0 20px;
     }
 
-    .image-gallery {
+    /* .image-gallery {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 20px;
-    }
+    } */
 }
 
 @media (max-width: 480px) {
@@ -820,7 +820,7 @@
             text-align: center;
             border-radius: 10px;
             margin-bottom: 40px;
-            width: 1150px;
+            /* width: 1150px; */
             
             height: 60vh;
         }
@@ -1141,6 +1141,83 @@
     .nav-text, .nav-text-small {
         font-size: 14px;
     }
+    .modal-content{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* camping image preview */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    display: flex;
+    max-width: 900px;
+    margin: 100px auto;
+    background: rgb(0, 0, 0);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.modal-left {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-right {
+    flex: 1;
+    background: #f4f4f4;
+}
+
+.modal-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-left h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.modal-left p {
+    margin: 5px 0;
+}
+
+.chat-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.chat-button i {
+    margin-right: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
 }
 
     </style>
@@ -1353,17 +1430,20 @@
             <p class="camping-description">
                 Immerse yourself in the beauty of nature with our carefully curated camping tours. From serene landscapes to thrilling outdoor activities, your next adventure awaits!
             </p>
-            
-            <div class="image-gallery">
+
+            <div class="image-gallery grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
                 {% for image in images %}
                     <div class="package-card">
-                        <img src="{{ image.image.url }}" alt="{{ image.name }}" onclick="openPreview('{{ image.image.url }}')">
-                        <div class="package-overlay">
-                            <p><strong></strong> {{ image.description }}</p>
-                            <p><strong></strong> {{ image.name }}</p>
-                            <p><strong></strong> {{ image.details }}</p>
-                            <p><strong></strong> ${{ image.amount }}</p>
-                            <p><strong></strong> {{ image.status|yesno:"Available,Not Available" }}</p>
+                        <img src="{{ image.image.url }}" alt="{{ image.name }}" class="package-image">
+                        <div class="package-overlay relative">
+                            <p><strong>Name:</strong> {{ image.name }}</p>
+                            <p><strong>Description:</strong> {{ image.description }}</p>
+                            <!-- <p><strong>Details:</strong> {{ image.details }}</p> -->
+                            <p><strong>Price:</strong> ${{ image.amount }}</p>
+                            <p><strong>Status:</strong> {{ image.status|yesno:"Available,Not Available" }}</p>
+                            <div class="absolute right-2 bottom-10 z-[999]">
+                                <button class="px-10 py-2 rounded-lg bg-[#fff] font-semibold text-[#000]" onclick="openPreview('{{ image.image.url }}', '{{ image.name }}', '{{ image.description }}', '{{ image.details }}', '{{ image.amount }}', '{{ image.status|yesno:"Available,Not Available" }}')">View</button>
+                            </div>
                         </div>
                     </div>
                 {% empty %}
@@ -1375,12 +1455,27 @@
         </div>
     </div>
 
-    <!-- Modal for Image Preview -->
-    <div id="imagePreviewModal" class="modal" onclick="closePreview()">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="previewImage">
+    <!-- Modal for Image and Details Preview -->
+    <div id="imagePreviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-left">
+                <h2 id="modalName"></h2>
+                <p id="modalDescription"></p>
+                <!-- <p id="modalDetails"></p> -->
+                <p id="modalAmount"></p>
+                <p id="modalStatus"></p>
+                <a id="chatButton" class="chat-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+            <div class="modal-right">
+                <img id="previewImage" src="" alt="Package Image">
+            </div>
+        </div>
+        <span class="close" onclick="closePreview()">&times;</span>
     </div>
 </section>
+
 
 
 
@@ -1735,16 +1830,16 @@
     function openPackageModal(imageUrl, name, details, amount, status) {
     const modal = document.getElementById('packageModal');
     const modalImage = document.getElementById('packageModalImage');
-    const modalDetails = document.getElementById('packageModalDetails');
+    // const modalDetails = document.getElementById('packageModalDetails');
 
     modal.style.display = 'flex';
     modalImage.src = imageUrl;
-    modalDetails.innerHTML = `
-        <h2>${name}</h2>
-        <p>${details}</p>
-        <p>Price: ₹${amount}</p>
-        <p>Status: ${status}</p>
-    `;
+    // modalDetails.innerHTML = `
+    //     <h2>${name}</h2>
+    //     <p>${details}</p>
+    //     <p>Price: ₹${amount}</p>
+    //     <p>Status: ${status}</p>
+    // `;
 }
 
 function closePackageModal() {
@@ -1822,6 +1917,29 @@ function openPreview(imageUrl) {
     setTimeout(function() {
       document.getElementById("loader").style.display = "none";
     }, 1000);  // Loader disappears after 1 second
+
+
+
+    // camping image preview
+    function openPreview(imageUrl, name, description, details, amount, status) {
+        document.getElementById('previewImage').src = imageUrl;
+        document.getElementById('modalName').innerText = "Name: " + name;
+        document.getElementById('modalDescription').innerText = "Description: " + description;
+        // document.getElementById('modalDetails').innerText = "Details: " + details;
+        document.getElementById('modalAmount').innerText = "Price: $" + amount;
+        document.getElementById('modalStatus').innerText = "Status: " + status;
+
+        // Generate WhatsApp link with package details
+        const message = `Hello, I'm interested in the following package:\n\n*Name:* ${name}\n*Description:* ${description}\n*Details:* ${details}\n*Price:* $${amount}\n*Status:* ${status}`;
+        const whatsappLink = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+        document.getElementById('chatButton').href = whatsappLink;
+
+        document.getElementById('imagePreviewModal').style.display = 'block';
+    }
+
+    function closePreview() {
+        document.getElementById('imagePreviewModal').style.display = 'none';
+    }
   </script>
 
     
