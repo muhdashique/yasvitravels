@@ -1441,7 +1441,7 @@
                     <div class="w-full">
                         <div class="relative flex items-start justify-between w-full lg:pt-10">
                             <div class="w-auto h-[70px] lg:h-[100px]"> <!-- Logo positioned at the left corner -->
-                                <img src="{% static 'D:\IMC project\yasvitaravelsproject\yasviproject\static\images\logowhite.png' %}" alt="Logo" class="h-full w-full object-contain">
+                                <img src="{% static 'images\logowhite.png' %}" alt="Logo" class="h-full w-full object-contain">
                             </div>
                             
                             <div class="flex justify-center items-start gap-10">
@@ -1680,7 +1680,7 @@
                        <a href="{% url 'tourpackage' %}"> <img src="{{ package.image.url }}" alt="{{ package.name }}"></a>
                         <div class="package-overlay">
                             <div class="package-name">{{ package.name }}</div>
-                            <div class="package-description">{{ package.details }}</div>
+                            <!-- <div class="package-description">{{ package.details }}</div> -->
                             <div class="package-amount">Price: ₹{{ package.amount }}</div>
                             <div class="package-status">
                                 Status: {{ package.get_status_display }}
@@ -1706,7 +1706,7 @@
                  <a href="{% url 'travelandtour' %}#campain_tour"> <img src="{{ image.image.url }}" alt="{{ image.name }}"></a>
                   <div class="package-overlay">
                     <p><strong></strong> {{ image.name }}</p>
-                    <p><strong></strong> {{ image.description }}</p>
+                    <!-- <p><strong></strong> {{ image.description }}</p> -->
                     <p><strong></strong> {{ image.details }}</p>
                     <p><strong></strong> ${{ image.amount }}</p>
                     <p><strong></strong> {{ image.status|yesno:"Available,Not Available" }}</p>

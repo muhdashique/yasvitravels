@@ -489,11 +489,11 @@
         .learn-more-btn:hover {
             background-color: #45a049;
         }
-        .image-gallery {
-            /* display: grid;
+        /* .image-gallery {
+            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem; */
-        }
+            gap: 1.5rem; 
+        } */
         .package-card {
             position: relative;
             height: 300px;
@@ -695,12 +695,12 @@
     box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
 }
 
-.image-gallery {
-    /* display: grid;
+/* .image-gallery {
+     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
-    padding: 20px 0; */
-}
+    padding: 20px 0; 
+} */
 
 .package-card {
     position: relative;
@@ -1178,7 +1178,7 @@
 
 .modal-right {
     flex: 1;
-    background: #f4f4f4;
+    background: #000000;
 }
 
 .modal-right img {
@@ -1219,7 +1219,50 @@
     color: white;
     cursor: pointer;
 }
-
+/* image preview scrollbar */
+#modalDescription {
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 5px;
+    border: 1px solid #000000;
+    background-color: #000000;
+    white-space: pre-wrap; /* Ensures newlines are respected */
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    display: flex;
+    padding: 20px;
+    background: #000000;
+    margin: 50px auto;
+    max-width: 800px;
+    border-radius: 8px;
+}
+.modal-left {
+    flex: 1;
+    padding: 10px;
+}
+.modal-right img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+}
     </style>
 </head>
 <body>
@@ -1437,12 +1480,23 @@
                         <img src="{{ image.image.url }}" alt="{{ image.name }}" class="package-image">
                         <div class="package-overlay relative">
                             <p><strong>Name:</strong> {{ image.name }}</p>
-                            <p><strong>Description:</strong> {{ image.description }}</p>
+                            <!-- <p><strong>Description:</strong> {{ image.description }}</p> -->
                             <!-- <p><strong>Details:</strong> {{ image.details }}</p> -->
                             <p><strong>Price:</strong> ${{ image.amount }}</p>
                             <p><strong>Status:</strong> {{ image.status|yesno:"Available,Not Available" }}</p>
                             <div class="absolute right-2 bottom-10 z-[999]">
-                                <button class="px-10 py-2 rounded-lg bg-[#fff] font-semibold text-[#000]" onclick="openPreview('{{ image.image.url }}', '{{ image.name }}', '{{ image.description }}', '{{ image.details }}', '{{ image.amount }}', '{{ image.status|yesno:"Available,Not Available" }}')">View</button>
+                                <button 
+                                    class="px-10 py-2 rounded-lg bg-[#fff] font-semibold text-[#000]" 
+                                    data-image="{{ image.image.url }}" 
+                                    data-name="{{ image.name|escapejs }}" 
+                                    data-description="{{ image.description|escapejs }}" 
+                                    data-details="{{ image.details|escapejs }}" 
+                                    data-amount="{{ image.amount }}" 
+                                    data-status="{{ image.status|yesno:'Available,Not Available' }}" 
+                                    onclick="openPreview(this)">View
+                                </button>
+                            
+
                             </div>
                         </div>
                     </div>
@@ -1460,8 +1514,7 @@
         <div class="modal-content">
             <div class="modal-left">
                 <h2 id="modalName"></h2>
-                <p id="modalDescription"></p>
-                <!-- <p id="modalDetails"></p> -->
+                <p id="modalDescription"></p> <!-- Scrollbar will be applied here -->
                 <p id="modalAmount"></p>
                 <p id="modalStatus"></p>
                 <a id="chatButton" class="chat-button" target="_blank">
@@ -1727,9 +1780,6 @@
         </div>  
     </section>
 
-
-
-
     <section id="private_photography">
         <div class="taxi-service" style="object-fit: cover;">
             <!-- Hero Section with Background Image -->
@@ -1921,25 +1971,29 @@ function openPreview(imageUrl) {
 
 
     // camping image preview
-    function openPreview(imageUrl, name, description, details, amount, status) {
+    function openPreview(button) {
+        const imageUrl = button.getAttribute('data-image');
+        const name = button.getAttribute('data-name');
+        const description = button.getAttribute('data-description').replace(/\\u000D\\u000A|\\n/g, '\n');
+        const details = button.getAttribute('data-details').replace(/\\u000D\\u000A|\\n/g, '\n');
+        const amount = button.getAttribute('data-amount');
+        const status = button.getAttribute('data-status');
+
         document.getElementById('previewImage').src = imageUrl;
         document.getElementById('modalName').innerText = "Name: " + name;
-        document.getElementById('modalDescription').innerText = "Description: " + description;
-        // document.getElementById('modalDetails').innerText = "Details: " + details;
-        document.getElementById('modalAmount').innerText = "Price: $" + amount;
+        document.getElementById('modalDescription').innerText = "Description:\n" + description;
+        document.getElementById('modalAmount').innerText = "Price: ₹" + amount;
         document.getElementById('modalStatus').innerText = "Status: " + status;
 
-        // Generate WhatsApp link with package details
-        const message = `Hello, I'm interested in the following package:\n\n*Name:* ${name}\n*Description:* ${description}\n*Details:* ${details}\n*Price:* $${amount}\n*Status:* ${status}`;
+        const message = `Hello, I'm interested in the following package:\n\n*Name:* ${name}\n*Description:* ${description}\n*Details:* ${details}\n*Price:* ₹${amount}\n*Status:* ${status}`;
         const whatsappLink = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
         document.getElementById('chatButton').href = whatsappLink;
 
         document.getElementById('imagePreviewModal').style.display = 'block';
     }
 
-    function closePreview() {
-        document.getElementById('imagePreviewModal').style.display = 'none';
-    }
+
+
   </script>
 
     

@@ -132,74 +132,91 @@
         }
 
         /* Lightbox styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            padding: 2rem;
-        }
+.lightbox-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto; /* Scroll for smaller screens */
+}
 
-        .lightbox.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.lightbox-content {
+    position: relative;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
 
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90vh;
-        }
+.lightbox-image {
+    max-width: 100%;
+    max-height: 70vh;
+    height: auto;
+    border-radius: 8px;
+}
 
-        .lightbox-image {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
+.lightbox-title {
+    margin: 10px 0;
+    font-size: 18px;
+}
 
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 1001;
+}
 
-        .close-lightbox:hover {
-            transform: rotate(90deg);
-        }
+.chat-button:hover {
+    background-color: #1ebe5b;
+}
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .imageview-section {
-                padding: 1rem;
-            }
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: #000000;
+    cursor: pointer;
+}
 
-            .section-title {
-                font-size: 2rem;
-            }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lightbox-content {
+        padding: 10px;
+        max-width: 90%;
+    }
 
-            .images-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 1rem;
-            }
-        }
+    .lightbox-title {
+        font-size: 16px;
+    }
 
-        @media (max-width: 480px) {
-            .section-title {
-                font-size: 1.75rem;
-            }
+    .chat-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
 
-            .segment-description {
-                font-size: 1rem;
-            }
-        }
+    .close {
+        font-size: 24px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -238,13 +255,11 @@
     </div>
     <section class="imageview-section" style="margin-top: 70px;">
         <h1 class="section-title">{{ segment.name }}</h1>
-        <p class="segment-description">
-            Explore Images available for {{ segment.name }}
-        </p>
-
+        <p class="segment-description">Explore Images available for {{ segment.name }}</p>
+    
         <div class="images-grid">
             {% for image in images %}
-            <div class="image-card" onclick="openLightbox('{{ image.image.url }}')">
+            <div class="image-card" onclick="openLightbox('{{ image.image.url }}', '{{ image.title }}')">
                 <div class="image-wrapper">
                     <img src="{{ image.image.url }}" alt="{{ image.title }}" class="segment-image">
                 </div>
@@ -259,14 +274,17 @@
             {% endfor %}
         </div>
     </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="close-lightbox" onclick="closeLightbox()">×</span>
+    
+    <!-- Modal for Image Preview -->
+    <div id="lightboxModal" class="lightbox-modal" style="display: none;">
         <div class="lightbox-content">
-            <img src="" alt="Enlarged image" class="lightbox-image" id="lightbox-img">
+            <span class="close" onclick="closeLightbox()">&times;</span>
+            <img id="lightboxImage" src="" alt="" class="lightbox-image">
+            <h2 id="lightboxTitle" class="lightbox-title"></h2>
+            <a id="whatsappButton" class="chat-button" target="_blank"><i class="fa-brands fa-whatsapp"></i>&nbsp;Chat </a>
         </div>
     </div>
+    
 
     <script>
         // Lightbox functionality
@@ -377,7 +395,59 @@
     setTimeout(function() {
       document.getElementById("loader").style.display = "none";
     }, 300);  // Loader disappears after 1 second
+
+// image
+function openLightbox(imageUrl) {
+        // Set image in the lightbox
+        document.getElementById("lightbox-image").src = imageUrl;
+        
+        // Display the lightbox
+        document.getElementById("lightbox").style.display = "block";
+    }
+
+    function closeLightbox() {
+        // Close the lightbox
+        document.getElementById("lightbox").style.display = "none";
+    }
+
+    function sendMessage() {
+        // Create a WhatsApp message with image URL
+        const message = `Hi! I'm interested in the image: ${window.imageUrl}`;
+
+        // Encode the message for the WhatsApp link
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappLink = `https://wa.me/+919778518451?text=${encodedMessage}`;
+
+        // Redirect to WhatsApp chat
+        window.open(whatsappLink, "_blank");
+    }
+
   </script>
+
+<script>
+   // Loader removal after page loads
+window.addEventListener('load', function() {
+    document.getElementById("loader").style.display = "none";
+});
+
+// Lightbox functionality
+function openLightbox(imageUrl, title) {
+    document.getElementById('lightboxImage').src = imageUrl;
+    document.getElementById('lightboxTitle').innerText = title;
+
+    const message = `Check out this image: ${title}. View it here: ${window.location.origin}${imageUrl}`;
+    const whatsappLink = `https://wa.me/+919778518451?text=${encodeURIComponent(message)}`;
+    document.getElementById('whatsappButton').href = whatsappLink;
+
+    document.getElementById('lightboxModal').style.display = 'flex';
+}
+
+function closeLightbox() {
+    document.getElementById('lightboxModal').style.display = 'none';
+}
+
+    </script>
+    
 
 </body>
 </html>

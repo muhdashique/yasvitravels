@@ -338,7 +338,21 @@ def view_segment_images(request, segment_id):
     })
 
 # room image manage views
+from django.db.models import Q
+
 def manage_images(request):
+    query = request.GET.get('q', '')  # Get the search query from the URL
+    images = Image.objects.all()
+
+    if query:
+        # Filter images based on the search term
+        images = images.filter(
+            Q(title__icontains=query) |
+            Q(destination__name__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(segment__name__icontains=query)
+        )
+
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -346,9 +360,9 @@ def manage_images(request):
             return redirect('manage_images')
     else:
         form = ImageForm()
-    
-    images = Image.objects.all()
-    return render(request, 'add_image.html', {'form': form, 'images': images})
+
+    return render(request, 'add_image.html', {'form': form, 'images': images, 'query': query})
+
 
 # edit room image view
 def edit_image(request, image_id):
@@ -610,3 +624,16 @@ def send_email(request):
     else:
         form = ContactForm()
         return render(request, 'contact.html', {'form': form})
+    
+
+
+
+
+# def manage_images(request):
+#     images = Image.objects.all()
+    
+#     if 'search' in request.GET:
+#         search_term = request.GET.get('search')
+#         images = images.filter(title__icontains=search_term)
+    
+#     return render(request, 'add_image.html', {'images': images})   
