@@ -53,12 +53,12 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.2);
-            z-index: 1;
+            /* z-index: 1; */
         }
 
         .banner-content {
             position: relative;
-            z-index: 2;
+            /* z-index: 2; */
         }
 
         .title {
@@ -87,7 +87,7 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 2;
+            /* z-index: 2; */
             animation: bounce 2s infinite;
         }
 
@@ -303,7 +303,7 @@
             border-radius: 25px;
             top: 40px;
             right: 0;
-            z-index: 1;
+            /* z-index: 1; */
         }
 
         .image-card {
@@ -314,7 +314,7 @@
             border-radius: 25px;
             top: 20px;
             left: 0;
-            z-index: 2;
+            /* z-index: 2; */
             overflow: hidden;
         }
 
@@ -332,7 +332,7 @@
             padding: 40px;
             bottom: 40px;
             right: 40px;
-            z-index: 3;
+            /* z-index: 3; */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
@@ -573,7 +573,7 @@
         border: none;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         cursor: pointer;
-        z-index: 10;
+        /* z-index: 10; */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -970,7 +970,7 @@
     gap: 30px;
     margin-top: 20px;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .gallery-card {
@@ -1284,13 +1284,13 @@
 @media screen and (max-width: 768px) {
     .banner {
         height: auto;
-        min-height: 70vh;
+        min-height: 100vh;
     }
 
-    .title {
+    /* .title {
         font-size: 48px;
-        /* margin-bottom: 15px; */
-    }
+        margin-bottom: 15px;
+    } */
 
     .subtitle {
         font-size: 18px;
@@ -1316,8 +1316,8 @@
     }
 
     .icons {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
     }
 
     .nav-text, .nav-text-small {
@@ -1385,7 +1385,7 @@
           width: 100%;
           height: 100%;
           background: white;
-          z-index: 9999;
+          /* z-index: 9999; */
           display: flex;
           justify-content: center;
           align-items: center;
@@ -1416,6 +1416,174 @@
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        @media screen and (min-width : 769px) {
+            .title {
+                font-size: 48px;
+                /* margin-bottom: 15px; */
+            }
+            .icons {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* taxy services */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+      
+
+        .booking-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            position: relative;
+            height: 700px;
+        }
+
+        .yellow-background {
+            background-color: #121D27;
+            width: 40%;
+            height: 80%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .booking-card {
+            background-color: white;
+            padding: 40px;
+            width: 40%;
+            position: absolute;
+            top: 50px;
+            left: 80px;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(174, 155, 155, 0.1);
+        }
+
+        .booking-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .booking-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .image-source {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .image-source a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .book-button {
+            display: inline-block;
+            background-color: #121D27;
+            padding: 12px 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: background-color 0.3s;
+        }
+
+        .book-button:hover {
+            background-color: #121D27;
+        }
+
+        .taxi-image {
+            width: 50%;
+            height: 300px;
+            object-fit: cover;
+            position: absolute;
+            top: 200px;
+            right: 50px;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .about-section {
+            background-color: #121D27;
+            width: 25%;
+            padding: 30px;
+            position: absolute;
+            bottom: 30px;
+            left: 250px;
+            z-index: 3;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .about-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .about-description {
+            line-height: 1.6;
+        }
+
+        .person-image {
+            width: 35%;
+            height: 200px;
+            object-fit: cover;
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .booking-container {
+                height: auto;
+            }
+            
+            .yellow-background,
+            .booking-card,
+            .taxi-image,
+            .about-section,
+            .person-image {
+                position: static;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .yellow-background {
+                display: none;
+            }
+            
+            .booking-card {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .taxi-image,
+            .person-image {
+                height: 200px;
+                margin: 20px 0;
+            }
+            
+            .about-section {
+                /* margin-top: 20px; */
+            }
+        }
       </style>
       
       <div id="loader">
@@ -1433,48 +1601,22 @@
       <!-- page loader -->
     
 
-    <section>
+    <section >
         
         <div class="banner">
-            <div class="banner-content w-full lg:pt-40">
+            <div class="banner-content w-full">
                 <div class="w-full">
                     <div class="w-full">
-                        <div class="relative flex items-start justify-between w-full lg:pt-10">
-                            <div class="w-auto h-[100px] lg:h-[130px]"> <!-- Logo positioned at the left corner -->
-                                <img src="{% static 'images\logicircle.png' %}" alt="Logo" class="h-full w-full object-contain">
-                            </div>
-                            
-                            <div class="flex justify-center items-start gap-10">
-                                <div class="hidden md:flex flex-col justify-center">
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fa-solid fa-envelope"></i>
-                                        <span>&nbsp; yasvitravels@gmail.com</span>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fa-solid fa-phone"></i>
-                                        <span>&nbsp; +91 9778518451</span>
-                                    </div>    
-                                </div>
-                                
-                                <div style="font-weight: 700; font-size: x-large;">
-                                    <a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-                                        <i class="fa-solid fa-right-to-bracket"></i>
-                                        <span class="nav-text">Login</span>
-                                    </a>
-                                </div>
-                                
-                            </div>
-                        </div>
                         <div class="flex justify-center items-center"> <!-- Push title to the right -->
-                            <h1 class="title leading-tight text-center">HIKING<br>TOURS</h1>
+                            <h1 class="text-[48px] md:text-[72px] lg:text-[110px] font-black leading-tight text-center ">HIKING<br>TOURS</h1>
                         </div>
                         <p class="subtitle text-center mx-auto">Explore. Discover. Experience. Your Journey Begins Here with Yasvi Travels</p>
                         <p class="attribution"></p>
                     </div>
                 </div>
             </div>
-            <nav class="nav-container relative z-[999]">
-                <ul class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 place-items-center place-content-center" style="margin-bottom: 15%;">
+            <nav class="nav-container relative z-[200]">
+                <ul class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 place-items-center place-content-center">
                     <li>
                         <a href="{% url 'index' %}" class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
                             <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
@@ -1664,7 +1806,31 @@
 
 
      
-    
+    <section>
+        <div class="booking-container">
+            <!-- Yellow background block -->
+            <div class="yellow-background"></div>
+            
+            <!-- Booking information card -->
+            <div class="booking-card">
+                <h1 class="booking-title">Book your trip online now</h1>
+                <p class="booking-description">Yasvi Taxi Services is a premium travel solution provider based in Chundel, Wayanad, offering safe, reliable, and affordable transportation services. Whether you need a ride for local travel, outstation trips, or airport transfers, we ensure a comfortable and hassle-free journey with our well-maintained fleet and professional drivers.</p>
+                <a href="{% url 'travelandtour' %}#taxi" class="book-button">Book Now</a>
+            </div>
+            
+            <!-- Taxi image -->
+            <img src="https://plus.unsplash.com/premium_photo-1661911000633-3320fe8b6901?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dGF4aXxlbnwwfHwwfHx8MA%3D%3D" alt="Taxi at night with glowing sign" class="taxi-image">
+            
+            <!-- About Us section -->
+            <!-- <div class="about-section">
+                <h2 class="about-title">About Us</h2>
+                <p class="about-description">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
+            </div> -->
+            
+            <!-- Person in taxi image -->
+            <!-- <img src="/api/placeholder/400/200" alt="Person in taxi" class="person-image"> -->
+        </div>
+    </section>
 
 
        
