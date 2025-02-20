@@ -344,6 +344,24 @@
     gap: 70px; /* Space between links */
     justify-content: center; /* Optional: Center align the icons */
 }
+/* //////// */
+.custom-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: large;
+    font-weight: 700;
+    color: #066D96;
+    border: 2px solid #066D96;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.custom-btn:hover {
+    background-color: #066D96;
+    color: white;
+}
 
 
         </style>
@@ -368,12 +386,12 @@
                 </div>    
             </div>
     
-            <div style="font-weight: 700; font-size: x-large;" class="">
-                <a href="{% url 'login' %}" class=" {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-                    <i class="fa-solid fa-right-to-bracket"></i>
+            <div>
+                <a href="{% url 'login' %}" class="custom-btn {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
                     <span class="nav-text">Login</span>
                 </a>
             </div>
+            
         </div>
     </div>
     
@@ -381,28 +399,181 @@
     <!-- Main content goes here -->
     {% endblock %}
     <!-- watsapp button -->
-    <div class="md:whatsapp-float w-[40px] h-[40px] fixed right-[20px] bottom-20 bg-[#25d366] rounded-full z-[100]">
-        <!-- Added your number with India's country code (91) -->
-        <a class="whatsapp-link" 
-        href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F"
-           target="_blank">
-           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.1-.472-.149-.672.149s-.773.967-.947 1.166c-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.789-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.348.447-.522.149-.174.199-.298.298-.497.099-.199.05-.373-.025-.522-.075-.149-.672-1.611-.923-2.214-.242-.581-.487-.502-.672-.511-.173-.008-.372-.01-.572-.01s-.522.075-.796.373c-.273.298-1.045 1.021-1.045 2.494 0 1.473 1.068 2.898 1.216 3.097.149.199 2.102 3.21 5.094 4.503.713.308 1.27.492 1.703.63.715.228 1.364.196 1.878.119.572-.085 1.758-.719 2.008-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.199-.57-.348zm-5.472 7.618c-1.961 0-3.842-.524-5.485-1.515l-3.938 1.03 1.05-3.843c-.986-1.64-1.523-3.514-1.523-5.441 0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10zm0-18c-4.418 0-8 3.582-8 8 0 1.591.467 3.117 1.347 4.432l.208.314-.623 2.28 2.34-.613.304.183c1.271.766 2.73 1.176 4.424 1.176 4.418 0 8-3.582 8-8s-3.582-8-8-8z"/>
-        </svg>        
-            
-        </a>
-    </div>
-
-
-    <a href="tel:+919778518451" class="md:floating-call-buttons flex justify-center items-center text-[#fff] w-[40px] h-[40px] fixed right-[20px] bottom-[130px] bg-[#25d366] rounded-full z-[100]" aria-label="Call 9778518451">
-        <i class="fa-solid fa-phone"></i>
-        <!-- <span class="md:call-icon"></span> -->
+    <a href="https://wa.me/919778518451?text=Hi%2C%20I%20would%20like%20to%20check%20the%20availability%20and%20rates%20for%20rooms%2Fvillas.%20What%20options%20do%20you%20have%20available%3F" class="floating-icon whatsapp-icon" target="_blank">
+        <i class="fab fa-whatsapp"></i>
       </a>
+    <style>
+        /* Floating Icons Styles */
+        .floating-icon {
+          position: fixed;
+          width: 60px;
+          height: 60px;
+          bottom: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 30%;
+          color: #ffffff;
+          font-size: 24px;
+          text-decoration: none;
+          box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
     
-      <a href="mailto:yasvitravels@gmail.com" class="md:floating-email-btn flex justify-center items-center text-[#fff] w-[40px] h-[40px] fixed right-[20px] bottom-[180px] bg-[#25d366] rounded-full z-[100]">
+        .floating-icon:hover {
+          transform: scale(1.1);
+        }
+    
+        .whatsapp-icon {
+          left: 40px;
+          background-color: #25D366;
+        }
+    
+    </style>
+    
+   
+
+
+    <a href="tel:+919778518451" class="floating-call-button">
+        <div class="pulse"></div>
+        <svg class="phone-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </a>
+      <style>
+        .floating-call-button {
+          position: fixed;
+          bottom: 90px;
+          right: 15px;
+          width: 60px;
+          height: 60px;
+          border-radius: 30%;
+          background-color: #25D366;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          transition: all 0.3s ease;
+        }
+    
+        .floating-call-button:hover {
+          transform: scale(1.1);
+          background-color: #25D366;
+        }
+    
+        .floating-call-button:active {
+          transform: scale(0.95);
+        }
+    
+        .phone-icon {
+          width: 30px;
+          height: 30px;
+          fill: white;
+        }
+    
+    
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            opacity: 0.6;
+          }
+          70% {
+            transform: scale(1.4);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1.4);
+            opacity: 0;
+          }
+        }
+      </style>
+       <a href="mailto:yasvitravels@gmail.com" class="floating-email-button">
         <i class="fa-solid fa-envelope"></i>
         <span></span>
     </a>
+    
+     
+    <a href="mailto:yasvitravels@gmail.com" class="floating-email-button">
+        <div class="pulse"></div>
+        <span class="tooltip">Send us an email</span>
+        <svg class="email-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+        </svg>
+      </a>
+
+      <style>
+        .floating-email-button {
+      position: fixed;
+      bottom: 150px;
+      left: 40px;  /* Changed from right to left positioning */
+      width: 60px;
+      height: 60px;
+      border-radius: 30%;
+      background-color: #0ea5e9;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+        .floating-email-button:hover {
+          transform: scale(1.1);
+          background-color: #0284c7;
+        }
+    
+        .floating-email-button:active {
+          transform: scale(0.95);
+        }
+    
+        .email-icon {
+          width: 30px;
+          height: 30px;
+          fill: white;
+        }
+    
+       
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            opacity: 0.6;
+          }
+          70% {
+            transform: scale(1.4);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1.4);
+            opacity: 0;
+          }
+        }
+    
+        /* Optional tooltip */
+        .tooltip {
+          position: absolute;
+          right: 75px;
+          background-color: #1e293b;
+          color: white;
+          padding: 8px 12px;
+          border-radius: 6px;
+          font-size: 14px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+          white-space: nowrap;
+        }
+    
+        .floating-email-button:hover .tooltip {
+          opacity: 1;
+        }
+      </style>
 
 
     <div class="scroll-progress" onclick="scrollToTop()">
