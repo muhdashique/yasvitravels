@@ -1597,7 +1597,7 @@
       <script>
         setTimeout(function() {
           document.getElementById("loader").style.display = "none";
-        }, 300);  // Loader disappears after 1 second
+        }, 1000);  // Loader disappears after 1 second
       </script>
       <!-- page loader -->
     
@@ -1697,14 +1697,6 @@
                             <span class="nav-text">Contact Us</span>
                         </a>
                     </li>
-                    <!-- <li>
-                        <a href="{% url 'login' %}" class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
-                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm-4 4h10v2H7z"/>
-                            </svg>
-                            <span class="nav-text">Login</span>
-                        </a>
-                    </li> -->
                  </ul>
             </nav>
              </div>
@@ -1821,15 +1813,6 @@
             
             <!-- Taxi image -->
             <img src="https://plus.unsplash.com/premium_photo-1661911000633-3320fe8b6901?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dGF4aXxlbnwwfHwwfHx8MA%3D%3D" alt="Taxi at night with glowing sign" class="taxi-image">
-            
-            <!-- About Us section -->
-            <!-- <div class="about-section">
-                <h2 class="about-title">About Us</h2>
-                <p class="about-description">Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices.</p>
-            </div> -->
-            
-            <!-- Person in taxi image -->
-            <!-- <img src="/api/placeholder/400/200" alt="Person in taxi" class="person-image"> -->
         </div>
     </section>
 
@@ -1947,120 +1930,7 @@
 </section>
     
 
-        <!-- <script>
-            let currentPosition = 0;
-            const grid = document.getElementById('testimonialsGrid');
-            const cards = grid.getElementsByClassName('testimonial-card');
-            const cardWidth = cards[0].offsetWidth + 30; // Include gap
-            const visibleCards = 3;
-            const maxPosition = (cards.length - visibleCards) * cardWidth;
-            let autoScrollInterval;
-            let isAutoScrolling = true;
-    
-            function scrollTestimonials(direction) {
-                if (direction === 'right' && currentPosition > -maxPosition) {
-                    currentPosition -= cardWidth;
-                } else if (direction === 'left' && currentPosition < 0) {
-                    currentPosition += cardWidth;
-                } else if (direction === 'right' && currentPosition <= -maxPosition) {
-                    // Reset to beginning when reaching the end
-                    currentPosition = 0;
-                }
-    
-                grid.style.transform = `translateX(${currentPosition}px)`;
-                updateButtonStates();
-            }
-    
-            function updateButtonStates() {
-                document.getElementById('scrollLeft').disabled = currentPosition >= 0;
-                document.getElementById('scrollRight').disabled = currentPosition <= -maxPosition;
-            }
-    
-            function startAutoScroll() {
-                autoScrollInterval = setInterval(() => {
-                    scrollTestimonials('right');
-                }, 3000); // Scroll every 3 seconds
-            }
-    
-            function toggleAutoScroll() {
-                const button = document.getElementById('autoScrollControl');
-                if (isAutoScrolling) {
-                    clearInterval(autoScrollInterval);
-                    button.textContent = 'Resume';
-                } else {
-                    startAutoScroll();
-                    button.textContent = 'Pause';
-                }
-                isAutoScrolling = !isAutoScrolling;
-            }
-    
-            // Start auto-scrolling
-            startAutoScroll();
-    
-            // Pause on hover
-            grid.addEventListener('mouseenter', () => {
-                if (isAutoScrolling) {
-                    clearInterval(autoScrollInterval);
-                }
-            });
-    
-            grid.addEventListener('mouseleave', () => {
-                if (isAutoScrolling) {
-                    startAutoScroll();
-                }
-            });
-    
-            // Add click handler for auto-scroll control
-            document.getElementById('autoScrollControl')
-                .addEventListener('click', toggleAutoScroll);
-    
-            // Initial button states
-            updateButtonStates();
-
-            
-        </script> -->
-
-<!-- <script>
-    function scrollTestimonials(direction) {
-        const container = document.getElementById('testimonialsGrid');
-        const scrollAmount = 320; 
- 
-        if (direction === 'left') {
-            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        } else {
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
-    }
-
-    let autoScroll;
-    const autoScrollButton = document.getElementById('autoScrollControl');
-    const testimonialContainer = document.getElementById('testimonialsGrid');
-
-    function startAutoScroll() {
-        autoScroll = setInterval(() => {
-            testimonialContainer.scrollBy({ left: 320, behavior: 'smooth' });
-            if (testimonialContainer.scrollLeft + testimonialContainer.clientWidth >= testimonialContainer.scrollWidth) {
-                testimonialContainer.scrollTo({ left: 0, behavior: 'smooth' });
-            }
-        }, 3000);
-    }
-
-    function stopAutoScroll() {
-        clearInterval(autoScroll);
-    }
-
-    autoScrollButton.addEventListener('click', function () {
-        if (autoScrollButton.innerText === 'Pause') {
-            stopAutoScroll();
-            autoScrollButton.innerText = 'Play';
-        } else {
-            startAutoScroll();
-            autoScrollButton.innerText = 'Pause';
-        }
-    });
-
-    startAutoScroll();
-</script> -->
+       
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     // Initialize Swiper
