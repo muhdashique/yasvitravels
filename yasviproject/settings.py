@@ -51,7 +51,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   
+    # other middleware...
+    'yasviapp.middleware.NoCacheMiddleware',
+    'yasviapp.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Make sure this is present
 ]
+
 
 ROOT_URLCONF = 'yasviproject.urls'
 TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')

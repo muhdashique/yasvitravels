@@ -330,7 +330,30 @@
     setTimeout(function() {
       document.getElementById("loader").style.display = "none";
     }, 1000);  // Loader disappears after 1 second
+
+
+    
   </script>
+  <script>
+    document.querySelectorAll('.btn-close').forEach(button => {
+        button.addEventListener('click', () => {
+            button.parentElement.style.display = 'none';
+        });
+    });
+
+    // Improved back button handling - enforce page reload for proper auth check
+    window.addEventListener('pageshow', function(event) {
+        // If the page is loaded from browser cache (back button used)
+        if (event.persisted || window.performance && 
+            window.performance.navigation.type === 2) {
+            // Force reload the page to trigger authentication checks
+            window.location.reload(true);
+        }
+    });
+
+    // Disable browser back cache completely
+    window.onunload = function(){};
+</script>
 
 </body>
 </html>

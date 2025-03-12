@@ -103,9 +103,16 @@ def login_view(request):
 
 
 # logout view function
+# In views.py
 def logout_view(request):
     logout(request)
-    return redirect('index')
+    response = redirect('index')
+    # Add cache-control headers to prevent back button from working
+    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response['Pragma'] = 'no-cache'
+    response['Expires'] = '0'
+    return response
+
 
 # Adminpage landing page  View
 @login_required(login_url='login')
@@ -147,6 +154,7 @@ def view_destinations(request):
 
 
 # destination edit page
+@login_required(login_url='login')
 def edit_destination(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     if request.method == 'POST':
@@ -161,7 +169,7 @@ def edit_destination(request, destination_id):
 
 
 # delete destination views
-
+@login_required(login_url='login')
 def delete_destination(request, destination_id):
     destination = get_object_or_404(Destination, id=destination_id)
     destination.delete()
@@ -212,6 +220,7 @@ def edit_category(request, category_id):
 
 
 # delete category function view
+@login_required(login_url='login')
 def delete_category(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     if request.method == 'POST':
@@ -280,6 +289,7 @@ def segment_list(request):
     return render(request, 'segment.html', {'segments': segments})
 
 # edit segment view
+@login_required(login_url='login')
 def edit_segment(request, pk):
     segment = Segment.objects.get(pk=pk)
     if request.method == 'POST':
@@ -339,7 +349,7 @@ def view_segment_images(request, segment_id):
 
 # room image manage views
 from django.db.models import Q
-
+@login_required(login_url='login')
 def manage_images(request):
     query = request.GET.get('q', '')  # Get the search query from the URL
     images = Image.objects.all()
@@ -365,6 +375,7 @@ def manage_images(request):
 
 
 # edit room image view
+@login_required(login_url='login')
 def edit_image(request, image_id):
     image = get_object_or_404(Image, id=image_id)
     if request.method == 'POST':
@@ -378,6 +389,7 @@ def edit_image(request, image_id):
 
 
 # delete room image views
+@login_required(login_url='login')
 def delete_image(request, image_id):
     image = get_object_or_404(Image, id=image_id)
     image.delete()
@@ -403,6 +415,7 @@ def testimonials_view(request):
     return render(request, 'tl', {'testimonials': testimonials})
 
 # new testimonial add views
+@login_required(login_url='login')
 def add_testimonial(request):
     if request.method == 'POST':
         form = TestimonialForm(request.POST, request.FILES)
@@ -417,6 +430,7 @@ def add_testimonial(request):
 
 
 # edit testimonials views
+@login_required(login_url='login')
 def edit_testimonial(request, id):
     testimonial = get_object_or_404(Testimonial, id=id)
     if request.method == 'POST':
@@ -429,6 +443,7 @@ def edit_testimonial(request, id):
     return render(request, 'edit_testimonial.html', {'form': form})
 
 # delete testimonials views
+@login_required(login_url='login')
 def delete_testimonial(request, id):
     testimonial = get_object_or_404(Testimonial, id=id)
     if request.method == 'POST':
@@ -447,6 +462,7 @@ def gallery_view(request):
 
 
 # gallery image adding views
+@login_required(login_url='login')
 def add_gallery_image(request):
     if request.method == 'POST':
         form = GalleryImageForm(request.POST, request.FILES)
@@ -460,6 +476,7 @@ def add_gallery_image(request):
 
 
 # edit gallery image views
+@login_required(login_url='login')
 def edit_gallery_image(request, id):
     image = get_object_or_404(GalleryImage, id=id)
     if request.method == 'POST':
@@ -472,6 +489,7 @@ def edit_gallery_image(request, id):
     return render(request, 'gallery_imageedit.html', {'form': form, 'image': image})
 
 # delete gallery image views
+@login_required(login_url='login')
 def delete_gallery_image(request, id):
     image = get_object_or_404(GalleryImage, id=id)
     if request.method == 'POST':
@@ -490,6 +508,7 @@ def view_packages(request):
     return render(request, 'package_form.html', {'packages': packages})
 
 # adding package views
+@login_required(login_url='login')
 def package_add(request):
     if request.method == 'POST':
         print('POST request received')
@@ -506,6 +525,7 @@ def package_add(request):
 
 
 # edit package views
+@login_required(login_url='login')
 def edit_package(request, id):
     package = Package.objects.get(pk=id)
     if request.method == 'POST':
@@ -519,6 +539,7 @@ def edit_package(request, id):
 
 
 # delete package views
+@login_required(login_url='login')
 def delete_package(request, id):
     package = get_object_or_404(Package, id=id)
     if request.method == 'POST':
@@ -531,6 +552,7 @@ def delete_package(request, id):
 # campain details adding and related functions
 
 # adding camping image views
+@login_required(login_url='login')
 def add_campingimage(request):
     if request.method == 'POST':
         image = request.FILES.get('image') 
@@ -562,6 +584,7 @@ def add_campingimage(request):
 
 
 # edit camping image views
+@login_required(login_url='login')
 def edit_campingimage(request, image_id):
     image = get_object_or_404(CampingImage, id=image_id)
 
@@ -584,6 +607,7 @@ def edit_campingimage(request, image_id):
 
 
 # delete camping image views
+@login_required(login_url='login')
 def delete_campingimage(request, image_id):
     image = get_object_or_404(CampingImage, id=image_id)
     image.delete()
